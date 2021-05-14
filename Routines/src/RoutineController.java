@@ -24,6 +24,9 @@ import javafx.scene.control.TextField;
 
 
 public class RoutineController implements Initializable{
+	
+	
+		///////////////////////////////////////////   FXML COMPONENTS   ///////////
 
     @FXML
     Button btnAddTask;
@@ -38,11 +41,19 @@ public class RoutineController implements Initializable{
     @FXML
     Button btnDown;
     
+	
+	
+	
+	
+		//////////////////////////////////////////////  DATAFIELDS  /////////////////
     
     private Routine routine = new Routine();
     
 
     
+	
+		/////////////////////////////////////////////  TASKS  ///////////////////////
+		
     public void showTasks(){
         lstTasks.getItems().clear();
         for(int i=0; i < routine.dailyTasks.size(); i++){
@@ -123,6 +134,9 @@ public class RoutineController implements Initializable{
     
     
     
+	
+		//////////////////////////////////////////////  ROUTINES  /////////////////////////////
+		
     public void newRoutine(){
         closeRoutine();
         routine = new Routine();
@@ -193,6 +207,9 @@ public class RoutineController implements Initializable{
     
     
     
+	
+		//////////////////////////////////////////////  APPLICATION  /////////////////////////
+		
     public void getAbout(){
         String about = new String();
         try{
@@ -214,12 +231,12 @@ public class RoutineController implements Initializable{
         aboutDialog.setHeaderText("About Routines");
         aboutDialog.setContentText(about);
         aboutDialog.showAndWait();
-    }
+    }//end getAbout()
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //I rarely use this, just need it here
+        //I rarely use this, just need it here for interfacing requirements
     }//end initialize()
     
 }//end Control

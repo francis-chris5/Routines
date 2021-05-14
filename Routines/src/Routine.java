@@ -12,29 +12,41 @@ import javafx.stage.Stage;
 
 public class Routine implements Serializable{
     
+		///////////////////////////////////////////////////  DATAFIELDS  //////////////
+		
     private String title = null;
     private String filepath = null;
     public LinkedList<Task> dailyTasks = new LinkedList();
     private boolean saved = true;
+	
+	
+	
     
-    
+		//////////////////////////////////////////////////  CONSTRUCTORS  ///////////////////////
     public Routine(){
     }//end default constructor()
     
-
+	
+	
+	
+	
+		/////////////////////////////////////////////////  GETTERS AND SETTERS  /////////////////
+		
     public String getTitle(){
         return this.title;
-    }
+    }//end getTitle()
     
     public boolean isSaved(){
         return this.saved;
-    }
+    }//end isSaved()
     
     public void setSaved(boolean saved){
         this.saved = saved;
-    }
+    }//end setSaved()
     
     
+	
+		///////////////////////////////////////////////  ROUTINES FILE MENU OPERATIONS  ////////
      public boolean saveRoutine(){
         try{
             File file = new File(this.filepath);
