@@ -17,6 +17,7 @@ public class Routine implements Serializable{
     private String title = null;
     private String filepath = null;
     public LinkedList<Task> dailyTasks = new LinkedList();
+    public LinkedList<Resource> resources = new LinkedList();
     private boolean saved = true;
 	
 	
@@ -24,6 +25,8 @@ public class Routine implements Serializable{
     
 		//////////////////////////////////////////////////  CONSTRUCTORS  ///////////////////////
     public Routine(){
+        dailyTasks.add(new Task("Begin"));
+        resources.add(new Resource("Self"));
     }//end default constructor()
     
 	

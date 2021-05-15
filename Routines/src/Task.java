@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 
 public class Task implements Serializable{
@@ -7,9 +8,13 @@ public class Task implements Serializable{
 		/////////////////////////////////////////////  DATAFIELDS  ///////////////////
 		
     private String name;
+    public LinkedList<Resource> assignedResources = new LinkedList<>();
 	
 	
 		////////////////////////////////////////////  CONSTRUCTORS  //////////////////
+    
+    public Task(){
+    }//end default constructor()
     
     public Task(String name){
         this.name = (name.length() == 0)? "untitled task": name;
@@ -26,7 +31,7 @@ public class Task implements Serializable{
     public void setName(String name){
         this.name = name;
     }//end setName()
-    
+
     
     
     /*
