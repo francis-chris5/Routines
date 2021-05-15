@@ -17,3 +17,9 @@ assign resources to tasks: people, funds, "labor" -an estimate of how hard it wi
 get a gantt chart, pie charts for task and resource percentage, pert chart, work breakdown, ...
 
 
+
+
+![early test of app running pic](https://user-images.githubusercontent.com/50467171/118344962-65a67500-b4ff-11eb-92f1-6db91dff39b0.jpg)
+
+
+version 0.0.1 is probably only a couple days away...
