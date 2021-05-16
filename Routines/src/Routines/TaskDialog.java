@@ -24,6 +24,10 @@ public class TaskDialog extends Dialog implements Initializable {
     
         ////////////////////////////////////////////  CONSTRUCTORS  /////////
     
+    public TaskDialog(){
+    }//end default constructor
+    
+    
     /**
      * 
      * @param confirmLabel <p>What the confirmation button needs to say, probably just "add" or "update"</p>
@@ -39,10 +43,10 @@ public class TaskDialog extends Dialog implements Initializable {
             catch(Exception e){
                 //just move on then
             }
-            ButtonType btnAddTask = new ButtonType("Add Task", ButtonData.OK_DONE);
-            this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
+            ButtonType btnConfirm = new ButtonType("Add Task", ButtonData.OK_DONE);
+            this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             Optional<ButtonType> clicked = this.showAndWait();
-            if(clicked.get() == btnAddTask){
+            if(clicked.get() == btnConfirm){
                 this.task = new Task();
                 this.task.setName(txtTaskName.getText());
             }
@@ -69,7 +73,7 @@ public class TaskDialog extends Dialog implements Initializable {
         ///////////////////////////////////////////  TASK METHODS  //////////
     public Task editTask(Task task){
         this.task = task;
-        //update data with change listener on GUI
+        //update task to match input fields
         return this.task;
     }//end editTask()
     

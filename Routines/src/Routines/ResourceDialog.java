@@ -28,6 +28,10 @@ public class ResourceDialog extends Dialog implements Initializable {
     
         ////////////////////////////////////////////////  CONSTRUCTORS  ///////
     
+    public ResourceDialog(){
+    }//end default constructor
+    
+    
     /**
      * 
      * @param confirmLabel <p>What the confirmation button needs to say, probably just "add" or "update"</p>
@@ -43,10 +47,10 @@ public class ResourceDialog extends Dialog implements Initializable {
             catch(Exception e){
                 //just move on then
             }
-            ButtonType btnAddTask = new ButtonType("Add Resource", ButtonData.OK_DONE);
-            this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
+            ButtonType btnConfirm = new ButtonType("Add Resource", ButtonData.OK_DONE);
+            this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             Optional<ButtonType> clicked = this.showAndWait();
-            if(clicked.get() == btnAddTask){
+            if(clicked.get() == btnConfirm){
                 this.resource = new Resource(txtResourceName.getText());
             }
             else{
@@ -73,7 +77,7 @@ public class ResourceDialog extends Dialog implements Initializable {
         ///////////////////////////////////////////  RESOURCE METHODS ////////
     public Resource editResource(Resource resource){
         this.resource = resource;
-        //update data with change listener on GUI
+        //update resource to match input fields
         return this.resource;
     }//end editResource()
     

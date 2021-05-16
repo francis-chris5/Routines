@@ -43,6 +43,10 @@ public class RoutineController implements Initializable{
     private int currentResource = 0;
 
     
+    
+    public void editRoutineDetails(){
+        this.routine = new DetailsDialog("edit").editRoutine(this.routine);
+    }//end editRoutineDetails()
 	
 	/////////////////////////////////////////////  TASKS  /////////////////
 		
