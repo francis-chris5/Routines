@@ -28,30 +28,36 @@ public class TaskDialog extends Dialog implements Initializable {
      * 
      * @param confirmLabel <p>What the confirmation button needs to say, probably just "add" or "update"</p>
      */
-    public TaskDialog(String confirmLabel){
+    public TaskDialog(String purpose){
         this.setTitle("Routines: Task");
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskDialogGUI.fxml"));
-            loader.setController(this);
-            this.setDialogPane(loader.load());
+        if(purpose.equals("add")){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskDialogGUI.fxml"));
+                loader.setController(this);
+                this.setDialogPane(loader.load());
+            }
+            catch(Exception e){
+                //just move on then
+            }
+            ButtonType btnAddTask = new ButtonType("Add Task", ButtonData.OK_DONE);
+            this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
+            Optional<ButtonType> clicked = this.showAndWait();
+            if(clicked.get() == btnAddTask){
+                this.task = new Task();
+                this.task.setName(txtTaskName.getText());
+            }
+            else{
+                this.task = null;
+            }
         }
-        catch(Exception e){
-            //just move on then
-        }
-        ButtonType btnAddTask = new ButtonType(confirmLabel, ButtonData.OK_DONE);
-        this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
-        Optional<ButtonType> clicked = this.showAndWait();
-        if(clicked.get() == btnAddTask){
-            this.task = new Task(txtTaskName.getText());
-        }
-        else{
-            this.task = null;
+        else if(purpose.equals("edit")){
+            this.task = null; //then call editTask() method
         }
     }//end one-arg constructor
     
     
     
-        /////////////////////////////////////////////  GETTERS AND SETTERS////
+        ///////////////////////////////////////////  GETTERS AND SETTERS  ////
     public Task getTask(){
         return this.task;
     }//end getTask()
@@ -60,6 +66,12 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     
+        ///////////////////////////////////////////  TASK METHODS  //////////
+    public Task editTask(Task task){
+        this.task = task;
+        //update data with change listener on GUI
+        return this.task;
+    }//end editTask()
     
         ///////////////////////////////////////////  JAVA OBJECTS  ///////////
     

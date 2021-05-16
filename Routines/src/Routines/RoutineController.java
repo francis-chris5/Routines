@@ -58,7 +58,7 @@ public class RoutineController implements Initializable{
     
     
     public void newTask(){
-        Task dt = new TaskDialog("Add Task").getTask();
+        Task dt = new TaskDialog("add").getTask();
         if(dt != null){
             currentTask = routine.routineTasks.size();
             routine.routineTasks.add(dt);
@@ -152,7 +152,7 @@ public class RoutineController implements Initializable{
     
     
      public void newResource(){
-        Resource nr = new ResourceDialog("Add Resource").getResource();
+        Resource nr = new ResourceDialog("add").getResource();
         if(nr != null){
             //currentTask = routine.routineTasks.size();
             routine.availableResources.add(nr);

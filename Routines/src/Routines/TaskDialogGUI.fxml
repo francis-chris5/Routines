@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,62 +16,175 @@
 
 <DialogPane stylesheets="@RoutineStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <AnchorPane prefHeight="330.0" prefWidth="587.0">
+      <AnchorPane prefHeight="340.0" prefWidth="622.0">
          <children>
-            <TextField fx:id="txtTaskName" layoutX="28.0" layoutY="80.0" promptText="Task Name" />
-            <Label layoutX="22.0" layoutY="63.0" text="Task Name" />
-            <Label layoutX="201.0" layoutY="63.0" text="Estimated Duration" />
-            <HBox layoutX="363.0" layoutY="61.0" prefHeight="68.0" prefWidth="247.0">
+            <VBox layoutX="13.0" layoutY="63.0" prefHeight="62.0" prefWidth="180.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                  <Label text="Task Name" />
+                  <TextField fx:id="txtTaskName" promptText="unique is better">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <HBox layoutX="226.0" layoutY="63.0" prefHeight="74.0" prefWidth="405.0">
+               <children>
+                  <VBox prefHeight="50.0" prefWidth="168.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Seconds">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="durationToggleGroup" />
-                           </toggleGroup></RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Minutes" toggleGroup="$durationToggleGroup" />
-                        <RadioButton mnemonicParsing="false" text="Hours" toggleGroup="$durationToggleGroup" />
+                        <Label text="Estimated Duration" />
+                        <TextField prefHeight="22.0" prefWidth="144.0" promptText="numerical input only">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </TextField>
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="68.0" prefWidth="77.0" spacing="5.0">
+                  <HBox prefHeight="78.0" prefWidth="202.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Days" toggleGroup="$durationToggleGroup" />
-                        <RadioButton mnemonicParsing="false" text="Weeks" toggleGroup="$durationToggleGroup" />
-                        <RadioButton mnemonicParsing="false" text="Months" toggleGroup="$durationToggleGroup" />
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </VBox>
-                  <VBox prefHeight="68.0" prefWidth="67.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Years" toggleGroup="$durationToggleGroup">
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Minutes">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="durationToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Hours" toggleGroup="$durationToggleGroup" />
+                              <RadioButton mnemonicParsing="false" text="Days" toggleGroup="$durationToggleGroup" />
+                           </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
-                           <VBox.margin>
-                              <Insets top="24.0" />
-                           </VBox.margin></RadioButton>
+                        </VBox>
+                        <VBox prefHeight="68.0" prefWidth="77.0" spacing="5.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Weeks" toggleGroup="$durationToggleGroup" />
+                              <RadioButton mnemonicParsing="false" text="Months" toggleGroup="$durationToggleGroup" />
+                              <RadioButton mnemonicParsing="false" text="Years" toggleGroup="$durationToggleGroup">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </RadioButton>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </HBox>
-            <TextField layoutX="28.0" layoutY="160.0" promptText="HH:MM:SS" />
-            <DatePicker layoutX="207.0" layoutY="160.0" />
-            <ComboBox layoutX="399.0" layoutY="160.0" prefWidth="150.0" />
-            <Label layoutX="22.0" layoutY="143.0" text="Start Time" />
-            <DatePicker layoutX="207.0" layoutY="221.0" />
-            <Label layoutX="201.0" layoutY="143.0" text="Start Date" />
-            <Label layoutX="201.0" layoutY="204.0" text="End Date" />
-            <Label layoutX="392.0" layoutY="143.0" text="Predecessor Task(s)" />
-            <ComboBox layoutX="207.0" layoutY="279.0" prefWidth="150.0" />
-            <Label layoutX="201.0" layoutY="262.0" text="Assign Resource" />
-            <ListView layoutX="421.0" layoutY="232.0" prefHeight="117.0" prefWidth="136.0" />
-            <Label layoutX="413.0" layoutY="210.0" text="Resources" />
-            <TextField layoutX="207.0" layoutY="80.0" prefHeight="22.0" prefWidth="144.0" promptText="(numbers only)" />
+            <VBox layoutX="18.0" layoutY="149.0" prefHeight="78.0" prefWidth="171.0">
+               <children>
+                  <Label text="Predecessor Task(s)" />
+                  <ComboBox prefWidth="150.0" promptText="Optional">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="446.0" layoutY="149.0" prefHeight="180.0" prefWidth="185.0">
+               <children>
+                  <VBox prefHeight="52.0" prefWidth="174.0">
+                     <children>
+                        <Label text="Assign Resource" />
+                        <ComboBox prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="119.0" prefWidth="173.0">
+                     <children>
+                        <Label text="Resources" />
+                        <ListView prefHeight="105.0" prefWidth="203.0">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox layoutX="228.0" layoutY="149.0" prefHeight="200.0" prefWidth="167.0">
+               <children>
+                  <VBox prefHeight="59.0" prefWidth="177.0">
+                     <children>
+                        <Label text="Start Time" />
+                        <TextField promptText="HH:MM:SS">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="70.0" prefWidth="204.0">
+                     <children>
+                        <Label text="Start Date" />
+                        <DatePicker>
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </DatePicker>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="70.0" prefWidth="204.0">
+                     <children>
+                        <Label text="End Date" />
+                        <DatePicker promptText="Optional">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </DatePicker>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox layoutX="18.0" layoutY="250.0" prefHeight="104.0" prefWidth="181.0">
+               <children>
+                  <Label text="Complexity" />
+                  <Slider prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <AnchorPane prefHeight="42.0" prefWidth="175.0">
+                     <children>
+                        <Label layoutX="14.0" text="Easy" textFill="#0000007b" />
+                        <Label layoutX="129.0" text="Difficult" textFill="#0000007b" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
          </children>
       </AnchorPane>
    </content>

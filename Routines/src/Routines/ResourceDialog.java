@@ -32,24 +32,29 @@ public class ResourceDialog extends Dialog implements Initializable {
      * 
      * @param confirmLabel <p>What the confirmation button needs to say, probably just "add" or "update"</p>
      */
-    public ResourceDialog(String confirmLabel){
+    public ResourceDialog(String purpose){
         this.setTitle("Routines: Resource");
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceDialogGUI.fxml"));
-            loader.setController(this);
-            this.setDialogPane(loader.load());
+        if(purpose.equals("add")){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceDialogGUI.fxml"));
+                loader.setController(this);
+                this.setDialogPane(loader.load());
+            }
+            catch(Exception e){
+                //just move on then
+            }
+            ButtonType btnAddTask = new ButtonType("Add Resource", ButtonData.OK_DONE);
+            this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
+            Optional<ButtonType> clicked = this.showAndWait();
+            if(clicked.get() == btnAddTask){
+                this.resource = new Resource(txtResourceName.getText());
+            }
+            else{
+                this.resource = null;
+            }
         }
-        catch(Exception e){
-            //just move on then
-        }
-        ButtonType btnAddTask = new ButtonType(confirmLabel, ButtonData.OK_DONE);
-        this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
-        Optional<ButtonType> clicked = this.showAndWait();
-        if(clicked.get() == btnAddTask){
-            this.resource = new Resource(txtResourceName.getText());
-        }
-        else{
-            this.resource = null;
+        else if(purpose.equals("edit")){
+            this.resource = null; //then call editResource() method
         }
     }//end one-arg constructor
     
@@ -63,6 +68,14 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     
     
+    
+    
+        ///////////////////////////////////////////  RESOURCE METHODS ////////
+    public Resource editResource(Resource resource){
+        this.resource = resource;
+        //update data with change listener on GUI
+        return this.resource;
+    }//end editResource()
     
     
         ///////////////////////////////////////////  JAVA OBJECTS  ///////////
