@@ -19,7 +19,7 @@ get a gantt chart, pie charts for task and resource percentage, pert chart, work
 
 
 
-![early test of app running pic](https://user-images.githubusercontent.com/50467171/118344962-65a67500-b4ff-11eb-92f1-6db91dff39b0.jpg)
+![pic_for_github](https://user-images.githubusercontent.com/50467171/118384875-f9e40b00-b5d7-11eb-974f-6b3666455d1f.jpg)
 
 
 version 0.0.1 is probably only a couple days away...
