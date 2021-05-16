@@ -30,8 +30,6 @@ public class RoutineController implements Initializable{
     ListView lstTasks;
     @FXML
     ListView lstResources;
-    @FXML
-    ComboBox cmbAddResource;
 
     
 	
@@ -42,7 +40,7 @@ public class RoutineController implements Initializable{
     
     private Routine routine = new Routine();
     private int currentTask = 0;
-    
+    private int currentResource = 0;
 
     
 	
@@ -50,8 +48,8 @@ public class RoutineController implements Initializable{
 		
     public void showTasks(){
         lstTasks.getItems().clear();
-        for(int i=0; i < routine.dailyTasks.size(); i++){
-            lstTasks.getItems().add(routine.dailyTasks.get(i));
+        for(int i=0; i < routine.routineTasks.size(); i++){
+            lstTasks.getItems().add(routine.routineTasks.get(i));
         }
     }//end showTasks()
     
@@ -62,8 +60,8 @@ public class RoutineController implements Initializable{
     public void newTask(){
         Task dt = new TaskDialog("Add Task").getTask();
         if(dt != null){
-            currentTask = routine.dailyTasks.size();
-            routine.dailyTasks.add(dt);
+            currentTask = routine.routineTasks.size();
+            routine.routineTasks.add(dt);
             showTasks();
             routine.setSaved(false);
         }
@@ -75,13 +73,13 @@ public class RoutineController implements Initializable{
     public void moveTaskUp(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.dailyTasks.size(); i++){
-                if(routine.dailyTasks.get(i).getName().equals(selection)){
+            for(int i=0; i < routine.routineTasks.size(); i++){
+                if(routine.routineTasks.get(i).getName().equals(selection)){
                     currentTask = i;
                 }
             }
             if(currentTask > 0){
-                Collections.swap(routine.dailyTasks, currentTask, currentTask-1);
+                Collections.swap(routine.routineTasks, currentTask, currentTask-1);
             }
         }
         catch(Exception e){
@@ -98,13 +96,13 @@ public class RoutineController implements Initializable{
     public void moveTaskDown(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.dailyTasks.size(); i++){
-                if(routine.dailyTasks.get(i).getName().equals(selection)){
+            for(int i=0; i < routine.routineTasks.size(); i++){
+                if(routine.routineTasks.get(i).getName().equals(selection)){
                     currentTask = i;
                 }
             }
-            if(currentTask < routine.dailyTasks.size()-1){
-                Collections.swap(routine.dailyTasks, currentTask, currentTask+1);
+            if(currentTask < routine.routineTasks.size()-1){
+                Collections.swap(routine.routineTasks, currentTask, currentTask+1);
             }
         }
         catch(Exception e){
@@ -120,13 +118,13 @@ public class RoutineController implements Initializable{
         try{
             currentTask = -1;
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.dailyTasks.size(); i++){
-                if(routine.dailyTasks.get(i).getName().equals(selection)){
+            for(int i=0; i < routine.routineTasks.size(); i++){
+                if(routine.routineTasks.get(i).getName().equals(selection)){
                     currentTask = i;
                 }
             }
             if(currentTask >= 0){
-                routine.dailyTasks.remove(currentTask);
+                routine.routineTasks.remove(currentTask);
             }
         }
         catch(Exception e){
@@ -134,8 +132,8 @@ public class RoutineController implements Initializable{
         }
         showTasks();
         currentTask = -1;
-        if(routine.dailyTasks.isEmpty()){
-            routine.dailyTasks.add(new Task("Begin"));
+        if(routine.routineTasks.isEmpty()){
+            routine.routineTasks.add(new Task("Begin"));
         }
         routine.setSaved(false);
     }//end deleteTask()
@@ -146,50 +144,112 @@ public class RoutineController implements Initializable{
     
     public void showResources(){
         lstResources.getItems().clear();
-        for(int i=0; i < routine.dailyTasks.get(currentTask).assignedResources.size(); i++){
-            lstResources.getItems().add(routine.dailyTasks.get(currentTask).assignedResources.get(i));
+        for(int i=0; i < routine.availableResources.size(); i++){
+            lstResources.getItems().add(routine.availableResources.get(i));
         }
         //cmbAddResource.setPromptText("Assign Resources");
     }//end showResources()
     
     
-    public void setResourceChoices(){
-        cmbAddResource.getItems().clear();
-        for(int i = 0; i < routine.resources.size(); i++){
-            cmbAddResource.getItems().add(routine.resources.get(i).getName());
+     public void newResource(){
+        Resource nr = new ResourceDialog("Add Resource").getResource();
+        if(nr != null){
+            //currentTask = routine.routineTasks.size();
+            routine.availableResources.add(nr);
+            //setResourceChoices();
+            showResources();
+            routine.setSaved(false);
         }
-    }//end setResourceChoices()
-    
-    public void chooseResources(){
-        int i = cmbAddResource.getSelectionModel().getSelectedIndex();
-        routine.dailyTasks.get(currentTask).assignedResources.add(routine.resources.get(i));
-        showResources();
-        //clear combobox back to prompt text???
-    }//end chooseResources()
-    
-    public void newResource(){
-        Resource resource = new Resource();
-        Dialog dlgResource = new Dialog();
-        dlgResource.setTitle("Routines");
-        dlgResource.setHeaderText("Input new Resource data");
-        
-        ButtonType addResource = new ButtonType("Add", ButtonData.OK_DONE);
-        dlgResource.getDialogPane().getButtonTypes().addAll(addResource, ButtonType.CANCEL);
-        
-        VBox vbxNewResource = new VBox();
-        TextField txtResourceName = new TextField();
-        txtResourceName.setPromptText("Resource name");
-        vbxNewResource.getChildren().addAll(txtResourceName);
-        
-        dlgResource.getDialogPane().setContent(vbxNewResource);
-        
-        Optional<ButtonType> result = dlgResource.showAndWait();
-        if(result.get() == addResource && txtResourceName.getText().length() > 0){
-            String name = txtResourceName.getText();
-            routine.resources.add(new Resource(name));
-        }
-        setResourceChoices();
     }//end addResource()
+     
+    
+     
+    public void moveResourceUP(){
+        try{
+            String selection = lstResources.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.availableResources.size(); i++){
+                if(routine.availableResources.get(i).getName().equals(selection)){
+                    currentResource = i;
+                }
+            }
+            if(currentResource > 0){
+                Collections.swap(routine.availableResources, currentResource, currentResource-1);
+            }
+        }
+        catch(Exception e){
+            //just move on
+        }
+        showResources();
+        currentResource -= 1;
+        routine.setSaved(false);
+    }//end moveTaskUp()
+    
+    
+    
+    
+    public void moveResourceDown(){
+        try{
+            String selection = lstResources.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.availableResources.size(); i++){
+                if(routine.availableResources.get(i).getName().equals(selection)){
+                    currentResource = i;
+                }
+            }
+            if(currentResource < routine.availableResources.size()-1){
+                Collections.swap(routine.availableResources, currentResource, currentResource+1);
+            }
+        }
+        catch(Exception e){
+            //just move on
+        }
+        showResources();
+        currentResource += 1; 
+        routine.setSaved(false);
+    }//end moveTaskDown()
+    
+    
+    public void deleteResource(){
+        try{
+            currentResource = -1;
+            String selection = lstResources.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.availableResources.size(); i++){
+                if(routine.availableResources.get(i).getName().equals(selection)){
+                    currentResource = i;
+                }
+            }
+            if(currentResource >= 0){
+                routine.availableResources.remove(currentResource);
+            }
+        }
+        catch(Exception e){
+            //just move on
+        }
+        showResources();
+        currentResource = -1;
+        if(routine.availableResources.isEmpty()){
+            routine.availableResources.add(new Resource("Self"));
+        }
+        routine.setSaved(false);
+    }//end deleteTask()
+    
+    
+    // MOVE THIS STUFF TO TASK-DIALOG
+    
+//    public void setResourceChoices(){
+//        cmbAddResource.getItems().clear();
+//        for(int i = 0; i < routine.availableResources.size(); i++){
+//            cmbAddResource.getItems().add(routine.availableResources.get(i).getName());
+//        }
+//    }//end setResourceChoices()
+//    
+//    public void chooseResources(){
+//        int i = cmbAddResource.getSelectionModel().getSelectedIndex();
+//        routine.routineTasks.get(currentTask).assignedResources.add(routine.availableResources.get(i));
+//        showResources();
+//        //clear combobox back to prompt text???
+//    }//end chooseResources()
+//    
+//   
     
     
     
@@ -218,6 +278,7 @@ public class RoutineController implements Initializable{
         Routine another = new Routine();
         routine = another.openRoutine();
         showTasks();
+        showResources();
         routine.setSaved(true);
     }//end openRoutine()
     
@@ -260,6 +321,7 @@ public class RoutineController implements Initializable{
         if(close){
             routine = new Routine();
             lstTasks.getItems().clear();
+            lstResources.getItems().clear();
         }
     }//end closeRoutine();
     
@@ -271,7 +333,7 @@ public class RoutineController implements Initializable{
     public void getAbout(){
         String about = new String();
         try{
-            File file = new File("src/about.txt");
+            File file = new File("src/Routines/about.txt");
             Scanner readFile = new Scanner(file);
             while(readFile.hasNextLine()){
                 about += readFile.nextLine();

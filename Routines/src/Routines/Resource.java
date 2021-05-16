@@ -15,10 +15,11 @@ public class Resource implements Serializable{
         /////////////////////////////////////////  CONSTRUCTORS  //////////////
     
     public Resource(){
+        this.name = "untitled resource";
     }//end default constructor()
     
     public Resource(String name){
-        this.name = name;
+        this.name = (name.length() == 0)? "untitled resource": name;
     }//end one-arg constructor()
     
     

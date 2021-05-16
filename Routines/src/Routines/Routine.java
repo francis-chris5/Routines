@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 
 public class Routine implements Serializable{
@@ -18,8 +17,8 @@ public class Routine implements Serializable{
 		
     private String title = null;
     private String filepath = null;
-    public LinkedList<Task> dailyTasks = new LinkedList();
-    public LinkedList<Resource> resources = new LinkedList();
+    public LinkedList<Task> routineTasks = new LinkedList();
+    public LinkedList<Resource> availableResources = new LinkedList();
     private boolean saved = true;
 	
 	
@@ -27,8 +26,8 @@ public class Routine implements Serializable{
     
 		//////////////////////////////////////////////////  CONSTRUCTORS  ///////////////////////
     public Routine(){
-        dailyTasks.add(new Task("Begin"));
-        resources.add(new Resource("Self"));
+        routineTasks.add(new Task("Begin"));
+        availableResources.add(new Resource("Self"));
     }//end default constructor()
     
 	
@@ -57,7 +56,7 @@ public class Routine implements Serializable{
             File file = new File(this.filepath);
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.dailyTasks);
+            oos.writeObject(this);
             oos.close();
             this.saved = true;
             return this.saved;
@@ -75,7 +74,7 @@ public class Routine implements Serializable{
             File file = choose.showSaveDialog(null);
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.dailyTasks);
+            oos.writeObject(this);
             oos.close();
             this.filepath = file.getPath();
             this.title = file.getName();
@@ -98,12 +97,12 @@ public class Routine implements Serializable{
             File file = choose.showOpenDialog(null);
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            this.dailyTasks = (LinkedList<Task>)ois.readObject();
+            Routine newRoutine = (Routine)ois.readObject();
             this.title = file.getName();
             this.filepath = file.getPath();
             this.saved = true;
             ois.close();
-            return this;
+            return newRoutine;
         }
         catch(Exception e){
             LinkedList<Task> fail = new LinkedList<Task>();

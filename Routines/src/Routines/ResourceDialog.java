@@ -1,3 +1,4 @@
+
 package Routines;
 
 
@@ -13,25 +14,28 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 
 
-public class TaskDialog extends Dialog implements Initializable {
+public class ResourceDialog extends Dialog implements Initializable {
 
-        /////////////////////////////////////////////  DATAFIELDS  ///////////
+    
+        //////////////////////////////////////////////////  DATAFIELDS  /////
+    
     @FXML
-    TextField txtTaskName;
+    TextField txtResourceName;
     
-    private Task task;
+    private Resource resource;
     
     
-        ////////////////////////////////////////////  CONSTRUCTORS  /////////
+    
+        ////////////////////////////////////////////////  CONSTRUCTORS  ///////
     
     /**
      * 
      * @param confirmLabel <p>What the confirmation button needs to say, probably just "add" or "update"</p>
      */
-    public TaskDialog(String confirmLabel){
-        this.setTitle("Routines: Task");
+    public ResourceDialog(String confirmLabel){
+        this.setTitle("Routines: Resource");
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskDialogGUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceDialogGUI.fxml"));
             loader.setController(this);
             this.setDialogPane(loader.load());
         }
@@ -42,20 +46,20 @@ public class TaskDialog extends Dialog implements Initializable {
         this.getDialogPane().getButtonTypes().addAll(btnAddTask, ButtonType.CANCEL);
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == btnAddTask){
-            this.task = new Task(txtTaskName.getText());
+            this.resource = new Resource(txtResourceName.getText());
         }
         else{
-            this.task = null;
+            this.resource = null;
         }
     }//end one-arg constructor
     
     
     
-        /////////////////////////////////////////////  GETTERS AND SETTERS////
-    public Task getTask(){
-        return this.task;
-    }//end getTask()
+        ///////////////////////////////////////  GETTERS AND SETTERS  ////////
     
+    public Resource getResource(){
+        return this.resource;
+    }//end getResource()
     
     
     
@@ -68,4 +72,4 @@ public class TaskDialog extends Dialog implements Initializable {
         //I rarely use this but the interface requires it
     }//end initialize()
     
-}//end TaskDialog()
+}//end ResourceDialog
