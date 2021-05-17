@@ -169,7 +169,7 @@
             <VBox layoutX="18.0" layoutY="250.0" prefHeight="104.0" prefWidth="181.0">
                <children>
                   <Label text="Complexity" />
-                  <Slider prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true">
+                  <Slider prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true" value="50.0">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>
