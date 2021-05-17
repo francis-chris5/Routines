@@ -129,15 +129,6 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     
     
-        ///////////////////////////////////////  GETTERS AND SETTERS  ////////
-    
-    
-    
-    
-    
-    
-    
-    
         ///////////////////////////////////////////  RESOURCE METHODS ////////
     
     public CostBasis getCostBasis(){

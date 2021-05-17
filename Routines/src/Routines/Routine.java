@@ -21,7 +21,7 @@ public class Routine implements Serializable{
     private String routineName;
     private LocalDate routineStartDate;
     private String routineNotes;
-    private TimeBasis defaultTimescale;
+    private TimeBasis defaultTimescale = TimeBasis.DAYS;
     public LinkedList<Task> routineTasks = new LinkedList();
     public LinkedList<Resource> availableResources = new LinkedList();
     private boolean saved = true;
@@ -36,8 +36,6 @@ public class Routine implements Serializable{
         ////////////////////////////////////////  CONSTRUCTORS  //////////////
     
     public Routine(){
-        routineTasks.add(new Task("Begin"));
-        availableResources.add(new Resource("Self"));
     }//end default constructor()
     
     

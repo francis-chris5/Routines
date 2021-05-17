@@ -2,6 +2,7 @@ package Routines;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Optional;
@@ -15,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 
 
@@ -63,7 +66,7 @@ public class RoutineController implements Initializable{
     
     
     public void newTask(){
-        Task dt = new TaskDialog("add").getTask();
+        Task dt = new TaskDialog("add", this.routine).addTask();
         if(dt != null){
             currentTask = routine.routineTasks.size();
             routine.routineTasks.add(dt);
@@ -75,12 +78,28 @@ public class RoutineController implements Initializable{
     
     
     
+    public void editTask(){
+        String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
+        for(int i=0; i < routine.routineTasks.size(); i++){
+            if(routine.routineTasks.get(i).toString().equals(selection)){
+                Task task = new TaskDialog(routine.routineTasks.get(i), routine).editTask();
+                if(task != null){
+                    routine.routineTasks.set(i, task);
+                    showTasks();
+                }
+            }
+        }
+    }//end editTask()
+    
+    
+    
+    
     
     public void moveTaskUp(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).getName().equals(selection)){
+                if(routine.routineTasks.get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
@@ -103,7 +122,7 @@ public class RoutineController implements Initializable{
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).getName().equals(selection)){
+                if(routine.routineTasks.get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
@@ -127,7 +146,7 @@ public class RoutineController implements Initializable{
             currentTask = -1;
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).getName().equals(selection)){
+                if(routine.routineTasks.get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
@@ -179,15 +198,15 @@ public class RoutineController implements Initializable{
     
     public void editResource(){
         String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).toString().equals(selection)){
-                    Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
-                    if(res != null){
-                        routine.availableResources.set(i, res);
-                        showResources();
-                    }
+        for(int i=0; i < routine.availableResources.size(); i++){
+            if(routine.availableResources.get(i).toString().equals(selection)){
+                Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
+                if(res != null){
+                    routine.availableResources.set(i, res);
+                    showResources();
                 }
             }
+        }
     }//end editResource()
     
     
@@ -264,27 +283,12 @@ public class RoutineController implements Initializable{
     }//end deleteTask()
     
     
-    // MOVE THIS STUFF TO TASK-DIALOG
-    
-//    public void setResourceChoices(){
-//        cmbAddResource.getItems().clear();
-//        for(int i = 0; i < routine.availableResources.size(); i++){
-//            cmbAddResource.getItems().add(routine.availableResources.get(i).getName());
-//        }
-//    }//end setResourceChoices()
-//    
-//    public void chooseResources(){
-//        int i = cmbAddResource.getSelectionModel().getSelectedIndex();
-//        routine.routineTasks.get(currentTask).assignedResources.add(routine.availableResources.get(i));
-//        showResources();
-//        //clear combobox back to prompt text???
-//    }//end chooseResources()
-//    
-//   
     
     
     
-	
+    
+    
+    
         //////////////////////////////////////////////  ROUTINES  /////////////
 		
     public void newRoutine(){
@@ -380,10 +384,40 @@ public class RoutineController implements Initializable{
     
         //////////////////////////////////////////////  APPLICATION  /////////
     
+    public void getHelp(){
+        String help = new String();
+        try{
+            File file = new File("src/Routines/References/UserManual.txt");
+            Scanner readFile = new Scanner(file);
+            while(readFile.hasNextLine()){
+                help += readFile.nextLine();
+                help += "\n";
+            }
+            readFile.close();
+        }
+        catch(Exception e){
+            //whoops, no help file
+            help = "error reading help file";
+        }
+        Alert helpDialog = new Alert(AlertType.INFORMATION);
+        helpDialog.setTitle("Routines");
+        helpDialog.setHeaderText("User Manual");
+        TextArea txtHelp = new TextArea();
+        txtHelp.setText(help);
+        txtHelp.setWrapText(true);
+        txtHelp.setEditable(false);
+        VBox vbxHelp = new VBox(txtHelp);
+        helpDialog.getDialogPane().setContent(vbxHelp);
+        helpDialog.showAndWait();
+    }//end getHelp()
+    
+    
+    
+    
     public void getAbout(){
         String about = new String();
         try{
-            File file = new File("src/Routines/about.txt");
+            File file = new File("src/Routines/References/about.txt");
             Scanner readFile = new Scanner(file);
             while(readFile.hasNextLine()){
                 about += readFile.nextLine();
