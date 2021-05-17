@@ -18,8 +18,12 @@ get a gantt chart, pie charts for task and resource percentage, pert chart, work
 
 
 
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/118569229-7fd29400-b747-11eb-9ba2-ecf2854343bc.jpg)
 
-![pic_for_github](https://user-images.githubusercontent.com/50467171/118384875-f9e40b00-b5d7-11eb-974f-6b3666455d1f.jpg)
+![pic_for_github_task](https://user-images.githubusercontent.com/50467171/118569237-83661b00-b747-11eb-82b2-9ce5cfa9c4e0.jpg)
+
+![pic_for_github_resource](https://user-images.githubusercontent.com/50467171/118569246-86f9a200-b747-11eb-81b7-42d33082dacc.jpg)
+
 
 
 version 0.0.1 is probably only a couple days away...
