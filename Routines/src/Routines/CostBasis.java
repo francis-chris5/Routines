@@ -33,9 +33,9 @@ public enum CostBasis {
             case PER_WEEK:
                 return "weekly";
             case FLAT_FEE:
-                return "a flat fee";
+                return "for a flat fee";
             default:
-                return "a flat fee";
+                return "for a flat fee";
         }
     }//end toString()
     

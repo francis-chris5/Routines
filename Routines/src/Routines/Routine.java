@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import javafx.stage.FileChooser;
 
@@ -15,8 +16,12 @@ public class Routine implements Serializable{
     
 		///////////////////////////////////////////////////  DATAFIELDS  //////////////
 		
-    private String title = null;
+    private String filename = null;
     private String filepath = null;
+    private String routineName;
+    private LocalDate routineStartDate;
+    private String routineNotes;
+    private TimeBasis defaultTimescale;
     public LinkedList<Task> routineTasks = new LinkedList();
     public LinkedList<Resource> availableResources = new LinkedList();
     private boolean saved = true;
@@ -29,29 +34,81 @@ public class Routine implements Serializable{
         routineTasks.add(new Task("Begin"));
         availableResources.add(new Resource("Self"));
     }//end default constructor()
-    
-	
-	
-	
-	
-		/////////////////////////////////////////////////  GETTERS AND SETTERS  /////////////////
-		
-    public String getTitle(){
-        return this.title;
-    }//end getTitle()
-    
-    public boolean isSaved(){
-        return this.saved;
-    }//end isSaved()
-    
-    public void setSaved(boolean saved){
+     public String getFilename(){
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public String getRoutineName() {
+        return routineName;
+    }
+
+    public void setRoutineName(String routineName) {
+        this.routineName = routineName;
+    }
+
+    public LocalDate getRoutineStartDate() {
+        return routineStartDate;
+    }
+
+    public void setRoutineStartDate(LocalDate routineStartDate) {
+        this.routineStartDate = routineStartDate;
+    }
+
+    public String getRoutineNotes() {
+        return routineNotes;
+    }
+
+    public void setRoutineNotes(String routineNotes) {
+        this.routineNotes = routineNotes;
+    }
+
+    public TimeBasis getDefaultTimescale() {
+        return defaultTimescale;
+    }
+
+    public void setDefaultTimescale(TimeBasis defaultTimescale) {
+        this.defaultTimescale = defaultTimescale;
+    }
+
+    public LinkedList<Task> getRoutineTasks() {
+        return routineTasks;
+    }
+
+    public void setRoutineTasks(LinkedList<Task> routineTasks) {
+        this.routineTasks = routineTasks;
+    }
+
+    public LinkedList<Resource> getAvailableResources() {
+        return availableResources;
+    }
+
+    public void setAvailableResources(LinkedList<Resource> availableResources) {
+        this.availableResources = availableResources;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    /////////////////////////////////////////////////  GETTERS AND SETTERS  /////////////////
+    public void setSaved(boolean saved) {
         this.saved = saved;
-    }//end setSaved()
-    
-    
-	
-		///////////////////////////////////////////////  ROUTINES FILE MENU OPERATIONS  ////////
-     public boolean saveRoutine(){
+    }
+
+    ///////////////////////////////////////////////  ROUTINES FILE MENU OPERATIONS  ////////
+    public boolean saveRoutine() {
         try{
             File file = new File(this.filepath);
             FileOutputStream fos = new FileOutputStream(file);
@@ -64,7 +121,7 @@ public class Routine implements Serializable{
         catch(Exception e){
             return false;
         }
-    }//end saveRoutine()
+    } //end saveRoutine()
     
     public boolean saveAsRoutine(){
         try{
@@ -77,7 +134,7 @@ public class Routine implements Serializable{
             oos.writeObject(this);
             oos.close();
             this.filepath = file.getPath();
-            this.title = file.getName();
+            this.filename = file.getName();
             this.saved = true;
             return this.saved;
         }
@@ -98,7 +155,7 @@ public class Routine implements Serializable{
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Routine newRoutine = (Routine)ois.readObject();
-            this.title = file.getName();
+            this.filename = file.getName();
             this.filepath = file.getPath();
             this.saved = true;
             ois.close();
@@ -123,5 +180,15 @@ public class Routine implements Serializable{
             //...
         return false;
     }//end exportRoutine()
+
+    @Override
+    public String toString() {
+        return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartDate() + " with tasks measured in " + this.getDefaultTimescale() + ", and includes the following general notes: " + this.getRoutineNotes();
+    }
     
-}//end serializable()
+    
+    
+    
+    
+    
+}//end Routine

@@ -4,9 +4,11 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -33,7 +35,7 @@
                   <VBox prefHeight="76.0" prefWidth="171.0">
                      <children>
                         <Label text="Default Role" />
-                        <TextField prefHeight="25.0" prefWidth="128.0">
+                        <TextField fx:id="txtResourceDefaultRole" prefHeight="25.0" prefWidth="128.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -46,7 +48,7 @@
                   <VBox prefHeight="76.0" prefWidth="168.0">
                      <children>
                         <Label text="Primary Contact Info" />
-                        <TextField prefHeight="25.0" prefWidth="128.0">
+                        <TextField fx:id="txtPrimaryContactInfo" prefHeight="25.0" prefWidth="128.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -58,14 +60,19 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox layoutX="360.0" layoutY="92.0" prefHeight="71.0" prefWidth="162.0">
+            <VBox layoutX="360.0" layoutY="92.0" prefHeight="175.0" prefWidth="162.0">
                <children>
                   <Label text="Days Off" />
-                  <DatePicker>
+                  <DatePicker fx:id="dtResourceDaysOff" onAction="#addDayOff">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>
                   </DatePicker>
+                  <ListView fx:id="lstDaysOff" onContextMenuRequested="#removeDayOff" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </ListView>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -76,7 +83,7 @@
                   <VBox prefHeight="82.0" prefWidth="163.0">
                      <children>
                         <Label text="Cost" />
-                        <TextField>
+                        <TextField fx:id="txtResourceCost">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -88,10 +95,13 @@
                   </VBox>
                   <VBox prefHeight="80.0" prefWidth="100.0" spacing="3.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="per Hour" />
-                        <RadioButton mnemonicParsing="false" text="per Day" />
-                        <RadioButton mnemonicParsing="false" text="per Week" />
-                        <RadioButton mnemonicParsing="false" text="Flat Fee" />
+                        <RadioButton fx:id="rdbPerHour" mnemonicParsing="false" text="per Hour">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="costToggleGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rdbPerDay" mnemonicParsing="false" text="per Day" toggleGroup="$costToggleGroup" />
+                        <RadioButton fx:id="rdbPerWeek" mnemonicParsing="false" text="per Week" toggleGroup="$costToggleGroup" />
+                        <RadioButton fx:id="rdbFlatFee" mnemonicParsing="false" selected="true" text="Flat Fee" toggleGroup="$costToggleGroup" />
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
@@ -99,10 +109,10 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox layoutX="360.0" layoutY="163.0" prefHeight="90.0" prefWidth="162.0">
+            <VBox layoutX="22.0" layoutY="182.0" prefHeight="90.0" prefWidth="162.0">
                <children>
                   <Label text="Stamina" />
-                  <Slider showTickMarks="true" value="50.0">
+                  <Slider fx:id="sldResourceStamina" showTickMarks="true" value="50.0">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>

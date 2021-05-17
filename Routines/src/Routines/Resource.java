@@ -2,7 +2,7 @@ package Routines;
 
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 
@@ -15,9 +15,9 @@ public class Resource implements Serializable{
     private String primaryContactInfo;
     private double cost;
     private CostBasis units;
-    public LinkedList<Date> daysOff;
-    public LinkedList<Task> assignedTo;
-    private int stamina;
+    public LinkedList<LocalDate> daysOff = new LinkedList<>();
+    public LinkedList<Task> assignedTo = new LinkedList<>();
+    private double stamina;
     
     
     
@@ -36,7 +36,7 @@ public class Resource implements Serializable{
         /////////////////////////////////////////  GETTERS AND SETTERS  ///////
             //need all of them to be an observable for table factories
     public String getName() {
-        if(this.name.length() == 0){
+        if(this.name == null){
             this.name = "untitled resource";
         }
         return name;
@@ -78,11 +78,11 @@ public class Resource implements Serializable{
         this.units = units;
     }
 
-    public LinkedList<Date> getDaysOff() {
+    public LinkedList<LocalDate> getDaysOff() {
         return daysOff;
     }
 
-    public void setDaysOff(LinkedList<Date> daysOff) {
+    public void setDaysOff(LinkedList<LocalDate> daysOff) {
         this.daysOff = daysOff;
     }
     
@@ -94,11 +94,11 @@ public class Resource implements Serializable{
         this.assignedTo = assignedTo;
     }
 
-    public int getStamina() {
+    public double getStamina() {
         return stamina;
     }
 
-    public void setStamina(int stamina) {
+    public void setStamina(double stamina) {
         this.stamina = stamina;
     }
     
@@ -111,7 +111,6 @@ public class Resource implements Serializable{
     
     @Override
     public String toString(){
-        return this.getName();
-        //return this.name + " reached at " + this.primaryContactInfo + " is assigned to " + this.assignedTo.toString() + " and gets paid " + this.cost + " " + this.units.toString();
+        return this.getName() + " reached at " + this.getPrimaryContactInfo() + " is assigned to " + (this.getAssignedTo().isEmpty()?"none":this.getAssignedTo().toString()) + " and gets paid " + this.getCost() + " " + (this.getUnits()!=null?this.getUnits().toString():CostBasis.FLAT_FEE) + ", and needs off on " + (this.daysOff.isEmpty()?"none":this.daysOff.toString());
     }//end toString()
 }//end Resource

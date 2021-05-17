@@ -275,7 +275,7 @@
                                           <Tooltip text="Add New Resource" />
                                        </tooltip>
                                     </Button>
-                                    <Button mnemonicParsing="false">
+                                    <Button mnemonicParsing="false" onAction="#editResource">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

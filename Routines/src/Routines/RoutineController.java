@@ -13,11 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 
 
@@ -45,7 +41,7 @@ public class RoutineController implements Initializable{
     
     
     public void editRoutineDetails(){
-        this.routine = new DetailsDialog("edit").editRoutine(this.routine);
+        this.routine = new DetailsDialog(this.routine).editRoutine();
     }//end editRoutineDetails()
 	
 	/////////////////////////////////////////////  TASKS  /////////////////
@@ -155,17 +151,31 @@ public class RoutineController implements Initializable{
     }//end showResources()
     
     
-     public void newResource(){
-        Resource nr = new ResourceDialog("add").getResource();
+    public void newResource(){
+        Resource nr = new ResourceDialog("add").addResource();
         if(nr != null){
-            //currentTask = routine.routineTasks.size();
             routine.availableResources.add(nr);
-            //setResourceChoices();
             showResources();
             routine.setSaved(false);
         }
     }//end addResource()
      
+     
+     
+     
+    
+    public void editResource(){
+        String selection = lstResources.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.availableResources.size(); i++){
+                if(routine.availableResources.get(i).toString().equals(selection)){
+                    Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
+                    if(res != null){
+                        routine.availableResources.set(i, res);
+                        showResources();
+                    }
+                }
+            }
+    }//end editResource()
     
      
     public void moveResourceUP(){
@@ -217,7 +227,7 @@ public class RoutineController implements Initializable{
             currentResource = -1;
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).getName().equals(selection)){
+                if(routine.availableResources.get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
@@ -268,7 +278,7 @@ public class RoutineController implements Initializable{
     
     
     public void saveRoutine(){
-        if(routine.getTitle() == null){
+        if(routine.getFilename() == null){
             routine.saveAsRoutine();
         }
         else{
@@ -301,7 +311,7 @@ public class RoutineController implements Initializable{
             wantSave.getButtonTypes().setAll(save, noSave, cancel);
             Optional<ButtonType> result = wantSave.showAndWait();
             if(result.get() == save){
-                if(routine.getTitle() == null){
+                if(routine.getFilename() == null){
                     routine.saveAsRoutine();
                 }
                 else{
