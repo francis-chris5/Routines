@@ -1,0 +1,35 @@
+
+
+
+
+ROUTINE:
+
+    The Routines Application will open to an empty routine
+
+    Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Dialog: 
+        Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
+        Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
+        Use the date selector to choose the desired/anticipated/projected Start Date for the routine
+        The "Notes" text area is for general note keeping on a routine-wide basis
+
+    A summary of the routine details will appear as the label for the Routine Details Button
+    
+    To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
+
+
+
+
+RESOURCES:
+
+    Click the Add Resource Button, or select [Resources -> Add Resource] from the main menu to open the Resource Dialog:
+        Enter the name, default role, and primary contact information for the resource
+        Provide the cost for the resource and select one of the radio buttons to determine the Cost Basis of how the cost will be applied to the routine
+        Move the slider to an appropriate Stamina value for the current resource: the resource stamina will be compared to task complexity as a ratio (and its inverse) to use in the Routine Analysis Procedures --for example a warning message if back to back high complexity tasks are assigned to a resource known to "tire easily"
+        Use the Date Picker to add requested days off for the current resource, ...got a bug in removing days off from the list, so that feature coming soon...
+        All details for a resource are optional fields
+
+    A summary of the new resource will appear in the Available Resources List on the main Graphical User Interface
+        Select a resource from the Available Resources List and use the two arrows located just above the list, or select [Resources -> Move Resource Up/Down] from the main menu, to move the selected resource up or down the list
+        Select a resource from the Available Resources List and click the Edit Resource Button, or select [Resources -> Edit Resource] to open the Resource Dialog
+        Select a resource from the Available Resources List and click the Delete Resource Button, or select [Resources -> Delete Resource] to delete the resource from the current routine
+

@@ -90,6 +90,7 @@
             </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
+                  <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
             <MenuItem mnemonicParsing="false" onAction="#getAbout" text="About Routines" />
           </items>
         </Menu>
@@ -218,7 +219,7 @@
                                           <Tooltip text="Add New Task" />
                                        </tooltip>
                                     </Button>
-                                    <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="63.0">
+                                    <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#editTask" prefHeight="60.0" prefWidth="63.0">
                                        <graphic>
                                           <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
