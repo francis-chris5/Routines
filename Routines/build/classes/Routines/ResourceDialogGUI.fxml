@@ -22,7 +22,7 @@
                   <VBox prefHeight="76.0" prefWidth="167.0">
                      <children>
                         <Label text="Resource Name" />
-                        <TextField fx:id="txtResourceName" prefHeight="25.0" prefWidth="128.0">
+                        <TextField fx:id="txtName" prefHeight="25.0" prefWidth="128.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -35,7 +35,7 @@
                   <VBox prefHeight="76.0" prefWidth="171.0">
                      <children>
                         <Label text="Default Role" />
-                        <TextField fx:id="txtResourceDefaultRole" prefHeight="25.0" prefWidth="128.0">
+                        <TextField fx:id="txtDefaultRole" prefHeight="25.0" prefWidth="128.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -63,7 +63,7 @@
             <VBox layoutX="360.0" layoutY="92.0" prefHeight="175.0" prefWidth="162.0">
                <children>
                   <Label text="Days Off" />
-                  <DatePicker fx:id="dtResourceDaysOff" onAction="#addDayOff">
+                  <DatePicker fx:id="dtDaysOff" onAction="#addDayOff">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>
@@ -83,7 +83,7 @@
                   <VBox prefHeight="82.0" prefWidth="163.0">
                      <children>
                         <Label text="Cost" />
-                        <TextField fx:id="txtResourceCost">
+                        <TextField fx:id="txtCost">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -112,7 +112,7 @@
             <VBox layoutX="22.0" layoutY="182.0" prefHeight="90.0" prefWidth="162.0">
                <children>
                   <Label text="Stamina" />
-                  <Slider fx:id="sldResourceStamina" showTickMarks="true" value="50.0">
+                  <Slider fx:id="sldStamina" showTickMarks="true" value="50.0">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>
