@@ -24,13 +24,13 @@ public class ResourceDialog extends Dialog implements Initializable {
         //////////////////////////////////////////////////  DATAFIELDS  /////
     
     @FXML
-    TextField txtResourceName;
+    TextField txtName;
     @FXML
-    TextField txtResourceDefaultRole;
+    TextField txtDefaultRole;
     @FXML
     TextField txtPrimaryContactInfo;
     @FXML
-    TextField txtResourceCost;
+    TextField txtCost;
     @FXML
     RadioButton rdbPerHour;
     @FXML
@@ -40,14 +40,20 @@ public class ResourceDialog extends Dialog implements Initializable {
     @FXML
     RadioButton rdbFlatFee;
     @FXML
-    DatePicker dtResourceDaysOff;
-    @FXML
-    Slider sldResourceStamina;
+    DatePicker dtDaysOff;
     @FXML
     ListView lstDaysOff;
+    @FXML
+    Slider sldStamina;
+    
     
     
     private Resource resource;
+    
+    
+    
+    
+    
     
     
     
@@ -56,7 +62,9 @@ public class ResourceDialog extends Dialog implements Initializable {
     public ResourceDialog(){
     }//end default constructor
     
-
+    
+    
+    
     public ResourceDialog(String purpose){
         this.resource = new Resource();
         this.setTitle("Routines: Resource");
@@ -83,6 +91,7 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     
     
+    
     public ResourceDialog(Resource resource){
         this.resource = resource;
         this.setTitle("Routines: Resource");
@@ -96,12 +105,12 @@ public class ResourceDialog extends Dialog implements Initializable {
         }
         ButtonType btnConfirm = new ButtonType("Update Resource", ButtonData.OK_DONE);
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
-        txtResourceName.setText(this.resource.getName());
-        txtResourceDefaultRole.setText(this.resource.getDefaultRole());
+        txtName.setText(this.resource.getName());
+        txtDefaultRole.setText(this.resource.getDefaultRole());
         txtPrimaryContactInfo.setText(this.resource.getPrimaryContactInfo());
-        txtResourceCost.setText("" + this.resource.getCost());
+        txtCost.setText("" + this.resource.getCost());
         setCostBasisRadioButton(this.resource.getUnits());
-        sldResourceStamina.setValue(this.resource.getStamina());
+        sldStamina.setValue(this.resource.getStamina());
         lstDaysOff.getItems().clear();
         lstDaysOff.getItems().addAll(this.resource.daysOff);
         Optional<ButtonType> clicked = this.showAndWait();
@@ -115,9 +124,15 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     
     
+    
+    
+    
+    
+    
         ///////////////////////////////////////  GETTERS AND SETTERS  ////////
     
-   
+    
+    
     
     
     
@@ -170,12 +185,12 @@ public class ResourceDialog extends Dialog implements Initializable {
         }
     }//end setCostBasisRadioButton()
     
-
+    
+    
     
     public void addDayOff(){
-        lstDaysOff.getItems().add(dtResourceDaysOff.getValue());
+        lstDaysOff.getItems().add(dtDaysOff.getValue());
     }//end addDayOff()
-    
     
     
     
@@ -188,48 +203,66 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     
     
-    
-     public Resource addResource(){
+    public Resource addResource(){
         if(this.resource != null){
-            this.resource.setName(txtResourceName.getText().length()==0?"untitled resource":txtResourceName.getText());
-            this.resource.setDefaultRole(txtResourceDefaultRole.getText());
+            this.resource.setName(txtName.getText().length()==0?"untitled resource":txtName.getText());
+            this.resource.setDefaultRole(txtDefaultRole.getText());
             this.resource.setPrimaryContactInfo(txtPrimaryContactInfo.getText());
             try{
-                this.resource.setCost(Double.parseDouble(txtResourceCost.getText()));
+                this.resource.setCost(Double.parseDouble(txtCost.getText()));
             }
-            catch(NumberFormatException e){
-                this.resource.setCost(1.0);
+            catch(NumberFormatException e0){
+                try{
+                    if(txtCost.getText().length() > 0){
+                        this.resource.setCost(Double.parseDouble(txtCost.getText().substring(1)));//check for dollar sign
+                    }
+                }
+                catch(NumberFormatException e1){
+                    this.resource.setCost(-1.0);
+                }
             }
             this.resource.setUnits(this.getCostBasis());
             this.resource.daysOff.clear();
             this.resource.daysOff.addAll(lstDaysOff.getItems());
-            this.resource.setStamina(sldResourceStamina.getValue());
+            this.resource.setStamina(sldStamina.getValue());
         }
         return this.resource;
     }//end addResource()
+    
      
      
-     
-     
-     
+      
     public Resource editResource(){
         if(this.resource != null){
-            this.resource.setName(txtResourceName.getText().length()==0?"untitled resource":txtResourceName.getText());
-            this.resource.setDefaultRole(txtResourceDefaultRole.getText());
+            this.resource.setName(txtName.getText().length()==0?"untitled resource":txtName.getText());
+            this.resource.setDefaultRole(txtDefaultRole.getText());
             this.resource.setPrimaryContactInfo(txtPrimaryContactInfo.getText());
             try{
-                this.resource.setCost(Double.parseDouble(txtResourceCost.getText()));
+                this.resource.setCost(Double.parseDouble(txtCost.getText()));
             }
-            catch(NumberFormatException e){
-                this.resource.setCost(1.0);
+            catch(NumberFormatException e0){
+                try{
+                    if(txtCost.getText().length() > 0){
+                        this.resource.setCost(Double.parseDouble(txtCost.getText().substring(1)));//check for dollar sign
+                    }
+                }
+                catch(NumberFormatException e1){
+                    this.resource.setCost(-1.0);
+                }
             }
             this.resource.setUnits(this.getCostBasis());
             this.resource.daysOff.clear();
             this.resource.daysOff.addAll(lstDaysOff.getItems());
-            this.resource.setStamina(sldResourceStamina.getValue());
+            this.resource.setStamina(sldStamina.getValue());
         }
         return this.resource;
     }//end editResource()
+    
+    
+    
+    
+    
+    
     
     
         ///////////////////////////////////////////  JAVA OBJECTS  ///////////

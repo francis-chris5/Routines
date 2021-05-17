@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
@@ -20,30 +21,35 @@ import javafx.scene.control.ListView;
 public class RoutineController implements Initializable{
 	
 	
-		///////////////////////////////////////////   FXML COMPONENTS   ///////////
-
+        ///////////////////////////////////////////   FXML COMPONENTS   ///////////
+    
+    @FXML
+    Button btnRoutineDetails;
     @FXML
     ListView lstTasks;
     @FXML
     ListView lstResources;
-
     
-	
-	
-	
-	
-	//////////////////////////////////////////////  DATAFIELDS  ///////////
+    
+    
+    
+    
+    
+    
+    
+        //////////////////////////////////////////////  DATAFIELDS  ///////////
     
     private Routine routine = new Routine();
     private int currentTask = 0;
     private int currentResource = 0;
-
     
     
-    public void editRoutineDetails(){
-        this.routine = new DetailsDialog(this.routine).editRoutine();
-    }//end editRoutineDetails()
-	
+    
+    
+    
+    
+    
+    
 	/////////////////////////////////////////////  TASKS  /////////////////
 		
     public void showTasks(){
@@ -54,7 +60,6 @@ public class RoutineController implements Initializable{
     }//end showTasks()
     
     
-
     
     
     public void newTask(){
@@ -68,7 +73,8 @@ public class RoutineController implements Initializable{
     }//end newTask()
     
     
-
+    
+    
     
     public void moveTaskUp(){
         try{
@@ -114,6 +120,8 @@ public class RoutineController implements Initializable{
     }//end moveTaskDown()
     
     
+    
+    
     public void deleteTask(){
         try{
             currentTask = -1;
@@ -140,6 +148,11 @@ public class RoutineController implements Initializable{
     
     
     
+    
+    
+    
+    
+    
         /////////////////////////////////////////////  RESOURCES  /////////////
     
     public void showResources(){
@@ -147,8 +160,9 @@ public class RoutineController implements Initializable{
         for(int i=0; i < routine.availableResources.size(); i++){
             lstResources.getItems().add(routine.availableResources.get(i));
         }
-        //cmbAddResource.setPromptText("Assign Resources");
     }//end showResources()
+    
+    
     
     
     public void newResource(){
@@ -159,7 +173,6 @@ public class RoutineController implements Initializable{
             routine.setSaved(false);
         }
     }//end addResource()
-     
      
      
      
@@ -177,12 +190,14 @@ public class RoutineController implements Initializable{
             }
     }//end editResource()
     
-     
+    
+    
+    
     public void moveResourceUP(){
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).getName().equals(selection)){
+                if(routine.availableResources.get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
@@ -205,7 +220,7 @@ public class RoutineController implements Initializable{
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).getName().equals(selection)){
+                if(routine.availableResources.get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
@@ -220,6 +235,8 @@ public class RoutineController implements Initializable{
         currentResource += 1; 
         routine.setSaved(false);
     }//end moveTaskDown()
+    
+    
     
     
     public void deleteResource(){
@@ -273,7 +290,17 @@ public class RoutineController implements Initializable{
     public void newRoutine(){
         closeRoutine();
         routine = new Routine();
+        editRoutineDetails();
     }//end newRoutine()
+    
+    
+    
+    
+    public void editRoutineDetails(){
+        this.routine = new DetailsDialog(this.routine).editRoutine();
+        btnRoutineDetails.setText(this.routine.toString());
+    }//end editRoutineDetails()
+    
     
     
     
@@ -287,6 +314,8 @@ public class RoutineController implements Initializable{
     }//end saveRoutine()
     
     
+    
+    
     public void openRoutine(){
         closeRoutine();
         Routine another = new Routine();
@@ -295,6 +324,8 @@ public class RoutineController implements Initializable{
         showResources();
         routine.setSaved(true);
     }//end openRoutine()
+    
+    
     
     
     public void closeRoutine(){
@@ -334,6 +365,7 @@ public class RoutineController implements Initializable{
         }
         if(close){
             routine = new Routine();
+            btnRoutineDetails.setText("Routine Details");
             lstTasks.getItems().clear();
             lstResources.getItems().clear();
         }
@@ -341,9 +373,13 @@ public class RoutineController implements Initializable{
     
     
     
-	
-	//////////////////////////////////////////////  APPLICATION  /////////
-		
+    
+    
+    
+    
+    
+        //////////////////////////////////////////////  APPLICATION  /////////
+    
     public void getAbout(){
         String about = new String();
         try{
@@ -366,6 +402,13 @@ public class RoutineController implements Initializable{
         aboutDialog.showAndWait();
     }//end getAbout()
     
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////  JAVA OBJECECT  /////////
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -14,7 +14,7 @@ import javafx.stage.FileChooser;
 
 public class Routine implements Serializable{
     
-		///////////////////////////////////////////////////  DATAFIELDS  //////////////
+        ///////////////////////////////////////////  DATAFIELDS  //////////////
 		
     private String filename = null;
     private String filepath = null;
@@ -25,23 +25,37 @@ public class Routine implements Serializable{
     public LinkedList<Task> routineTasks = new LinkedList();
     public LinkedList<Resource> availableResources = new LinkedList();
     private boolean saved = true;
-	
-	
-	
     
-		//////////////////////////////////////////////////  CONSTRUCTORS  ///////////////////////
+    
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////  CONSTRUCTORS  //////////////
+    
     public Routine(){
         routineTasks.add(new Task("Begin"));
         availableResources.add(new Resource("Self"));
     }//end default constructor()
-     public String getFilename(){
+    
+    
+    
+    
+    
+    
+    
+    
+        ///////////////////////////////////////  GETTERS AND SETTERS  ///////
+    public String getFilename(){
         return filename;
-    }
+    }//end default constructor
 
     public void setFilename(String filename) {
         this.filename = filename;
     }
-
+    
     public String getFilepath() {
         return filepath;
     }
@@ -102,12 +116,19 @@ public class Routine implements Serializable{
         return saved;
     }
 
-    /////////////////////////////////////////////////  GETTERS AND SETTERS  /////////////////
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
-
-    ///////////////////////////////////////////////  ROUTINES FILE MENU OPERATIONS  ////////
+    
+    
+    
+    
+    
+    
+    
+    
+        /////////////////////////////  ROUTINES FILE MENU OPERATIONS  ////////
+    
     public boolean saveRoutine() {
         try{
             File file = new File(this.filepath);
@@ -122,6 +143,9 @@ public class Routine implements Serializable{
             return false;
         }
     } //end saveRoutine()
+    
+    
+    
     
     public boolean saveAsRoutine(){
         try{
@@ -170,6 +194,8 @@ public class Routine implements Serializable{
     }//end openRoutine()
     
     
+    
+    
     public boolean exportRoutine(String format){
         //export in form compataible(?) with other software
             //xml
@@ -180,15 +206,18 @@ public class Routine implements Serializable{
             //...
         return false;
     }//end exportRoutine()
-
+    
+    
+    
+    
+    
+    
+    
+        ///////////////////////////////////////////  JAVA OBJECTS  ///////////
+    
     @Override
     public String toString() {
         return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartDate() + " with tasks measured in " + this.getDefaultTimescale() + ", and includes the following general notes: " + this.getRoutineNotes();
-    }
-    
-    
-    
-    
-    
-    
+    }//end toString()
+
 }//end Routine

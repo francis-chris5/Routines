@@ -39,7 +39,12 @@ public class DetailsDialog extends Dialog implements Initializable {
     @FXML
     RadioButton rdbYears;
     
+    
     private Routine routine;
+    
+    
+    
+    
     
     
     
@@ -48,6 +53,8 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     public DetailsDialog(){
     }//end default constructor
+    
+    
     
     
     public DetailsDialog(String purpose){
@@ -72,6 +79,7 @@ public class DetailsDialog extends Dialog implements Initializable {
             }
         }
     }//end string-arg constructor
+    
     
     
     
@@ -103,11 +111,18 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    
+    
+    
+    
+    
         ////////////////////////////////////////  GETTERS AND SETTERS  ///////
     
     public Routine getRoutine(){
         return this.routine;
     }//end getRoutine()
+    
+    
     
     
     
@@ -139,6 +154,8 @@ public class DetailsDialog extends Dialog implements Initializable {
             return TimeBasis.DAYS;
         }
     }//end getDefaultTimeBasis()
+    
+    
     
     
     public void setDefaultTimeRadioButton(TimeBasis tb){
@@ -173,6 +190,7 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    
     public Routine editRoutine(){
         this.routine.setRoutineName(txtRoutineName.getText());
         this.routine.setRoutineStartDate(dtRoutineStartDate.getValue());
@@ -180,6 +198,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         this.routine.setDefaultTimescale(this.getDefaultTimeBasis());
         return this.routine;
     }//end editRoutine()
+    
     
     
     
