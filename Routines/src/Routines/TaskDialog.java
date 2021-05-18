@@ -68,7 +68,7 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     public TaskDialog(String purpose, Routine routine){
-        this.task = new Task();
+        this.task = new Task("");
         this.routine = routine;
         this.setTitle("Routines: Task");
         if(purpose.equals("add")){
@@ -83,7 +83,7 @@ public class TaskDialog extends Dialog implements Initializable {
             ButtonType btnConfirm = new ButtonType("Add Task", ButtonData.OK_DONE);
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             setTimeBasisRadioButton(routine.getDefaultTimescale());
-            //add options for predecessor task
+            setPredecessorChoices();
             setResourceChoices();
             Optional<ButtonType> clicked = this.showAndWait();
             if(clicked.get() == btnConfirm){
@@ -115,9 +115,9 @@ public class TaskDialog extends Dialog implements Initializable {
         txtName.setText(this.task.getName());
         txtDuration.setText("" + this.task.getDuration());
         this.setTimeBasisRadioButton(this.task.getUnits());
-        //add options for predecessor task
+        this.setPredecessorChoices();
         cmbPredecessor.setValue(this.task.getPredecessor());
-        txtStartTime.setText(this.task.getStartTime().toString());
+        txtStartTime.setText(this.task.getStartTime()==null?"":this.task.getStartTime().toString());
         dtStartDate.setValue(this.task.getStartDate());
         dtEndDate.setValue(this.task.getEndDate());
         setResourceChoices();
@@ -203,12 +203,22 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     
-        public void setResourceChoices(){
-            cmbAssignedResources.getItems().clear();
-            for(int i = 0; i < routine.availableResources.size(); i++){
-                cmbAssignedResources.getItems().add(routine.availableResources.get(i).getName());
-            }
-        }//end setResourceChoices()
+    public void setResourceChoices(){
+        cmbAssignedResources.getItems().clear();
+        for(int i = 0; i < routine.availableResources.size(); i++){
+            cmbAssignedResources.getItems().add(routine.availableResources.get(i).getName());
+        }
+    }//end setResourceChoices()
+    
+    
+    
+    
+    public void setPredecessorChoices(){
+        cmbPredecessor.getItems().clear();
+        for(int i=0; i < routine.routineTasks.size(); i++){
+            cmbPredecessor.getItems().add(routine.routineTasks.get(i));
+        }
+    }//end setPredecessorChoices()
     
     
     
@@ -216,14 +226,17 @@ public class TaskDialog extends Dialog implements Initializable {
     public void addResource(){
         int i = cmbAssignedResources.getSelectionModel().getSelectedIndex();
         lstAssignedResources.getItems().add(routine.availableResources.get(i));
+        routine.availableResources.get(i).assignedTo.add(this.task);
     }//end addResource()
     
     
     
     
     public void removeResource(){
-        String res = lstAssignedResources.getSelectionModel().getSelectedItem().toString();
-        lstAssignedResources.getItems().remove(res);
+        int res = lstAssignedResources.getSelectionModel().getSelectedIndex();
+        if(res >= 0){
+            lstAssignedResources.getItems().remove(res);
+        }
     }//end removeResource()
     
     
@@ -255,7 +268,6 @@ public class TaskDialog extends Dialog implements Initializable {
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());
-            System.out.println(this.task.toString());
         }
         return this.task;
     }//end addTask()
@@ -291,7 +303,6 @@ public class TaskDialog extends Dialog implements Initializable {
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());
-            System.out.println(this.task.toString());
         }
         return this.task;
     }//end editTask()

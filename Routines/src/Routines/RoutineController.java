@@ -71,6 +71,7 @@ public class RoutineController implements Initializable{
             currentTask = routine.routineTasks.size();
             routine.routineTasks.add(dt);
             showTasks();
+            showResources();
             routine.setSaved(false);
         }
     }//end newTask()
@@ -79,15 +80,22 @@ public class RoutineController implements Initializable{
     
     
     public void editTask(){
-        String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-        for(int i=0; i < routine.routineTasks.size(); i++){
-            if(routine.routineTasks.get(i).toString().equals(selection)){
-                Task task = new TaskDialog(routine.routineTasks.get(i), routine).editTask();
-                if(task != null){
-                    routine.routineTasks.set(i, task);
-                    showTasks();
+        try{
+            String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.routineTasks.size(); i++){
+                if(routine.routineTasks.get(i).toString().equals(selection)){
+                    Task task = new TaskDialog(routine.routineTasks.get(i), routine).editTask();
+                    if(task != null){
+                        routine.routineTasks.set(i, task);
+                        showTasks();
+                        showResources();
+                        routine.setSaved(false);
+                    }
                 }
             }
+        }
+        catch(Exception e){
+            //just move on then
         }
     }//end editTask()
     
@@ -162,6 +170,8 @@ public class RoutineController implements Initializable{
         if(routine.routineTasks.isEmpty()){
             routine.routineTasks.add(new Task("Begin"));
         }
+        showTasks();
+        showResources();
         routine.setSaved(false);
     }//end deleteTask()
     
@@ -189,6 +199,7 @@ public class RoutineController implements Initializable{
         if(nr != null){
             routine.availableResources.add(nr);
             showResources();
+            showTasks();
             routine.setSaved(false);
         }
     }//end addResource()
@@ -197,15 +208,22 @@ public class RoutineController implements Initializable{
      
     
     public void editResource(){
-        String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-        for(int i=0; i < routine.availableResources.size(); i++){
-            if(routine.availableResources.get(i).toString().equals(selection)){
-                Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
-                if(res != null){
-                    routine.availableResources.set(i, res);
-                    showResources();
+        try{
+            String selection = lstResources.getSelectionModel().getSelectedItem().toString();
+            for(int i=0; i < routine.availableResources.size(); i++){
+                if(routine.availableResources.get(i).toString().equals(selection)){
+                    Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
+                    if(res != null){
+                        routine.availableResources.set(i, res);
+                        showResources();
+                        showTasks();
+                        routine.setSaved(false);
+                    }
                 }
             }
+        }
+        catch(Exception e){
+            //just move on then
         }
     }//end editResource()
     
@@ -316,6 +334,13 @@ public class RoutineController implements Initializable{
             routine.saveRoutine();
         }
     }//end saveRoutine()
+    
+    
+    
+    
+    public void saveAsRoutine(){
+        routine.saveAsRoutine();
+    }
     
     
     

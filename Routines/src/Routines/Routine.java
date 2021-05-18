@@ -20,6 +20,7 @@ public class Routine implements Serializable{
     private String filepath = null;
     private String routineName;
     private LocalDate routineStartDate;
+    private double routineBudget;
     private String routineNotes;
     private TimeBasis defaultTimescale = TimeBasis.DAYS;
     public LinkedList<Task> routineTasks = new LinkedList();
@@ -76,6 +77,14 @@ public class Routine implements Serializable{
 
     public void setRoutineStartDate(LocalDate routineStartDate) {
         this.routineStartDate = routineStartDate;
+    }
+    
+    public double getRoutineBudget() {
+        return routineBudget;
+    }
+
+    public void setRoutineBudget(double routineBudget) {
+        this.routineBudget = routineBudget;
     }
 
     public String getRoutineNotes() {
@@ -157,6 +166,7 @@ public class Routine implements Serializable{
             oos.close();
             this.filepath = file.getPath();
             this.filename = file.getName();
+            System.out.println(this.filename + " @ " + this.filepath);
             this.saved = true;
             return this.saved;
         }
@@ -215,7 +225,7 @@ public class Routine implements Serializable{
     
     @Override
     public String toString() {
-        return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartDate() + " with tasks measured in " + this.getDefaultTimescale() + ", and includes the following general notes: " + this.getRoutineNotes();
+        return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartDate() + " with tasks measured in " + this.getDefaultTimescale() + " with a budget of " + this.getRoutineBudget() + ", and includes the following...";
     }//end toString()
 
 }//end Routine

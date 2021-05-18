@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldListCell;
 
 
 public class ResourceDialog extends Dialog implements Initializable {
@@ -181,14 +182,17 @@ public class ResourceDialog extends Dialog implements Initializable {
     
     public void addDayOff(){
         lstDaysOff.getItems().add(dtDaysOff.getValue());
+        dtDaysOff.getEditor().clear();
     }//end addDayOff()
     
     
     
     
     public void removeDayOff(){
-        String day = lstDaysOff.getSelectionModel().getSelectedItem().toString();
-        lstDaysOff.getItems().remove(day);
+        int day = lstDaysOff.getSelectionModel().getSelectedIndex();
+        if(day >= 0){
+            lstDaysOff.getItems().remove(day);
+        }
     }//end removeDayOff()
     
     

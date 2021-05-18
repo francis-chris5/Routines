@@ -105,6 +105,19 @@ public class Task implements Serializable{
     public LinkedList<Resource> getAssignedResources() {
         return assignedResources;
     }
+    
+    public String getResourceNames(){
+        String rNames = new String("[");
+        for(int i=0; i < assignedResources.size(); i++){
+            if(i < assignedResources.size() -1){
+                rNames += assignedResources.get(i).getName() + ", ";
+            }
+            else{
+                rNames += assignedResources.get(i).getName() + "]";
+            }
+        }
+        return rNames;
+    }
 
     public void setAssignedResources(LinkedList<Resource> assignedResources) {
         this.assignedResources = assignedResources;
@@ -126,11 +139,13 @@ public class Task implements Serializable{
     
     
     
+    
+    
 	///////////////////////////////////////////  JAVA OBJECT  /////////////
 	
     @Override
     public String toString(){
-        return this.getName() + " comes after " + (this.getPredecessor() == null?"nothing":this.predecessor.getName()) + " and should take " + this.getDuration() + " " + this.getUnits().toString() + " to be completed by " + (this.assignedResources.isEmpty()?"nobody???":this.assignedResources.toString());
+        return this.getName() + " comes after " + (this.getPredecessor() == null?"nothing":this.predecessor.getName()) + " and should take " + this.getDuration() + " " + this.getUnits().toString() + " to be completed by " + (this.assignedResources.isEmpty()?"nobody???":this.getResourceNames());
     }//end toString()
     
 }//end Task

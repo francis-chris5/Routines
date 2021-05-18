@@ -63,6 +63,7 @@
             <MenuItem mnemonicParsing="false" onAction="#closeRoutine" text="Close" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#saveRoutine" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAsRoutine" text="Save As..." />
                   <MenuItem mnemonicParsing="false" onAction="#editRoutineDetails" text="Routine Details" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />

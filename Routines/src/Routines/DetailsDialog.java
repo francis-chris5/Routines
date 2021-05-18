@@ -14,6 +14,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.web.HTMLEditor;
 
 public class DetailsDialog extends Dialog implements Initializable {
 
@@ -25,7 +26,7 @@ public class DetailsDialog extends Dialog implements Initializable {
     @FXML
     DatePicker dtRoutineStartDate;
     @FXML
-    TextArea txtRoutineNotes;
+    HTMLEditor txtRoutineNotes;
     @FXML
     RadioButton rdbMinutes;
     @FXML
@@ -38,6 +39,8 @@ public class DetailsDialog extends Dialog implements Initializable {
     RadioButton rdbMonths;
     @FXML
     RadioButton rdbYears;
+    @FXML
+    TextField txtRoutineBudget;
     
     
     private Routine routine;
@@ -98,7 +101,8 @@ public class DetailsDialog extends Dialog implements Initializable {
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
         txtRoutineName.setText(this.routine.getRoutineName());
         dtRoutineStartDate.setValue(this.routine.getRoutineStartDate());
-        txtRoutineNotes.setText(this.routine.getRoutineNotes());
+        txtRoutineBudget.setText("" + this.routine.getRoutineBudget());
+        txtRoutineNotes.setHtmlText(this.routine.getRoutineNotes());
         setDefaultTimeRadioButton(this.routine.getDefaultTimescale());
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == btnConfirm){
@@ -194,8 +198,20 @@ public class DetailsDialog extends Dialog implements Initializable {
     public Routine editRoutine(){
         this.routine.setRoutineName(txtRoutineName.getText());
         this.routine.setRoutineStartDate(dtRoutineStartDate.getValue());
-        this.routine.setRoutineNotes(txtRoutineNotes.getText());
+        try{
+            this.routine.setRoutineBudget(Double.parseDouble(txtRoutineBudget.getText()));
+        }
+        catch(NumberFormatException e0){
+            try{
+                this.routine.setRoutineBudget(Double.parseDouble(txtRoutineBudget.getText().substring(1)));
+            }
+            catch(NumberFormatException e1){
+                this.routine.setRoutineBudget(-1.0);
+            }  
+        }
+        this.routine.setRoutineNotes(txtRoutineNotes.getHtmlText());
         this.routine.setDefaultTimescale(this.getDefaultTimeBasis());
+        System.out.println(routine);
         return this.routine;
     }//end editRoutine()
     

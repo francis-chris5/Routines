@@ -89,6 +89,19 @@ public class Resource implements Serializable{
     public LinkedList<Task> getAssignedTo() {
         return assignedTo;
     }
+    
+    public String getTaskNames(){
+        String tNames = new String("[");
+        for(int i=0; i < assignedTo.size(); i++){
+            if(i < assignedTo.size() - 1){
+                tNames += assignedTo.get(i).getName() + ", ";
+            }
+            else{
+                tNames += assignedTo.get(i).getName() + "]";
+            }
+        }
+        return tNames;
+    }
 
     public void setAssignedTo(LinkedList<Task> assignedTo) {
         this.assignedTo = assignedTo;
@@ -111,6 +124,6 @@ public class Resource implements Serializable{
     
     @Override
     public String toString(){
-        return this.getName() + " reached at " + this.getPrimaryContactInfo() + " is assigned to " + (this.getAssignedTo().isEmpty()?"none":this.getAssignedTo().toString()) + " and gets paid " + this.getCost() + " " + (this.getUnits()!=null?this.getUnits().toString():CostBasis.FLAT_FEE) + ", and needs off on " + (this.daysOff.isEmpty()?"none":this.daysOff.toString());
+        return this.getName() + " reached at " + this.getPrimaryContactInfo() + " is assigned to " + (this.getAssignedTo().isEmpty()?"none":this.getTaskNames()) + " and gets paid " + this.getCost() + " " + (this.getUnits()!=null?this.getUnits().toString():CostBasis.FLAT_FEE) + ", and needs off on " + (this.daysOff.isEmpty()?"none":this.daysOff.toString());
     }//end toString()
 }//end Resource

@@ -111,7 +111,7 @@
                   <VBox prefHeight="119.0" prefWidth="173.0">
                      <children>
                         <Label text="Resources" />
-                        <ListView fx:id="lstAssignedResources" prefHeight="105.0" prefWidth="203.0">
+                        <ListView fx:id="lstAssignedResources" onContextMenuRequested="#removeResource" prefHeight="105.0" prefWidth="203.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -123,8 +123,36 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox layoutX="228.0" layoutY="149.0" prefHeight="200.0" prefWidth="167.0">
+            <VBox layoutX="18.0" layoutY="250.0" prefHeight="104.0" prefWidth="181.0">
                <children>
+                  <Label text="Complexity" />
+                  <Slider fx:id="sldComplexity" prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true" value="50.0">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <AnchorPane prefHeight="42.0" prefWidth="175.0">
+                     <children>
+                        <Label layoutX="14.0" text="Easy" textFill="#0000007b" />
+                        <Label layoutX="129.0" text="Difficult" textFill="#0000007b" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="226.0" layoutY="150.0" prefHeight="200.0" prefWidth="195.0">
+               <children>
+                  <HBox prefHeight="39.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" selected="true" text="Calculated" />
+                        <RadioButton mnemonicParsing="false" text="Manual Input" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
                   <VBox prefHeight="59.0" prefWidth="177.0">
                      <children>
                         <Label text="Start Time" />
@@ -165,25 +193,6 @@
                      </padding>
                   </VBox>
                </children>
-            </VBox>
-            <VBox layoutX="18.0" layoutY="250.0" prefHeight="104.0" prefWidth="181.0">
-               <children>
-                  <Label text="Complexity" />
-                  <Slider fx:id="sldComplexity" prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true" value="50.0">
-                     <VBox.margin>
-                        <Insets left="8.0" />
-                     </VBox.margin>
-                  </Slider>
-                  <AnchorPane prefHeight="42.0" prefWidth="175.0">
-                     <children>
-                        <Label layoutX="14.0" text="Easy" textFill="#0000007b" />
-                        <Label layoutX="129.0" text="Difficult" textFill="#0000007b" />
-                     </children>
-                  </AnchorPane>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
             </VBox>
          </children>
       </AnchorPane>
