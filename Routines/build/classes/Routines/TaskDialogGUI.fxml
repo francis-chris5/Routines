@@ -50,13 +50,13 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <RadioButton fx:id="rdbMinutes" mnemonicParsing="false" text="Minutes">
+                              <RadioButton fx:id="rdbMinutes" mnemonicParsing="false" onAction="#schedulerChanged" text="Minutes">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="durationToggleGroup" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbHours" mnemonicParsing="false" text="Hours" toggleGroup="$durationToggleGroup" />
-                              <RadioButton fx:id="rdbDays" mnemonicParsing="false" text="Days" toggleGroup="$durationToggleGroup" />
+                              <RadioButton fx:id="rdbHours" mnemonicParsing="false" onAction="#schedulerChanged" text="Hours" toggleGroup="$durationToggleGroup" />
+                              <RadioButton fx:id="rdbDays" mnemonicParsing="false" onAction="#schedulerChanged" text="Days" toggleGroup="$durationToggleGroup" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -64,9 +64,9 @@
                         </VBox>
                         <VBox prefHeight="68.0" prefWidth="77.0" spacing="5.0">
                            <children>
-                              <RadioButton fx:id="rdbWeeks" mnemonicParsing="false" text="Weeks" toggleGroup="$durationToggleGroup" />
-                              <RadioButton fx:id="rdbMonths" mnemonicParsing="false" text="Months" toggleGroup="$durationToggleGroup" />
-                              <RadioButton fx:id="rdbYears" mnemonicParsing="false" text="Years" toggleGroup="$durationToggleGroup">
+                              <RadioButton fx:id="rdbWeeks" mnemonicParsing="false" onAction="#schedulerChanged" text="Weeks" toggleGroup="$durationToggleGroup" />
+                              <RadioButton fx:id="rdbMonths" mnemonicParsing="false" onAction="#schedulerChanged" text="Months" toggleGroup="$durationToggleGroup" />
+                              <RadioButton fx:id="rdbYears" mnemonicParsing="false" onAction="#schedulerChanged" text="Years" toggleGroup="$durationToggleGroup">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
@@ -80,19 +80,6 @@
                   </HBox>
                </children>
             </HBox>
-            <VBox layoutX="18.0" layoutY="149.0" prefHeight="78.0" prefWidth="171.0">
-               <children>
-                  <Label text="Predecessor Task(s)" />
-                  <ComboBox fx:id="cmbPredecessor" prefWidth="150.0">
-                     <VBox.margin>
-                        <Insets left="8.0" />
-                     </VBox.margin>
-                  </ComboBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
             <VBox layoutX="446.0" layoutY="149.0" prefHeight="180.0" prefWidth="185.0">
                <children>
                   <VBox prefHeight="52.0" prefWidth="174.0">
@@ -123,7 +110,7 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox layoutX="18.0" layoutY="250.0" prefHeight="104.0" prefWidth="181.0">
+            <VBox layoutX="13.0" layoutY="149.0" prefHeight="104.0" prefWidth="181.0">
                <children>
                   <Label text="Complexity" />
                   <Slider fx:id="sldComplexity" prefHeight="38.0" prefWidth="154.0" showTickLabels="true" showTickMarks="true" value="50.0">
@@ -142,21 +129,39 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </VBox>
-            <VBox layoutX="226.0" layoutY="150.0" prefHeight="200.0" prefWidth="195.0">
+            <VBox layoutX="218.0" layoutY="149.0" prefHeight="200.0" prefWidth="195.0">
                <children>
+                  <Label text="Schedule By" />
                   <HBox prefHeight="39.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Calculated" />
-                        <RadioButton mnemonicParsing="false" text="Manual Input" />
+                        <RadioButton fx:id="rdbByPredecessor" mnemonicParsing="false" onAction="#schedulerChanged" selected="true" text="Predecessor">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="schedulerToggleGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rdbByStart" mnemonicParsing="false" onAction="#schedulerChanged" text="Start" toggleGroup="$schedulerToggleGroup" />
+                        <RadioButton fx:id="rdbByEnd" mnemonicParsing="false" onAction="#schedulerChanged" text="End" toggleGroup="$schedulerToggleGroup" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
+                  <VBox prefHeight="78.0" prefWidth="171.0">
+                     <children>
+                        <Label text="Predecessor Task(s)" />
+                        <ComboBox fx:id="cmbPredecessor" disable="true" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
                   <VBox prefHeight="59.0" prefWidth="177.0">
                      <children>
-                        <Label text="Start Time" />
-                        <TextField fx:id="txtStartTime" promptText="HH:MM:SS">
+                        <Label text="Time" />
+                        <TextField fx:id="txtScheduleTime" disable="true" promptText="HH:MM:SS">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
@@ -168,21 +173,8 @@
                   </VBox>
                   <VBox prefHeight="70.0" prefWidth="204.0">
                      <children>
-                        <Label text="Start Date" />
-                        <DatePicker fx:id="dtStartDate">
-                           <VBox.margin>
-                              <Insets left="8.0" />
-                           </VBox.margin>
-                        </DatePicker>
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </VBox>
-                  <VBox prefHeight="70.0" prefWidth="204.0">
-                     <children>
-                        <Label text="End Date" />
-                        <DatePicker fx:id="dtEndDate">
+                        <Label text="Date" />
+                        <DatePicker fx:id="dtScheduleDate" disable="true">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
