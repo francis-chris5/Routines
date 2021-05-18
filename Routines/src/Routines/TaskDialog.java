@@ -40,13 +40,17 @@ public class TaskDialog extends Dialog implements Initializable {
     @FXML
     RadioButton rdbYears;
     @FXML
+    RadioButton rdbByPredecessor;
+    @FXML
+    RadioButton rdbByStart;
+    @FXML
+    RadioButton rdbByEnd;
+    @FXML
     ComboBox cmbPredecessor;
     @FXML
-    TextField txtStartTime;
+    TextField txtScheduleTime;
     @FXML
-    DatePicker dtStartDate;
-    @FXML
-    DatePicker dtEndDate;
+    DatePicker dtScheduleDate;
     @FXML
     ComboBox cmbAssignedResources;
     @FXML
@@ -83,6 +87,7 @@ public class TaskDialog extends Dialog implements Initializable {
             ButtonType btnConfirm = new ButtonType("Add Task", ButtonData.OK_DONE);
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             setTimeBasisRadioButton(routine.getDefaultTimescale());
+            setScheduler(TaskScheduler.BY_PREDECESSOR);
             setPredecessorChoices();
             setResourceChoices();
             Optional<ButtonType> clicked = this.showAndWait();
@@ -116,10 +121,10 @@ public class TaskDialog extends Dialog implements Initializable {
         txtDuration.setText("" + this.task.getDuration());
         this.setTimeBasisRadioButton(this.task.getUnits());
         this.setPredecessorChoices();
+        this.setScheduler(this.task.getScheduler());
         cmbPredecessor.setValue(this.task.getPredecessor());
-        txtStartTime.setText(this.task.getStartTime()==null?"":this.task.getStartTime().toString());
-        dtStartDate.setValue(this.task.getStartDate());
-        dtEndDate.setValue(this.task.getEndDate());
+        txtScheduleTime.setText(this.task.getStartTime()==null?"":this.task.getStartTime().toString());
+        dtScheduleDate.setValue(this.task.getStartDate());
         setResourceChoices();
         lstAssignedResources.getItems().clear();
         lstAssignedResources.getItems().addAll(this.task.getAssignedResources());
@@ -202,6 +207,82 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     
+    public void setScheduler(TaskScheduler ts){
+        switch(ts){
+            case BY_PREDECESSOR:
+                rdbByPredecessor.setSelected(true);
+                cmbPredecessor.setDisable(false);
+                txtScheduleTime.setDisable(true);
+                dtScheduleDate.setDisable(true);
+                break;
+            case BY_START:
+                if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                    rdbByStart.setSelected(true);
+                    cmbPredecessor.setDisable(true);
+                    txtScheduleTime.setDisable(false);
+                    dtScheduleDate.setDisable(true);
+                }
+                else{
+                    rdbByStart.setSelected(true);
+                    cmbPredecessor.setDisable(true);
+                    txtScheduleTime.setDisable(true);
+                    dtScheduleDate.setDisable(false);
+                }
+                break;
+            case BY_END:
+                if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                    rdbByEnd.setSelected(true);
+                    cmbPredecessor.setDisable(true);
+                    txtScheduleTime.setDisable(false);
+                    dtScheduleDate.setDisable(true);
+                }
+                else{
+                    rdbByEnd.setSelected(true);
+                    cmbPredecessor.setDisable(true);
+                    txtScheduleTime.setDisable(true);
+                    dtScheduleDate.setDisable(false);
+                }
+                break;
+                
+        }
+    }//end setSchedule()
+    
+    
+    
+    
+    public void schedulerChanged(){
+        if(rdbByStart.isSelected()){
+            setScheduler(TaskScheduler.BY_START);
+        }
+        else if(rdbByEnd.isSelected()){
+            setScheduler(TaskScheduler.BY_END);
+        }
+        else{
+            setScheduler(TaskScheduler.BY_PREDECESSOR);
+        }
+    }//end schedulerChanged()
+    
+    
+    
+    
+    public TaskScheduler getScheduler(){
+        if(rdbByPredecessor.isSelected()){
+            return TaskScheduler.BY_PREDECESSOR;
+        }
+        else if(rdbByStart.isSelected()){
+            return TaskScheduler.BY_START;
+        }
+        else if(rdbByEnd.isSelected()){
+            return TaskScheduler.BY_END;
+        }
+        else{
+            return TaskScheduler.BY_PREDECESSOR;
+        }
+    }//end getScheduler()
+    
+    
+    
+    
     
     public void setResourceChoices(){
         cmbAssignedResources.getItems().clear();
@@ -251,24 +332,64 @@ public class TaskDialog extends Dialog implements Initializable {
                 this.task.setDuration(1L);
             }
             this.task.setUnits(this.getTimeBasis());
-            this.task.setPredecessor((Task)cmbPredecessor.getValue());
-            try{
-                int[] time = new int[3];
-                String[] stringTime = txtStartTime.getText().split(":");
-                for(int i=0; i < stringTime.length; i++){
-                    time[i] = Integer.parseInt(stringTime[i]);
-                }
-                this.task.setStartTime(LocalTime.of(time[0], time[1], time[2]));
+            this.task.setScheduler(this.getScheduler());
+            switch(this.task.getScheduler()){
+                case BY_PREDECESSOR:
+                    this.task.setPredecessor((Task)cmbPredecessor.getValue());
+                    this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                    this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    break;
+                case BY_START:
+                    if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                        try{
+                            int[] time = new int[3];
+                            String[] stringTime = txtScheduleTime.getText().split(":");
+                            for(int i=0; i < stringTime.length; i++){
+                                time[i] = Integer.parseInt(stringTime[i]);
+                            }
+                            this.task.setStartTime(LocalTime.of(time[0], time[1], time[2]));
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        catch(NumberFormatException e){
+                            //just move on then
+                        }
+                    }
+                    else{
+                        this.task.setStartDate(dtScheduleDate.getValue());
+                        this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    break;
+                case BY_END:
+                    if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                        try{
+                            int[] time = new int[3];
+                            String[] stringTime = txtScheduleTime.getText().split(":");
+                            for(int i=0; i < stringTime.length; i++){
+                                time[i] = Integer.parseInt(stringTime[i]);
+                            }
+                            this.task.setEndTime(LocalTime.of(time[0], time[1], time[2]));
+                            this.task.setStartTime(this.task.getEndTime().minus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        catch(NumberFormatException e){
+                            //just move on then
+                        }
+                    }
+                    else{
+                        this.task.setEndDate(dtScheduleDate.getValue());
+                        this.task.setStartDate(this.task.getEndDate().minus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    break;
+                default:
+                    this.task.setPredecessor((Task)cmbPredecessor.getValue());
             }
-            catch(NumberFormatException e){
-                //just move on then
-            }
-            this.task.setStartDate(dtStartDate.getValue());
-            this.task.setEndDate(dtEndDate.getValue());
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());
         }
+        System.out.println("start: " + this.task.getStartTime());
+        System.out.println("end: " + this.task.getEndTime());
+        System.out.println("start: " + this.task.getStartDate());
+        System.out.println("end: " + this.task.getEndDate());
         return this.task;
     }//end addTask()
     
@@ -286,20 +407,56 @@ public class TaskDialog extends Dialog implements Initializable {
                 this.task.setDuration(1L);
             }
             this.task.setUnits(this.getTimeBasis());
-            this.task.setPredecessor((Task)cmbPredecessor.getValue());
-            try{
-                int[] time = new int[3];
-                String[] stringTime = txtStartTime.getText().split(":");
-                for(int i=0; i < stringTime.length; i++){
-                    time[i] = Integer.parseInt(stringTime[i]);
-                }
-                this.task.setStartTime(LocalTime.of(time[0], time[1], time[2]));
+            this.task.setScheduler(this.getScheduler());
+            switch(this.task.getScheduler()){
+                case BY_PREDECESSOR:
+                    this.task.setPredecessor((Task)cmbPredecessor.getValue());
+                    this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                    this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    break;
+                case BY_START:
+                    if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                        try{
+                            int[] time = new int[3];
+                            String[] stringTime = txtScheduleTime.getText().split(":");
+                            for(int i=0; i < stringTime.length; i++){
+                                time[i] = Integer.parseInt(stringTime[i]);
+                            }
+                            this.task.setStartTime(LocalTime.of(time[0], time[1], time[2]));
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        catch(NumberFormatException e){
+                            //just move on then
+                        }
+                    }
+                    else{
+                        this.task.setStartDate(dtScheduleDate.getValue());
+                        this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    break;
+                case BY_END:
+                    if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                        try{
+                            int[] time = new int[3];
+                            String[] stringTime = txtScheduleTime.getText().split(":");
+                            for(int i=0; i < stringTime.length; i++){
+                                time[i] = Integer.parseInt(stringTime[i]);
+                            }
+                            this.task.setEndTime(LocalTime.of(time[0], time[1], time[2]));
+                            this.task.setStartTime(this.task.getEndTime().minus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        catch(NumberFormatException e){
+                            //just move on then
+                        }
+                    }
+                    else{
+                        this.task.setEndDate(dtScheduleDate.getValue());
+                        this.task.setStartDate(this.task.getEndDate().minus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    break;
+                default:
+                    this.task.setPredecessor((Task)cmbPredecessor.getValue());
             }
-            catch(NumberFormatException e){
-                //just move on then
-            }
-            this.task.setStartDate(dtStartDate.getValue());
-            this.task.setEndDate(dtEndDate.getValue());
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());

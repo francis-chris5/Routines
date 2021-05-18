@@ -1,14 +1,16 @@
 
 package Routines;
 
+import java.time.temporal.ChronoUnit;
+
 /**
- * @description <p>The software will be using Unix-Epoch time instead of calendar dates, so the GUI units need converted to a millisecond basis for internal calculations.</p>
+ * @description <p>The software PLAN will be using Unix-Epoch time instead of calendar dates, so the GUI units need converted to a millisecond basis for internal calculations.</p>
  */
-public enum TimeBasis {
+public enum TimeBasis{
+    
     MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS;
     
     public long getTimeBasis(){
-            // would work days be better here than calendar --can it change dynamically???
         switch(this){
             case MINUTES:
                 return 1000*60;
@@ -26,6 +28,26 @@ public enum TimeBasis {
                 return 1000*60*60*24;
         }
     }//end getTimeBasis()
+    
+    
+    public ChronoUnit getChronoUnits(){
+        switch(this){
+            case MINUTES:
+                return ChronoUnit.MINUTES;
+            case HOURS:
+                return ChronoUnit.HOURS;
+            case DAYS:
+                return ChronoUnit.DAYS;
+            case WEEKS:
+                return ChronoUnit.WEEKS;
+            case MONTHS:
+                return ChronoUnit.MONTHS;
+            case YEARS:
+                return ChronoUnit.YEARS;
+            default:
+                return ChronoUnit.DAYS;
+        }
+    }//end getChronoUnits()
 
     @Override
     public String toString() {
@@ -46,9 +68,6 @@ public enum TimeBasis {
                 return "days";
         }
     }//end toString()
-    
-    
-    
-    
+  
     
 }//end TimeBasis

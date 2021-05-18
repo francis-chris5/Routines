@@ -14,8 +14,10 @@ public class Task implements Serializable{
     private String name;
     private long duration;
     private TimeBasis units;
+    private TaskScheduler scheduler;
     private Task predecessor;
-    private LocalTime startTime; //convert input string to milliseconds past Unix-Epoch routine start
+    private LocalTime startTime;
+    private LocalTime endTime;
     private LocalDate startDate;
     private LocalDate endDate;
     public LinkedList<Resource> assignedResources = new LinkedList<>();
@@ -69,6 +71,24 @@ public class Task implements Serializable{
     public void setUnits(TimeBasis units) {
         this.units = units;
     }
+
+    public TaskScheduler getScheduler() {
+        return scheduler;
+    }
+
+    public void setScheduler(TaskScheduler scheduler) {
+        this.scheduler = scheduler;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+    
+    
 
     public Task getPredecessor() {
         return predecessor;
