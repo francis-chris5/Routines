@@ -17,12 +17,10 @@ assign resources to tasks: people, funds, "labor" -an estimate of how hard it wi
 get a gantt chart, pie charts for task and resource percentage, pert chart, work breakdown, ...
 
 
-
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/118569229-7fd29400-b747-11eb-9ba2-ecf2854343bc.jpg)
-
-![pic_for_github_task](https://user-images.githubusercontent.com/50467171/118569237-83661b00-b747-11eb-82b2-9ce5cfa9c4e0.jpg)
-
-![pic_for_github_resource](https://user-images.githubusercontent.com/50467171/118569246-86f9a200-b747-11eb-81b7-42d33082dacc.jpg)
+![pics_for_github_main](https://user-images.githubusercontent.com/50467171/118716213-9681f500-b7f2-11eb-85bc-48204dd908a4.jpg)
+![pics_for_github_details](https://user-images.githubusercontent.com/50467171/118716234-9bdf3f80-b7f2-11eb-9f19-f73fbbcec2f5.jpg)
+![pics_for_github_resource](https://user-images.githubusercontent.com/50467171/118716254-9f72c680-b7f2-11eb-932b-bb9fce8a2270.jpg)
+![pics_for_github_task](https://user-images.githubusercontent.com/50467171/118716263-a1d52080-b7f2-11eb-85f1-5a665fbc99b0.jpg)
 
 
 
