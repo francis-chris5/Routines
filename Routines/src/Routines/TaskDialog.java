@@ -336,8 +336,14 @@ public class TaskDialog extends Dialog implements Initializable {
                 case BY_PREDECESSOR:
                     this.task.setPredecessor((Task)cmbPredecessor.getValue());
                     if(this.task.getPredecessor() != null){
-                        this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
-                        this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                            this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        else{
+                            this.task.setStartDate(this.task.getPredecessor().getEndDate().plus(1, this.task.getUnits().getChronoUnits()));
+                            this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
                     }
                     else{
                         if(rdbMinutes.isSelected() || rdbHours.isSelected()){
@@ -395,7 +401,7 @@ public class TaskDialog extends Dialog implements Initializable {
             }
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
-            this.task.setComplexity(sldComplexity.getValue());
+            this.task.setComplexity(sldComplexity.getValue()==0?0.0001:sldComplexity.getValue());
         }
         routine.findRoutineEndDate();
         return this.task;
@@ -420,8 +426,14 @@ public class TaskDialog extends Dialog implements Initializable {
                 case BY_PREDECESSOR:
                     this.task.setPredecessor((Task)cmbPredecessor.getValue());
                     if(this.task.getPredecessor() != null){
-                        this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
-                        this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                            this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        else{
+                            this.task.setStartDate(this.task.getPredecessor().getEndDate().plus(1, this.task.getUnits().getChronoUnits()));
+                            this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
                     }
                     else{
                         if(rdbMinutes.isSelected() || rdbHours.isSelected()){
@@ -479,7 +491,7 @@ public class TaskDialog extends Dialog implements Initializable {
             }
             this.task.assignedResources.clear();
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
-            this.task.setComplexity(sldComplexity.getValue());
+            this.task.setComplexity(sldComplexity.getValue()==0?0.0001:sldComplexity.getValue());
         }
         routine.findRoutineEndDate();
         return this.task;

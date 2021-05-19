@@ -8,12 +8,15 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
 
 public class DetailsDialog extends Dialog implements Initializable {
@@ -73,7 +76,7 @@ public class DetailsDialog extends Dialog implements Initializable {
             catch(Exception e){
                 //just move on then
             }
-            ButtonType btnConfirm = new ButtonType("Create Routine", ButtonData.OK_DONE);
+            ButtonType btnConfirm = new ButtonType("Create Routine", ButtonData.OTHER);
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             Optional<ButtonType> clicked = this.showAndWait();
             if(clicked.get() == btnConfirm){
@@ -99,7 +102,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         catch(Exception e){
             //just move on then
         }
-        ButtonType btnConfirm = new ButtonType("Update Routine", ButtonData.OK_DONE);
+        ButtonType btnConfirm = new ButtonType("Update Routine", ButtonData.OTHER);
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
         txtRoutineName.setText(this.routine.getRoutineName());
         dtRoutineStartDate.setValue(this.routine.getRoutineStartDate());
@@ -239,7 +242,6 @@ public class DetailsDialog extends Dialog implements Initializable {
         }
         this.routine.setRoutineNotes(txtRoutineNotes.getHtmlText());
         this.routine.setDefaultTimescale(this.getDefaultTimeBasis());
-        System.out.println(routine);
         return this.routine;
     }//end editRoutine()
     

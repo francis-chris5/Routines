@@ -199,7 +199,6 @@ public class Routine implements Serializable{
             oos.close();
             this.filepath = file.getPath();
             this.filename = file.getName();
-            System.out.println(this.filename + " @ " + this.filepath);
             this.saved = true;
             return this.saved;
         }
