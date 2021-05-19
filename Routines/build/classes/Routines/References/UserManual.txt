@@ -9,8 +9,11 @@ ROUTINE:
     Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Dialog: 
         Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
         Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
+        Enter the projected/anticipated/allocated budget for the project
         Use the date selector to choose the desired/anticipated/projected Start Date for the routine
         The "Notes" text area is for general note keeping on a routine-wide basis
+            Overriding the default usage of the Enter key to confirm the Dialog entry seemed a slippery slope so use Shift+Enter for line feeds in the notes
+            This is an HTML editor, not text editor, so it is better to type the words and then format them
 
     A summary of the routine details will appear as the label for the Routine Details Button
     
@@ -39,7 +42,9 @@ RESOURCES:
 TASKS:
 
     Click the Add Task Button, or select [Tasks -> Add Task] from the main menu to open the Task Dialog:
-        Enter the name, duration, override time scale if necessary, choose a predecessor task OR select start date/time OR select end date/time, assign resources to the task, and select a complexity level for the current task
+        Enter the name, duration, override time scale if necessary
+        Select an option for how the task will be scheduled choose a predecessor task OR select start date/time OR select end date/time, if the Timescale is set to minutes or hours enter the start or end time as HH:MM:SS in 24 hour format, otherwise select the desired date from the calendar choices
+        assign resources to the task, and select a complexity level for the current task
         All details for a resource are optional fields
 
     A summary of the task will appear in the Task List on the main Graphical User Interface
