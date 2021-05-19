@@ -2,6 +2,7 @@
 package Routines;
 
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -12,7 +13,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 
@@ -25,6 +25,8 @@ public class DetailsDialog extends Dialog implements Initializable {
     TextField txtRoutineName;
     @FXML
     DatePicker dtRoutineStartDate;
+    @FXML
+    TextField txtRoutineStartTime;
     @FXML
     HTMLEditor txtRoutineNotes;
     @FXML
@@ -104,6 +106,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         txtRoutineBudget.setText("" + this.routine.getRoutineBudget());
         txtRoutineNotes.setHtmlText(this.routine.getRoutineNotes());
         setDefaultTimeRadioButton(this.routine.getDefaultTimescale());
+        setStartFormat();
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == btnConfirm){
             //should be finished at this point
@@ -195,8 +198,33 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    public void setStartFormat(){
+        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+            txtRoutineStartTime.setDisable(false);
+        }
+        else{
+            txtRoutineStartTime.setDisable(true);
+        }
+    }
+    
+    
+    
+    
     public Routine editRoutine(){
         this.routine.setRoutineName(txtRoutineName.getText());
+        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+             try{
+                int[] time = new int[3];
+                String[] stringTime = txtRoutineStartTime.getText().split(":");
+                for(int i=0; i < stringTime.length; i++){
+                    time[i] = Integer.parseInt(stringTime[i]);
+                }
+                this.routine.setRoutineStartTime(LocalTime.of(time[0], time[1], time[2]));
+            }
+            catch(NumberFormatException e){
+                //just move on then
+            }
+        }
         this.routine.setRoutineStartDate(dtRoutineStartDate.getValue());
         try{
             this.routine.setRoutineBudget(Double.parseDouble(txtRoutineBudget.getText()));

@@ -167,9 +167,6 @@ public class RoutineController implements Initializable{
         }
         showTasks();
         currentTask = -1;
-        if(routine.routineTasks.isEmpty()){
-            routine.routineTasks.add(new Task("Begin"));
-        }
         showTasks();
         showResources();
         routine.setSaved(false);
@@ -294,9 +291,6 @@ public class RoutineController implements Initializable{
         }
         showResources();
         currentResource = -1;
-        if(routine.availableResources.isEmpty()){
-            routine.availableResources.add(new Resource("Self"));
-        }
         routine.setSaved(false);
     }//end deleteTask()
     
@@ -320,6 +314,7 @@ public class RoutineController implements Initializable{
     
     public void editRoutineDetails(){
         this.routine = new DetailsDialog(this.routine).editRoutine();
+        this.routine.findRoutineEndDate();
         btnRoutineDetails.setText(this.routine.toString());
     }//end editRoutineDetails()
     
@@ -351,6 +346,7 @@ public class RoutineController implements Initializable{
         routine = another.openRoutine();
         showTasks();
         showResources();
+        btnRoutineDetails.setText(this.routine.toString());
         routine.setSaved(true);
     }//end openRoutine()
     

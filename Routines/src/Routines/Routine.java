@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import javafx.stage.FileChooser;
 
@@ -20,6 +21,9 @@ public class Routine implements Serializable{
     private String filepath = null;
     private String routineName;
     private LocalDate routineStartDate;
+    private LocalDate routineEndDate;
+    private LocalTime routineStartTime;
+    private LocalTime routineEndTime;
     private double routineBudget;
     private String routineNotes;
     private TimeBasis defaultTimescale = TimeBasis.DAYS;
@@ -37,6 +41,9 @@ public class Routine implements Serializable{
         ////////////////////////////////////////  CONSTRUCTORS  //////////////
     
     public Routine(){
+        this.routineStartDate = LocalDate.now();
+        this.routineStartTime = LocalTime.now();
+        this.findRoutineEndDate();
     }//end default constructor()
     
     
@@ -74,6 +81,32 @@ public class Routine implements Serializable{
     public LocalDate getRoutineStartDate() {
         return routineStartDate;
     }
+
+    public LocalDate getRoutineEndDate() {
+        return routineEndDate;
+    }
+
+    public void setRoutineEndDate(LocalDate routineEndDate) {
+        this.routineEndDate = routineEndDate;
+    }
+
+    public LocalTime getRoutineStartTime() {
+        return routineStartTime;
+    }
+
+    public void setRoutineStartTime(LocalTime routineStartTime) {
+        this.routineStartTime = routineStartTime;
+    }
+
+    public LocalTime getRoutineEndTime() {
+        return routineEndTime;
+    }
+
+    public void setRoutineEndTime(LocalTime routineEndTime) {
+        this.routineEndTime = routineEndTime;
+    }
+    
+    
 
     public void setRoutineStartDate(LocalDate routineStartDate) {
         this.routineStartDate = routineStartDate;
@@ -200,6 +233,46 @@ public class Routine implements Serializable{
             return new Routine();
         }
     }//end openRoutine()
+    
+    
+    
+    
+    public void findRoutineEndDate(){
+        if(routineTasks.isEmpty()){
+            if(defaultTimescale == TimeBasis.MINUTES || defaultTimescale == TimeBasis.HOURS){
+                routineEndDate = null;
+                routineEndTime = routineStartTime.plus(10, defaultTimescale.getChronoUnits());
+            }
+            else{
+                routineEndTime = null;
+                routineEndDate = routineStartDate.plus(10, defaultTimescale.getChronoUnits());
+            }
+        }
+        else{
+            int duration = 0;
+            int max = 0;
+            if(defaultTimescale == TimeBasis.MINUTES || defaultTimescale == TimeBasis.HOURS){
+                routineEndDate = null; //this will need to change later just in case
+                for(int i=0; i < this.routineTasks.size(); i++){
+                    if(routineTasks.get(max).getEndTime().compareTo(routineTasks.get(i).getEndTime()) < 0){
+                        max = i;
+                    }
+                }
+                duration = (int)defaultTimescale.getChronoUnits().between(routineStartTime, routineTasks.get(max).getEndTime());
+                this.routineEndTime = this.routineStartTime.plus(duration, defaultTimescale.getChronoUnits());
+            }
+            else{
+                routineEndTime = null; //this will need to change later just in case
+                for(int i=0; i < this.routineTasks.size(); i++){
+                    if(routineTasks.get(max).getEndDate().compareTo(routineTasks.get(i).getEndDate()) < 0){
+                        max = i;
+                    }
+                }
+                duration = (int)defaultTimescale.getChronoUnits().between(routineStartDate, routineTasks.get(max).getEndDate());
+                this.routineEndDate = this.routineStartDate.plus(duration, defaultTimescale.getChronoUnits());
+            }
+        }
+    }//end findRoutineEndDate()
     
     
     

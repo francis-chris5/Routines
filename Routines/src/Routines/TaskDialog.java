@@ -3,7 +3,6 @@ package Routines;
 
 import java.net.URL;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -336,8 +335,20 @@ public class TaskDialog extends Dialog implements Initializable {
             switch(this.task.getScheduler()){
                 case BY_PREDECESSOR:
                     this.task.setPredecessor((Task)cmbPredecessor.getValue());
-                    this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
-                    this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    if(this.task.getPredecessor() != null){
+                        this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                        this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    else{
+                        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                            this.task.setStartTime(routine.getRoutineStartTime());
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        else{
+                            this.task.setStartDate(this.routine.getRoutineStartDate());
+                            this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                    }
                     break;
                 case BY_START:
                     if(rdbMinutes.isSelected() || rdbHours.isSelected()){
@@ -386,10 +397,7 @@ public class TaskDialog extends Dialog implements Initializable {
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());
         }
-        System.out.println("start: " + this.task.getStartTime());
-        System.out.println("end: " + this.task.getEndTime());
-        System.out.println("start: " + this.task.getStartDate());
-        System.out.println("end: " + this.task.getEndDate());
+        routine.findRoutineEndDate();
         return this.task;
     }//end addTask()
     
@@ -411,8 +419,20 @@ public class TaskDialog extends Dialog implements Initializable {
             switch(this.task.getScheduler()){
                 case BY_PREDECESSOR:
                     this.task.setPredecessor((Task)cmbPredecessor.getValue());
-                    this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
-                    this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    if(this.task.getPredecessor() != null){
+                        this.task.setStartTime(this.task.getPredecessor().getEndTime().plus(1, this.task.getUnits().getChronoUnits()));
+                        this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                    }
+                    else{
+                        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
+                            this.task.setStartTime(routine.getRoutineStartTime());
+                            this.task.setEndTime(this.task.getStartTime().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                        else{
+                            this.task.setStartDate(this.routine.getRoutineStartDate());
+                            this.task.setEndDate(this.task.getStartDate().plus(this.task.getDuration(), this.task.getUnits().getChronoUnits()));
+                        }
+                    }
                     break;
                 case BY_START:
                     if(rdbMinutes.isSelected() || rdbHours.isSelected()){
@@ -461,6 +481,7 @@ public class TaskDialog extends Dialog implements Initializable {
             this.task.assignedResources.addAll(lstAssignedResources.getItems());
             this.task.setComplexity(sldComplexity.getValue());
         }
+        routine.findRoutineEndDate();
         return this.task;
     }//end editTask()
     
