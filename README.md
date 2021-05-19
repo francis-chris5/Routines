@@ -17,6 +17,11 @@ assign resources to tasks: people, funds, "labor" -an estimate of how hard it wi
 get a gantt chart, pie charts for task and resource percentage, pert chart, work breakdown, ...
 
 
+PROJECT PROGRESS:
+
+I've got the data organization, main GUI, and dialog boxes set up the way I wanted them, ready to start on graphs, charts, and plots. I went with a summary list and dialog editing instead of a table for general overview, but the data is organized into proper Java objects that can easily be stuck right into beans or observable factories to switch that over to traditional tables instead (I may end up doing that eventually anyway). 
+
+
 ![pics_for_github_main](https://user-images.githubusercontent.com/50467171/118716213-9681f500-b7f2-11eb-85bc-48204dd908a4.jpg)
 ![pics_for_github_details](https://user-images.githubusercontent.com/50467171/118716234-9bdf3f80-b7f2-11eb-9f19-f73fbbcec2f5.jpg)
 ![pics_for_github_resource](https://user-images.githubusercontent.com/50467171/118716254-9f72c680-b7f2-11eb-932b-bb9fce8a2270.jpg)
