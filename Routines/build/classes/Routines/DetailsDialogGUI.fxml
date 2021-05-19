@@ -45,11 +45,6 @@
             <VBox layoutX="23.0" layoutY="160.0" prefHeight="281.0" prefWidth="625.0">
                <children>
                   <Label text="Notes" />
-                  <Label text="(press Shift+Enter for new line as enter key confirms the dialog)" textFill="#f20909">
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
                   <HTMLEditor fx:id="txtRoutineNotes" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="271.0" prefWidth="347.0">
                      <VBox.margin>
                         <Insets left="8.0" />
