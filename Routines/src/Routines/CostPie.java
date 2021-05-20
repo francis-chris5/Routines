@@ -38,7 +38,7 @@ public class CostPie extends HBox {
                     taskCost.add(routine.routineTasks.get(i).getAssignedResources().get(j).getCost()* routine.routineTasks.get(i).getDuration());
                 }
                 else{
-                    taskCost.add(routine.routineTasks.get(i).getAssignedResources().get(j).getCost());
+                    taskCost.add(routine.routineTasks.get(i).getAssignedResources().get(j).getCost() / routine.routineTasks.get(i).getAssignedResources().get(j).getAssignedTo().size());
                 }
             }
         }

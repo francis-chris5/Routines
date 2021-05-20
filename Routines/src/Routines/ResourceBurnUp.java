@@ -44,7 +44,7 @@ public class ResourceBurnUp extends HBox{
                     taskExpense += routine.routineTasks.get(i).getAssignedResources().get(j).getCost()* routine.routineTasks.get(i).getDuration();
                 }
                 else{
-                    taskExpense += routine.routineTasks.get(i).getAssignedResources().get(j).getCost();
+                    taskExpense += routine.routineTasks.get(i).getAssignedResources().get(j).getCost() / routine.routineTasks.get(i).getAssignedResources().get(j).getAssignedTo().size();
                 }
             }
             data.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), taskExpense + runningTotal));
