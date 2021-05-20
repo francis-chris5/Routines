@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<DialogPane stylesheets="@Stylesheets/RoutineStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="67.0" prefWidth="270.0">
+         <children>
+            <VBox layoutX="23.0" layoutY="28.0" prefHeight="60.0" prefWidth="204.0">
+               <children>
+                  <Label text="Name" />
+                  <TextField fx:id="txtRoutineName">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="287.0" layoutY="28.0" prefHeight="60.0" prefWidth="204.0">
+               <children>
+                  <Label text="Start Date" />
+                  <DatePicker fx:id="dtRoutineStartDate">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="23.0" layoutY="160.0" prefHeight="281.0" prefWidth="625.0">
+               <children>
+                  <Label text="Notes" />
+                  <HTMLEditor fx:id="txtRoutineNotes" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="271.0" prefWidth="347.0">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </HTMLEditor>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <HBox layoutX="63.0" layoutY="73.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="3.0">
+                     <children>
+                        <Label text="Timescale" />
+                        <RadioButton fx:id="rdbMinutes" mnemonicParsing="false" onAction="#setStartFormat" text="Minutes">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="timescaleToggleGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbHours" mnemonicParsing="false" onAction="#setStartFormat" text="Hours" toggleGroup="$timescaleToggleGroup">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbDays" mnemonicParsing="false" onAction="#setStartFormat" selected="true" text="Days" toggleGroup="$timescaleToggleGroup">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </RadioButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="84.0" prefWidth="95.0" spacing="3.0">
+                     <children>
+                        <RadioButton fx:id="rdbWeeks" mnemonicParsing="false" onAction="#setStartFormat" text="Weeks" toggleGroup="$timescaleToggleGroup">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbMonths" mnemonicParsing="false" onAction="#setStartFormat" text="Months" toggleGroup="$timescaleToggleGroup">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbYears" mnemonicParsing="false" onAction="#setStartFormat" text="Years" toggleGroup="$timescaleToggleGroup">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </RadioButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="18.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox layoutX="287.0" layoutY="123.0" prefHeight="60.0" prefWidth="204.0">
+               <children>
+                  <Label text="Budget" />
+                  <TextField fx:id="txtRoutineBudget">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="287.0" layoutY="73.0" prefHeight="60.0" prefWidth="204.0">
+               <children>
+                  <Label text="Start Time" />
+                  <TextField fx:id="txtRoutineStartTime" disable="true" promptText="HH:MM:SS">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </content>
+</DialogPane>

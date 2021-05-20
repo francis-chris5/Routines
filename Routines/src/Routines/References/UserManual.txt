@@ -1,0 +1,53 @@
+
+
+
+
+ROUTINE:
+
+    The Routines Application will open to an empty routine
+
+    Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Dialog: 
+        Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
+        Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
+        Enter the projected/anticipated/allocated budget for the project
+        Use the date selector to choose the desired/anticipated/projected Start Date for the routine
+        The "Notes" text area is for general note keeping on a routine-wide basis
+            Overriding the default usage of the Enter key to confirm the Dialog entry seemed a slippery slope so use Shift+Enter for line feeds in the notes
+            This is an HTML editor, not text editor, so it is better to type the words and then format them
+
+    A summary of the routine details will appear as the label for the Routine Details Button
+    
+    To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
+
+
+
+
+RESOURCES:
+
+    Click the Add Resource Button, or select [Resources -> Add Resource] from the main menu to open the Resource Dialog:
+        Enter the name, default role, and primary contact information for the resource
+        Provide the cost for the resource and select one of the radio buttons to determine the Cost Basis of how the cost will be applied to the routine
+        Move the slider to an appropriate Stamina value for the current resource: the resource stamina will be compared to task complexity as a ratio (and its inverse) to use in the Routine Analysis Procedures --for example a warning message if back to back high complexity tasks are assigned to a resource known to "tire easily"
+        Use the Date Picker to add requested days off for the current resource, right click a date on the list to remove it
+        All details for a resource are optional fields
+
+    A summary of the resource will appear in the Available Resources List on the main Graphical User Interface
+        Select a resource from the Available Resources List and use the two arrows located just above the list, or select [Resources -> Move Resource Up/Down] from the main menu, to move the selected resource up or down the list
+        Select a resource from the Available Resources List and click the Edit Resource Button, or select [Resources -> Edit Resource] to open the Resource Dialog with the selected resource's details
+        Select a resource from the Available Resources List and click the Delete Resource Button, or select [Resources -> Delete Resource] to delete the resource from the current routine
+
+
+
+
+TASKS:
+
+    Click the Add Task Button, or select [Tasks -> Add Task] from the main menu to open the Task Dialog:
+        Enter the name, duration, override time scale if necessary
+        Select an option for how the task will be scheduled choose a predecessor task OR select start date/time OR select end date/time, if the Timescale is set to minutes or hours enter the start or end time as HH:MM:SS in 24 hour format, otherwise select the desired date from the calendar choices
+        assign resources to the task, and select a complexity level for the current task
+        All details for a resource are optional fields
+
+    A summary of the task will appear in the Task List on the main Graphical User Interface
+        Select a task from the Task List and use the arrows located just above the list, or select [Tasks -> Move Resource Up/Down] from the main menu, to move the selected task up or down the list. NOTE: this will not change the task's assigned predecessor
+        Select a task from the Task List and click the Edit Task Button, or select [Tasks -> Edit Selected Task] from the main menu, to open the Task Dialog with the selected tasks details
+        Select a task from the Task List and click the Delete Task Button, or select [Tasks -> Delete Selected Task] from the main menu, to remove the task from the current routine
