@@ -37,9 +37,11 @@ public class RoutineController implements Initializable{
     @FXML
     VBox chtTimePie;
     @FXML
-    VBox chtStaminaComplexity;
+    VBox chtStaminaComplexityControl;
     @FXML
     VBox chtResourceBurnUp;
+    @FXML
+    VBox chtCostPie;
     
     
     
@@ -62,18 +64,25 @@ public class RoutineController implements Initializable{
     
         //////////////////////////////////////////  VISUAL ANALYSIS  /////////
     
-    public void setTimePie(){
-        chtTimePie.getChildren().add(new TimePie());
-    }//end setTimePie()
+    public void updateGraphicalAnalysis(){
+        chtTimePie.getChildren().clear();
+        chtTimePie.getChildren().add(new TimePie(this.routine));
+        chtResourceBurnUp.getChildren().clear();
+        chtResourceBurnUp.getChildren().add(new ResourceBurnUp(this.routine));
+        chtStaminaComplexityControl.getChildren().clear();
+        chtStaminaComplexityControl.getChildren().add(new StaminaComplexityControl(this.routine));
+        chtCostPie.getChildren().clear();
+        chtCostPie.getChildren().add(new CostPie(this.routine));
+    }//end updateGraphicalAnalysis()
     
     
-    public void setStaminaComplexityControl(){
-        chtStaminaComplexity.getChildren().add(new StaminaComplexityControl());
-    }//end setStaminaComplexityControl()
+//    public void setStaminaComplexityControl(){
+//        chtStaminaComplexity.getChildren().add(new StaminaComplexityControl());
+//    }//end setStaminaComplexityControl()
     
     
     public void setResourceBurnUp(){
-        chtResourceBurnUp.getChildren().add(new ResourceBurnUp());
+        
     }//end setResourceBurnUp()
     
     
@@ -101,6 +110,7 @@ public class RoutineController implements Initializable{
             routine.routineTasks.add(dt);
             showTasks();
             showResources();
+            updateGraphicalAnalysis();
             routine.setSaved(false);
         }
     }//end newTask()
@@ -118,6 +128,7 @@ public class RoutineController implements Initializable{
                         routine.routineTasks.set(i, task);
                         showTasks();
                         showResources();
+                        updateGraphicalAnalysis();
                         routine.setSaved(false);
                     }
                 }
@@ -198,6 +209,7 @@ public class RoutineController implements Initializable{
         currentTask = -1;
         showTasks();
         showResources();
+        updateGraphicalAnalysis();
         routine.setSaved(false);
     }//end deleteTask()
     
@@ -226,6 +238,7 @@ public class RoutineController implements Initializable{
             routine.availableResources.add(nr);
             showResources();
             showTasks();
+            updateGraphicalAnalysis();
             routine.setSaved(false);
         }
     }//end addResource()
@@ -243,6 +256,7 @@ public class RoutineController implements Initializable{
                         routine.availableResources.set(i, res);
                         showResources();
                         showTasks();
+                        updateGraphicalAnalysis();
                         routine.setSaved(false);
                     }
                 }
@@ -319,6 +333,7 @@ public class RoutineController implements Initializable{
             //just move on
         }
         showResources();
+        updateGraphicalAnalysis();
         currentResource = -1;
         routine.setSaved(false);
     }//end deleteTask()
@@ -345,6 +360,7 @@ public class RoutineController implements Initializable{
         this.routine = new DetailsDialog(this.routine).editRoutine();
         this.routine.findRoutineEndDate();
         btnRoutineDetails.setText(this.routine.toString());
+        updateGraphicalAnalysis();
     }//end editRoutineDetails()
     
     
@@ -375,6 +391,7 @@ public class RoutineController implements Initializable{
         routine = another.openRoutine();
         showTasks();
         showResources();
+        updateGraphicalAnalysis();
         btnRoutineDetails.setText(this.routine.toString());
         routine.setSaved(true);
     }//end openRoutine()
@@ -422,6 +439,9 @@ public class RoutineController implements Initializable{
             btnRoutineDetails.setText("Routine Details");
             lstTasks.getItems().clear();
             lstResources.getItems().clear();
+            chtTimePie.getChildren().clear();
+            chtResourceBurnUp.getChildren().clear();
+            chtStaminaComplexityControl.getChildren().clear();
         }
     }//end closeRoutine();
     
@@ -497,9 +517,6 @@ public class RoutineController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just need it here for interfacing requirements
-        this.setTimePie();
-        this.setStaminaComplexityControl();
-        this.setResourceBurnUp();
     }//end initialize()
     
 }//end Control

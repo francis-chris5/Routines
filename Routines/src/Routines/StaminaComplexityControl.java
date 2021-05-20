@@ -17,64 +17,61 @@ import javafx.scene.layout.HBox;
  * @author Chris
  */
 public class StaminaComplexityControl extends HBox {
-    private final NumberAxis yAxis = new NumberAxis();
-    private final CategoryAxis xAxis = new CategoryAxis();
-    private final LineChart<String, Number> chart = new LineChart<String, Number>(xAxis, yAxis);
+    private NumberAxis yAxis = new NumberAxis();
+    private CategoryAxis xAxis = new CategoryAxis();
+    private LineChart<String, Number> chart = new LineChart<String, Number>(xAxis, yAxis);
     private XYChart.Series data = new XYChart.Series();
     private XYChart.Series ucl = new XYChart.Series();
     private XYChart.Series lcl = new XYChart.Series();
     
-    public StaminaComplexityControl(){
-        chart.setTitle("Test Control");
+    public StaminaComplexityControl(Routine routine){
+        chart.setTitle(routine.getRoutineName() + " Control");
+        data.setName("Stamina Vs. Complexity");
+        ucl.setName("+ stamina > complexity");
+        lcl.setName("- complexity > staimina");
         
-        setData();
-        setControlLimits();
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(-2.5);
+        yAxis.setUpperBound(2.5);
+        
+        setData(routine);
+        setControlLimits(routine);
         
         
         chart.getData().addAll(ucl, lcl, data);
         chart.setCreateSymbols(false);
-        chart.setLegendVisible(false);
+        chart.setLegendVisible(true);
+        
         
         this.getChildren().add(chart);
     }//end default constructor
     
     
-    public void setControlLimits(){
-        for(int i=0; i < data.getData().size(); i++){
-            ucl.getData().add(new XYChart.Data("task " + i, 1.0));
-            lcl.getData().add(new XYChart.Data("task " + i, -1.0));
+    public void setControlLimits(Routine routine){
+        for(int i=0; i < routine.routineTasks.size(); i++){
+            ucl.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), 1.0));
+            lcl.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), -1.0));
         }
     }//end setControlLimits()
     
     
     
     
-    public void setData(){
-        LinkedList<Double> testStamina = new LinkedList<>();
-        LinkedList<Double> testComplexity = new LinkedList<>();
-        
-            //just some random values to test with
-        testStamina.add(72.0);
-        testStamina.add(83.4);
-        testStamina.add(19.1);
-        testStamina.add(27.2);
-        testStamina.add(65.7);
-        
-        testComplexity.add(23.2);
-        testComplexity.add(32.4);
-        testComplexity.add(48.7);
-        testComplexity.add(32.3);
-        testComplexity.add(83.9);
-        testComplexity.add(58.2);
-        testComplexity.add(27.4);
-        
-        data.getData().add(new XYChart.Data("task 0", testStamina.get(0)/testComplexity.get(0) - 1));
-        data.getData().add(new XYChart.Data("task 1", testStamina.get(2)/testComplexity.get(1) - 1));
-        data.getData().add(new XYChart.Data("task 2", ( (testStamina.get(1) + testStamina.get(4))/2)/testComplexity.get(2) - 1));
-        data.getData().add(new XYChart.Data("task 3", testStamina.get(3)/testComplexity.get(3) - 1));
-        data.getData().add(new XYChart.Data("task 4", testStamina.get(4)/testComplexity.get(4) - 1));
-        data.getData().add(new XYChart.Data("task 5", ( (testStamina.get(2) + testStamina.get(1) + testStamina.get(4))/3)/testComplexity.get(5) - 1));
-        data.getData().add(new XYChart.Data("task 6", testStamina.get(3)/testComplexity.get(6) - 1));
+    public void setData(Routine routine){
+        for(int i = 0; i < routine.routineTasks.size(); i++){
+            double staminaSum = 0.0, ratio = 0.0;
+            for(int j = 0; j < routine.routineTasks.get(i).getAssignedResources().size(); j++){
+                staminaSum += routine.routineTasks.get(i).getAssignedResources().get(j).getStamina();
+            }
+            double staminaAverage = staminaSum / routine.routineTasks.get(i).getAssignedResources().size();
+            if(routine.routineTasks.get(i).getComplexity() != 0){
+                ratio = staminaAverage / routine.routineTasks.get(i).getComplexity();
+            }
+            else{
+                ratio = staminaAverage / 0.0001;
+            }
+            data.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), ratio - 1));
+        }
     }//end setData()
     
 }//end StaminaComplexityControl

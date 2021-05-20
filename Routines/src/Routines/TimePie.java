@@ -1,7 +1,6 @@
 
 package Routines;
 
-import java.util.LinkedList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -15,15 +14,13 @@ import javafx.scene.layout.HBox;
  */
 public class TimePie extends HBox {
     
-    private final PieChart chart = new PieChart();
+    private PieChart chart = new PieChart();
     private ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
     
     
-    public TimePie(){
-        chart.setTitle("Test Time Pie");
-        
-        setData();
-        
+    public TimePie(Routine routine){
+        chart.setTitle(routine.getRoutineName() + " Time Pie");
+        setData(routine);
         chart.setData(data);
         this.getChildren().add(chart);
     }//end default constructor
@@ -32,22 +29,14 @@ public class TimePie extends HBox {
     
     
     
-    public void setData(){
-        LinkedList<Integer> tasks = new LinkedList<>();
-        
-        tasks.add(7);
-        tasks.add(2);
-        tasks.add(4);
-        tasks.add(9);
-        tasks.add(2);
-        
+    public void setData(Routine routine){
         double total = 0;
-        for(int i = 0; i < tasks.size(); i++){
-            total += tasks.get(i);
+        for(int i = 0; i < routine.routineTasks.size(); i++){
+            total += routine.routineTasks.get(i).getDuration();
         }
         
-        for(int i = 0; i < tasks.size(); i++){
-            data.add(new PieChart.Data("task " + i, tasks.get(i)/total));
+        for(int i = 0; i < routine.routineTasks.size(); i++){
+            data.add(new PieChart.Data(routine.routineTasks.get(i).getName(), routine.routineTasks.get(i).getDuration()/total));
         }
     }//end setData()
     
