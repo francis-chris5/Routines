@@ -33,6 +33,9 @@ public class RoutineController implements Initializable{
     @FXML
     ListView lstResources;
     
+    @FXML
+    VBox chtGanttChart;
+    
     
     @FXML
     VBox chtTimePie;
@@ -73,17 +76,14 @@ public class RoutineController implements Initializable{
         chtStaminaComplexityControl.getChildren().add(new StaminaComplexityControl(this.routine));
         chtCostPie.getChildren().clear();
         chtCostPie.getChildren().add(new CostPie(this.routine));
+        chtGanttChart.getChildren().clear();
+        chtGanttChart.getChildren().add(new GanttChart(this.routine));
     }//end updateGraphicalAnalysis()
     
     
-//    public void setStaminaComplexityControl(){
-//        chtStaminaComplexity.getChildren().add(new StaminaComplexityControl());
-//    }//end setStaminaComplexityControl()
     
     
-    public void setResourceBurnUp(){
-        
-    }//end setResourceBurnUp()
+    
     
     
     
@@ -442,6 +442,7 @@ public class RoutineController implements Initializable{
             chtTimePie.getChildren().clear();
             chtResourceBurnUp.getChildren().clear();
             chtStaminaComplexityControl.getChildren().clear();
+            chtCostPie.getChildren().clear();
         }
     }//end closeRoutine();
     
