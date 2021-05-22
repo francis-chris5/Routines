@@ -49,17 +49,17 @@ public class ResourceBurnUp extends HBox{
     public void setData(Routine routine){
         try{
             double runningTotal = 0.0;
-            for(int i = 0; i < routine.routineTasks.size(); i++){
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
                 double taskExpense = 0.0;
-                for(int j=0; j<routine.routineTasks.get(i).getAssignedResources().size(); j++){
-                    if(routine.routineTasks.get(i).getAssignedResources().get(j).getUnits() != CostBasis.FLAT_FEE){
-                        taskExpense += routine.routineTasks.get(i).getAssignedResources().get(j).getCost()* routine.routineTasks.get(i).getDuration();
+                for(int j=0; j<routine.getRoutineTasks().get(i).getAssignedResources().size(); j++){
+                    if(routine.getRoutineTasks().get(i).getAssignedResources().get(j).getUnits() != CostBasis.FLAT_FEE){
+                        taskExpense += routine.getRoutineTasks().get(i).getAssignedResources().get(j).getCost()* routine.getRoutineTasks().get(i).getDuration();
                     }
                     else{
-                        taskExpense += routine.routineTasks.get(i).getAssignedResources().get(j).getCost() / routine.routineTasks.get(i).getAssignedResources().get(j).getAssignedTo().size();
+                        taskExpense += routine.getRoutineTasks().get(i).getAssignedResources().get(j).getCost() / routine.getRoutineTasks().get(i).getAssignedResources().get(j).getAssignedTo().size();
                     }
                 }
-                data.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), taskExpense + runningTotal));
+                data.getData().add(new XYChart.Data(routine.getRoutineTasks().get(i).getName(), taskExpense + runningTotal));
                 runningTotal += taskExpense;
             }
         }
@@ -72,10 +72,10 @@ public class ResourceBurnUp extends HBox{
     
     
     public void setCostProjection(Routine routine){
-        if(!routine.routineTasks.isEmpty()){
+        if(!routine.getRoutineTasks().isEmpty()){
             double step = routine.getRoutineBudget() / data.getData().size();
             for(int i = 0; i < data.getData().size(); i++){
-                costProjection.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), (i+1) * step));
+                costProjection.getData().add(new XYChart.Data(routine.getRoutineTasks().get(i).getName(), (i+1) * step));
             }
         }
     }//end setCostProjection()

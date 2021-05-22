@@ -1,7 +1,8 @@
 
 package Routines;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
@@ -28,7 +29,6 @@ public class GanttChart extends Pane{
     
     
     
-    
         //////////////////////////////////////////////  CONSTRUCTORS  /////////
     
     public GanttChart(Routine routine){
@@ -36,7 +36,7 @@ public class GanttChart extends Pane{
         xAxis.setSide(Side.TOP);
         yAxis.setTickLabelsVisible(false);
         setData(routine);
-        chart.setPrefHeight(taskList.size()*22*2.3);
+        chart.setPrefHeight(taskList.size()*22 + 250);
         for(int i = 0; i < taskList.size(); i++){
             chart.getData().add(taskList.get(i));
         }
@@ -55,12 +55,11 @@ public class GanttChart extends Pane{
         ////////////////////////////////////////////  CHART METHODS  /////////
     
     public void setData(Routine routine){
-        for(int i=0; i < routine.routineTasks.size(); i++){
+        for(int i=0; i < routine.getRoutineTasks().size(); i++){
             XYChart.Series data = new XYChart.Series();
-            for(LocalDate j = routine.routineTasks.get(i).getStartDate(); j.compareTo(routine.routineTasks.get(i).getEndDate()) < 0; j = j.plus(1, routine.getDefaultTimescale().getChronoUnits())) {
-                //data.getData().add(new XYChart.Data(j.toString(), routine.routineTasks.get(i).getName()));
+            for(LocalDateTime j = routine.getRoutineTasks().get(i).getStartTime(); !j.equals(routine.getRoutineTasks().get(i).getEndTime()); j = j.plus(1, routine.getDefaultTimescale().getChronoUnits())) {
                 data.getData().add(new XYChart.Data(j.toString(), -i));
-                data.setName(routine.routineTasks.get(i).getName());
+                data.setName(routine.getRoutineTasks().get(i).getName());
             }
             taskList.add(data);
         }

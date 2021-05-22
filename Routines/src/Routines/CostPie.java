@@ -44,13 +44,13 @@ public class CostPie extends HBox {
     public void setData(Routine routine){
         try{
             LinkedList<Double> taskCost = new LinkedList<>();
-            for(int i = 0; i < routine.routineTasks.size(); i++){
-                for(int j = 0; j < routine.routineTasks.get(i).getAssignedResources().size(); j++){
-                    if(routine.routineTasks.get(i).getAssignedResources().get(j).getUnits() != CostBasis.FLAT_FEE){
-                        taskCost.add(routine.routineTasks.get(i).getAssignedResources().get(j).getCost()* routine.routineTasks.get(i).getDuration());
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
+                for(int j = 0; j < routine.getRoutineTasks().get(i).getAssignedResources().size(); j++){
+                    if(routine.getRoutineTasks().get(i).getAssignedResources().get(j).getUnits() != CostBasis.FLAT_FEE){
+                        taskCost.add(routine.getRoutineTasks().get(i).getAssignedResources().get(j).getCost()* routine.getRoutineTasks().get(i).getDuration());
                     }
                     else{
-                        taskCost.add(routine.routineTasks.get(i).getAssignedResources().get(j).getCost() / routine.routineTasks.get(i).getAssignedResources().get(j).getAssignedTo().size());
+                        taskCost.add(routine.getRoutineTasks().get(i).getAssignedResources().get(j).getCost() / routine.getRoutineTasks().get(i).getAssignedResources().get(j).getAssignedTo().size());
                     }
                 }
             }
@@ -58,8 +58,8 @@ public class CostPie extends HBox {
             for(int i = 0; i < taskCost.size(); i++){
                 total += taskCost.get(i);
             }
-            for(int i = 0; i < routine.routineTasks.size(); i++){
-                data.add(new PieChart.Data(routine.routineTasks.get(i).getName(), taskCost.get(i)/total));
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
+                data.add(new PieChart.Data(routine.getRoutineTasks().get(i).getName(), taskCost.get(i)/total));
             }
         }
         catch(Exception e){

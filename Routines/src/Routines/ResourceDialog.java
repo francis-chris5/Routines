@@ -16,7 +16,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.TextFieldListCell;
 
 
 public class ResourceDialog extends Dialog implements Initializable {
@@ -113,7 +112,7 @@ public class ResourceDialog extends Dialog implements Initializable {
         setCostBasisRadioButton(this.resource.getUnits());
         sldStamina.setValue(this.resource.getStamina());
         lstDaysOff.getItems().clear();
-        lstDaysOff.getItems().addAll(this.resource.daysOff);
+        lstDaysOff.getItems().addAll(this.resource.getDaysOff());
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == btnConfirm){
             //should be finished by the time the button is clicked
@@ -217,8 +216,8 @@ public class ResourceDialog extends Dialog implements Initializable {
                 }
             }
             this.resource.setUnits(this.getCostBasis());
-            this.resource.daysOff.clear();
-            this.resource.daysOff.addAll(lstDaysOff.getItems());
+            this.resource.getDaysOff().clear();
+            this.resource.getDaysOff().addAll(lstDaysOff.getItems());
             this.resource.setStamina(sldStamina.getValue());
         }
         return this.resource;
@@ -246,8 +245,8 @@ public class ResourceDialog extends Dialog implements Initializable {
                 }
             }
             this.resource.setUnits(this.getCostBasis());
-            this.resource.daysOff.clear();
-            this.resource.daysOff.addAll(lstDaysOff.getItems());
+            this.resource.getDaysOff().clear();
+            this.resource.getDaysOff().addAll(lstDaysOff.getItems());
             this.resource.setStamina(sldStamina.getValue());
         }
         return this.resource;

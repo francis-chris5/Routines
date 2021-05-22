@@ -9,25 +9,7 @@ import java.time.temporal.ChronoUnit;
 public enum TimeBasis{
     
     MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS;
-    
-    public long getTimeBasis(){
-        switch(this){
-            case MINUTES:
-                return 1000*60;
-            case HOURS:
-                return 1000*60*60;
-            case DAYS:
-                return 1000*60*60*24;
-            case WEEKS:
-                return 1000*60*60*24*7;
-            case MONTHS:
-                return 1000*60*60*24*30;
-            case YEARS:
-                return 1000*60*60*24*365;
-            default:
-                return 1000*60*60*24;
-        }
-    }//end getTimeBasis()
+
     
     
     public ChronoUnit getChronoUnits(){

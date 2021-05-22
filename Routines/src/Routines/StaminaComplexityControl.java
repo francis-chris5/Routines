@@ -54,10 +54,10 @@ public class StaminaComplexityControl extends HBox {
         /////////////////////////////////////////////  CHART METHODS  ////////
     
     public void setControlLimits(Routine routine){
-        if(!routine.routineTasks.isEmpty()){
-            for(int i=0; i < routine.routineTasks.size(); i++){
-                ucl.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), 1.0));
-                lcl.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), -1.0));
+        if(!routine.getRoutineTasks().isEmpty()){
+            for(int i=0; i < routine.getRoutineTasks().size(); i++){
+                ucl.getData().add(new XYChart.Data(routine.getRoutineTasks().get(i).getName(), 1.0));
+                lcl.getData().add(new XYChart.Data(routine.getRoutineTasks().get(i).getName(), -1.0));
             }
         }
     }//end setControlLimits()
@@ -67,19 +67,19 @@ public class StaminaComplexityControl extends HBox {
     
     public void setData(Routine routine){
         try{
-            for(int i = 0; i < routine.routineTasks.size(); i++){
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
                 double staminaSum = 0.0, ratio = 0.0;
-                for(int j = 0; j < routine.routineTasks.get(i).getAssignedResources().size(); j++){
-                    staminaSum += routine.routineTasks.get(i).getAssignedResources().get(j).getStamina();
+                for(int j = 0; j < routine.getRoutineTasks().get(i).getAssignedResources().size(); j++){
+                    staminaSum += routine.getRoutineTasks().get(i).getAssignedResources().get(j).getStamina();
                 }
-                double staminaAverage = staminaSum / routine.routineTasks.get(i).getAssignedResources().size();
-                if(routine.routineTasks.get(i).getComplexity() != 0){
-                    ratio = staminaAverage / routine.routineTasks.get(i).getComplexity();
+                double staminaAverage = staminaSum / routine.getRoutineTasks().get(i).getAssignedResources().size();
+                if(routine.getRoutineTasks().get(i).getComplexity() != 0){
+                    ratio = staminaAverage / routine.getRoutineTasks().get(i).getComplexity();
                 }
                 else{
                     ratio = staminaAverage / 0.0001;
                 }
-                data.getData().add(new XYChart.Data(routine.routineTasks.get(i).getName(), ratio - 1));
+                data.getData().add(new XYChart.Data(routine.getRoutineTasks().get(i).getName(), ratio - 1));
             }
         }
         catch(Exception e){

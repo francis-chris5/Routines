@@ -9,7 +9,7 @@
     -fx-stroke-width: 22pt;
 }
 
-.chart-legend-item-symbol{
-    
-}
 
+#offtime.chart-series-line{
+    -fx-stroke-fill:#555555;
+}

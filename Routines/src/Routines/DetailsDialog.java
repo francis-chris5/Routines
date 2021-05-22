@@ -2,6 +2,7 @@
 package Routines;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -9,14 +10,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
 
 public class DetailsDialog extends Dialog implements Initializable {
@@ -46,6 +45,8 @@ public class DetailsDialog extends Dialog implements Initializable {
     RadioButton rdbYears;
     @FXML
     TextField txtRoutineBudget;
+    @FXML
+    Button btnLaunchScheduler;
     
     
     private Routine routine;
@@ -66,6 +67,7 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     public DetailsDialog(String purpose){
+        routine = new Routine();
         this.setTitle("Routines: Routine Details");
         if(purpose.equals("new")){
             try{
@@ -80,7 +82,7 @@ public class DetailsDialog extends Dialog implements Initializable {
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             Optional<ButtonType> clicked = this.showAndWait();
             if(clicked.get() == btnConfirm){
-                routine = new Routine();
+                //should be finished at this point
             }
             else{
                 this.routine = null;
@@ -105,7 +107,8 @@ public class DetailsDialog extends Dialog implements Initializable {
         ButtonType btnConfirm = new ButtonType("Update Routine", ButtonData.OTHER);
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
         txtRoutineName.setText(this.routine.getRoutineName());
-        dtRoutineStartDate.setValue(this.routine.getRoutineStartDate());
+        dtRoutineStartDate.setValue(this.routine.getRoutineStartTime().toLocalDate());
+        txtRoutineStartTime.setText(routine.getRoutineStartTime().toLocalTime().toString());
         txtRoutineBudget.setText("" + this.routine.getRoutineBudget());
         txtRoutineNotes.setHtmlText(this.routine.getRoutineNotes());
         setDefaultTimeRadioButton(this.routine.getDefaultTimescale());
@@ -215,20 +218,17 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     public Routine editRoutine(){
         this.routine.setRoutineName(txtRoutineName.getText());
-        if(rdbMinutes.isSelected() || rdbHours.isSelected()){
              try{
                 int[] time = new int[3];
                 String[] stringTime = txtRoutineStartTime.getText().split(":");
                 for(int i=0; i < stringTime.length; i++){
                     time[i] = Integer.parseInt(stringTime[i]);
                 }
-                this.routine.setRoutineStartTime(LocalTime.of(time[0], time[1], time[2]));
+                this.routine.setRoutineStartTime(LocalDateTime.of(dtRoutineStartDate.getValue(), LocalTime.of(time[0], time[1], time[2])));
             }
             catch(NumberFormatException e){
                 //just move on then
             }
-        }
-        this.routine.setRoutineStartDate(dtRoutineStartDate.getValue());
         try{
             this.routine.setRoutineBudget(Double.parseDouble(txtRoutineBudget.getText()));
         }
@@ -245,6 +245,13 @@ public class DetailsDialog extends Dialog implements Initializable {
         return this.routine;
     }//end editRoutine()
     
+    
+    
+    
+    public void defineWorkHours(){
+        routine.setWorkHours(new WorkHoursDialog(routine).getWorkHours());
+        System.out.println(routine.getWorkHours());
+    }//end defineWorkScedule()
     
     
     

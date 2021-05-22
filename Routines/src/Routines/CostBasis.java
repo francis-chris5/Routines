@@ -7,21 +7,6 @@ package Routines;
 public enum CostBasis {
     PER_HOUR, PER_DAY, PER_WEEK, FLAT_FEE;
     
-    public long getCostBasis(){
-            // would work days be better here than calendar --can it change dynamically???
-        switch(this){
-            case PER_HOUR:
-                return 1000*60*60;
-            case PER_DAY:
-                return 1000*60*60*24;
-            case PER_WEEK:
-                return 1000*60*60*24*7;
-            case FLAT_FEE:
-                return 1;
-            default:
-                return 1;
-        }
-    }//end getCostBasis()
 
     @Override
     public String toString() {

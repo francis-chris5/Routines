@@ -15,8 +15,8 @@ public class Resource implements Serializable{
     private String primaryContactInfo;
     private double cost;
     private CostBasis units;
-    public LinkedList<LocalDate> daysOff = new LinkedList<>();
-    public LinkedList<Task> assignedTo = new LinkedList<>();
+    private LinkedList<LocalDate> daysOff = new LinkedList<>();
+    private LinkedList<Task> assignedTo = new LinkedList<>();
     private double stamina;
     
     

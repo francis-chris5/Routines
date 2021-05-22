@@ -41,14 +41,14 @@ public class TimePie extends HBox {
         /////////////////////////////////////////  CHART METHODS  ///////////
     
     public void setData(Routine routine){
-        if(!routine.routineTasks.isEmpty()){
+        if(!routine.getRoutineTasks().isEmpty()){
             double total = 0;
-            for(int i = 0; i < routine.routineTasks.size(); i++){
-                total += routine.routineTasks.get(i).getDuration();
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
+                total += routine.getRoutineTasks().get(i).getDuration();
             }
 
-            for(int i = 0; i < routine.routineTasks.size(); i++){
-                data.add(new PieChart.Data(routine.routineTasks.get(i).getName(), routine.routineTasks.get(i).getDuration()/total));
+            for(int i = 0; i < routine.getRoutineTasks().size(); i++){
+                data.add(new PieChart.Data(routine.getRoutineTasks().get(i).getName(), routine.getRoutineTasks().get(i).getDuration()/total));
             }
         }
     }//end setData()

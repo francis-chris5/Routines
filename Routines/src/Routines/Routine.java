@@ -7,8 +7,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javafx.stage.FileChooser;
 
@@ -20,15 +19,14 @@ public class Routine implements Serializable{
     private String filename = null;
     private String filepath = null;
     private String routineName;
-    private LocalDate routineStartDate;
-    private LocalDate routineEndDate;
-    private LocalTime routineStartTime;
-    private LocalTime routineEndTime;
+    private LocalDateTime routineStartTime;
+    private LocalDateTime routineEndTime;
+    private WorkHours workHours = new WorkHours();
     private double routineBudget;
     private String routineNotes;
     private TimeBasis defaultTimescale = TimeBasis.DAYS;
-    public LinkedList<Task> routineTasks = new LinkedList();
-    public LinkedList<Resource> availableResources = new LinkedList();
+    private LinkedList<Task> routineTasks = new LinkedList();
+    private LinkedList<Resource> availableResources = new LinkedList();
     private boolean saved = true;
     
     
@@ -41,9 +39,9 @@ public class Routine implements Serializable{
         ////////////////////////////////////////  CONSTRUCTORS  //////////////
     
     public Routine(){
-        this.routineStartDate = LocalDate.now();
-        this.routineStartTime = LocalTime.now();
-        this.findRoutineEndDate();
+        this.routineStartTime = LocalDateTime.now();
+        this.findRoutineEndTime();
+        this.workHours.setWorkingLists();
     }//end default constructor()
     
     
@@ -78,38 +76,28 @@ public class Routine implements Serializable{
         this.routineName = routineName;
     }
 
-    public LocalDate getRoutineStartDate() {
-        return routineStartDate;
-    }
-
-    public LocalDate getRoutineEndDate() {
-        return routineEndDate;
-    }
-
-    public void setRoutineEndDate(LocalDate routineEndDate) {
-        this.routineEndDate = routineEndDate;
-    }
-
-    public LocalTime getRoutineStartTime() {
+    public LocalDateTime getRoutineStartTime() {
         return routineStartTime;
     }
 
-    public void setRoutineStartTime(LocalTime routineStartTime) {
-        this.routineStartTime = routineStartTime;
-    }
-
-    public LocalTime getRoutineEndTime() {
+    public LocalDateTime getRoutineEndTime() {
         return routineEndTime;
     }
 
-    public void setRoutineEndTime(LocalTime routineEndTime) {
+    public void setRoutineEndTime(LocalDateTime routineEndTime) {
         this.routineEndTime = routineEndTime;
     }
-    
-    
 
-    public void setRoutineStartDate(LocalDate routineStartDate) {
-        this.routineStartDate = routineStartDate;
+    public WorkHours getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(WorkHours workHours) {
+        this.workHours = workHours;
+    }
+
+    public void setRoutineStartTime(LocalDateTime routineStartTime) {
+        this.routineStartTime = routineStartTime;
     }
     
     public double getRoutineBudget() {
@@ -236,42 +224,22 @@ public class Routine implements Serializable{
     
     
     
-    public void findRoutineEndDate(){
-        if(routineTasks.isEmpty()){
-            if(defaultTimescale == TimeBasis.MINUTES || defaultTimescale == TimeBasis.HOURS){
-                routineEndDate = null;
-                routineEndTime = routineStartTime.plus(10, defaultTimescale.getChronoUnits());
-            }
-            else{
-                routineEndTime = null;
-                routineEndDate = routineStartDate.plus(10, defaultTimescale.getChronoUnits());
+    public void findRoutineEndTime(){
+        int duration = 0;
+        int max = 0;
+        for(int i=0; i < this.routineTasks.size(); i++){
+            if(routineTasks.get(max).getEndTime().compareTo(routineTasks.get(i).getEndTime()) < 0){
+                max = i;
             }
         }
-        else{
-            int duration = 0;
-            int max = 0;
-            if(defaultTimescale == TimeBasis.MINUTES || defaultTimescale == TimeBasis.HOURS){
-                routineEndDate = null; //this will need to change later just in case
-                for(int i=0; i < this.routineTasks.size(); i++){
-                    if(routineTasks.get(max).getEndTime().compareTo(routineTasks.get(i).getEndTime()) < 0){
-                        max = i;
-                    }
-                }
-                duration = (int)defaultTimescale.getChronoUnits().between(routineStartTime, routineTasks.get(max).getEndTime());
-                this.routineEndTime = this.routineStartTime.plus(duration, defaultTimescale.getChronoUnits());
-            }
-            else{
-                routineEndTime = null; //this will need to change later just in case
-                for(int i=0; i < this.routineTasks.size(); i++){
-                    if(routineTasks.get(max).getEndDate().compareTo(routineTasks.get(i).getEndDate()) < 0){
-                        max = i;
-                    }
-                }
-                duration = (int)defaultTimescale.getChronoUnits().between(routineStartDate, routineTasks.get(max).getEndDate());
-                this.routineEndDate = this.routineStartDate.plus(duration, defaultTimescale.getChronoUnits());
-            }
+        try{
+            duration = (int)defaultTimescale.getChronoUnits().between(routineStartTime, routineTasks.get(max).getEndTime());
+            this.routineEndTime = this.routineStartTime.plus(duration, defaultTimescale.getChronoUnits());
         }
-    }//end findRoutineEndDate()
+        catch(Exception e){
+            //probably no tasks yet
+        }
+    }//end findRoutineEndTime()
     
     
     
@@ -297,7 +265,7 @@ public class Routine implements Serializable{
     
     @Override
     public String toString() {
-        return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartDate() + " with tasks measured in " + this.getDefaultTimescale() + " with a budget of " + this.getRoutineBudget() + ", and includes the following...";
+        return this.getRoutineName() + " is scheduled to start on " + this.getRoutineStartTime() + " with tasks measured in " + this.getDefaultTimescale() + " with a budget of " + this.getRoutineBudget() + ", and includes the following...";
     }//end toString()
 
 }//end Routine

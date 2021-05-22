@@ -2,8 +2,7 @@ package Routines;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 
@@ -16,11 +15,9 @@ public class Task implements Serializable{
     private TimeBasis units;
     private TaskScheduler scheduler;
     private Task predecessor;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    public LinkedList<Resource> assignedResources = new LinkedList<>();
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private LinkedList<Resource> assignedResources = new LinkedList<>();
     private double complexity; //this value couples with stamina from resources to produce warnings/suggestions if two exhaustive tasks were assigned to a lazy person back to back
 	
 	
@@ -80,11 +77,11 @@ public class Task implements Serializable{
         this.scheduler = scheduler;
     }
 
-    public LocalTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
     
@@ -98,28 +95,12 @@ public class Task implements Serializable{
         this.predecessor = predecessor;
     }
 
-    public LocalTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     public LinkedList<Resource> getAssignedResources() {

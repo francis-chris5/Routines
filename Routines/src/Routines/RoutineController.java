@@ -95,8 +95,8 @@ public class RoutineController implements Initializable{
 		
     public void showTasks(){
         lstTasks.getItems().clear();
-        for(int i=0; i < routine.routineTasks.size(); i++){
-            lstTasks.getItems().add(routine.routineTasks.get(i));
+        for(int i=0; i < routine.getRoutineTasks().size(); i++){
+            lstTasks.getItems().add(routine.getRoutineTasks().get(i));
         }
     }//end showTasks()
     
@@ -106,8 +106,8 @@ public class RoutineController implements Initializable{
     public void newTask(){
         Task dt = new TaskDialog("add", this.routine).addTask();
         if(dt != null){
-            currentTask = routine.routineTasks.size();
-            routine.routineTasks.add(dt);
+            currentTask = routine.getRoutineTasks().size();
+            routine.getRoutineTasks().add(dt);
             showTasks();
             showResources();
             updateGraphicalAnalysis();
@@ -121,11 +121,11 @@ public class RoutineController implements Initializable{
     public void editTask(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).toString().equals(selection)){
-                    Task task = new TaskDialog(routine.routineTasks.get(i), routine).editTask();
+            for(int i=0; i < routine.getRoutineTasks().size(); i++){
+                if(routine.getRoutineTasks().get(i).toString().equals(selection)){
+                    Task task = new TaskDialog(routine.getRoutineTasks().get(i), routine).editTask();
                     if(task != null){
-                        routine.routineTasks.set(i, task);
+                        routine.getRoutineTasks().set(i, task);
                         showTasks();
                         showResources();
                         updateGraphicalAnalysis();
@@ -146,13 +146,13 @@ public class RoutineController implements Initializable{
     public void moveTaskUp(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getRoutineTasks().size(); i++){
+                if(routine.getRoutineTasks().get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
             if(currentTask > 0){
-                Collections.swap(routine.routineTasks, currentTask, currentTask-1);
+                Collections.swap(routine.getRoutineTasks(), currentTask, currentTask-1);
             }
         }
         catch(Exception e){
@@ -169,13 +169,13 @@ public class RoutineController implements Initializable{
     public void moveTaskDown(){
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getRoutineTasks().size(); i++){
+                if(routine.getRoutineTasks().get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
-            if(currentTask < routine.routineTasks.size()-1){
-                Collections.swap(routine.routineTasks, currentTask, currentTask+1);
+            if(currentTask < routine.getRoutineTasks().size()-1){
+                Collections.swap(routine.getRoutineTasks(), currentTask, currentTask+1);
             }
         }
         catch(Exception e){
@@ -193,13 +193,13 @@ public class RoutineController implements Initializable{
         try{
             currentTask = -1;
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.routineTasks.size(); i++){
-                if(routine.routineTasks.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getRoutineTasks().size(); i++){
+                if(routine.getRoutineTasks().get(i).toString().equals(selection)){
                     currentTask = i;
                 }
             }
             if(currentTask >= 0){
-                routine.routineTasks.remove(currentTask);
+                routine.getRoutineTasks().remove(currentTask);
             }
         }
         catch(Exception e){
@@ -224,8 +224,8 @@ public class RoutineController implements Initializable{
     
     public void showResources(){
         lstResources.getItems().clear();
-        for(int i=0; i < routine.availableResources.size(); i++){
-            lstResources.getItems().add(routine.availableResources.get(i));
+        for(int i=0; i < routine.getAvailableResources().size(); i++){
+            lstResources.getItems().add(routine.getAvailableResources().get(i));
         }
     }//end showResources()
     
@@ -235,7 +235,7 @@ public class RoutineController implements Initializable{
     public void newResource(){
         Resource nr = new ResourceDialog("add").addResource();
         if(nr != null){
-            routine.availableResources.add(nr);
+            routine.getAvailableResources().add(nr);
             showResources();
             showTasks();
             updateGraphicalAnalysis();
@@ -249,11 +249,11 @@ public class RoutineController implements Initializable{
     public void editResource(){
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).toString().equals(selection)){
-                    Resource res = new ResourceDialog(routine.availableResources.get(i)).editResource();
+            for(int i=0; i < routine.getAvailableResources().size(); i++){
+                if(routine.getAvailableResources().get(i).toString().equals(selection)){
+                    Resource res = new ResourceDialog(routine.getAvailableResources().get(i)).editResource();
                     if(res != null){
-                        routine.availableResources.set(i, res);
+                        routine.getAvailableResources().set(i, res);
                         showResources();
                         showTasks();
                         updateGraphicalAnalysis();
@@ -273,13 +273,13 @@ public class RoutineController implements Initializable{
     public void moveResourceUP(){
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getAvailableResources().size(); i++){
+                if(routine.getAvailableResources().get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
             if(currentResource > 0){
-                Collections.swap(routine.availableResources, currentResource, currentResource-1);
+                Collections.swap(routine.getAvailableResources(), currentResource, currentResource-1);
             }
         }
         catch(Exception e){
@@ -296,13 +296,13 @@ public class RoutineController implements Initializable{
     public void moveResourceDown(){
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getAvailableResources().size(); i++){
+                if(routine.getAvailableResources().get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
-            if(currentResource < routine.availableResources.size()-1){
-                Collections.swap(routine.availableResources, currentResource, currentResource+1);
+            if(currentResource < routine.getAvailableResources().size()-1){
+                Collections.swap(routine.getAvailableResources(), currentResource, currentResource+1);
             }
         }
         catch(Exception e){
@@ -320,13 +320,13 @@ public class RoutineController implements Initializable{
         try{
             currentResource = -1;
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
-            for(int i=0; i < routine.availableResources.size(); i++){
-                if(routine.availableResources.get(i).toString().equals(selection)){
+            for(int i=0; i < routine.getAvailableResources().size(); i++){
+                if(routine.getAvailableResources().get(i).toString().equals(selection)){
                     currentResource = i;
                 }
             }
             if(currentResource >= 0){
-                routine.availableResources.remove(currentResource);
+                routine.getAvailableResources().remove(currentResource);
             }
         }
         catch(Exception e){
@@ -358,7 +358,7 @@ public class RoutineController implements Initializable{
     
     public void editRoutineDetails(){
         this.routine = new DetailsDialog(this.routine).editRoutine();
-        this.routine.findRoutineEndDate();
+        this.routine.findRoutineEndTime();
         btnRoutineDetails.setText(this.routine.toString());
         updateGraphicalAnalysis();
     }//end editRoutineDetails()
@@ -443,6 +443,7 @@ public class RoutineController implements Initializable{
             chtResourceBurnUp.getChildren().clear();
             chtStaminaComplexityControl.getChildren().clear();
             chtCostPie.getChildren().clear();
+            chtGanttChart.getChildren().clear();
         }
     }//end closeRoutine();
     

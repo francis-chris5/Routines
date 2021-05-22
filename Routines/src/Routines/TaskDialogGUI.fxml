@@ -46,7 +46,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <HBox disable="true" prefHeight="78.0" prefWidth="202.0">
+                  <HBox prefHeight="78.0" prefWidth="202.0">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
@@ -148,7 +148,7 @@
                   <VBox prefHeight="78.0" prefWidth="171.0">
                      <children>
                         <Label text="Predecessor Task(s)" />
-                        <ComboBox fx:id="cmbPredecessor" disable="true" prefWidth="150.0">
+                        <ComboBox fx:id="cmbPredecessor" prefWidth="150.0">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>
