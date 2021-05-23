@@ -51,3 +51,24 @@ TASKS:
         Select a task from the Task List and use the arrows located just above the list, or select [Tasks -> Move Resource Up/Down] from the main menu, to move the selected task up or down the list. NOTE: this will not change the task's assigned predecessor
         Select a task from the Task List and click the Edit Task Button, or select [Tasks -> Edit Selected Task] from the main menu, to open the Task Dialog with the selected tasks details
         Select a task from the Task List and click the Delete Task Button, or select [Tasks -> Delete Selected Task] from the main menu, to remove the task from the current routine
+
+
+
+
+KEYBOARD SHORTCUTS
+    FILE:
+        ctrl+s          ->   save
+        ctrl+shift+n    ->   new routine
+        ctrl+d          ->  edit routine details
+    
+    Tasks:
+        ctrl+t          ->  new task
+        ctrl+shift+t    ->  edit task
+
+    Resources
+        ctrl+r          ->  new resource
+        ctrl+shift+r    ->  edit resource
+
+
+
+    

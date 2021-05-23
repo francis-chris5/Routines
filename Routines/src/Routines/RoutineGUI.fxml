@@ -47,6 +47,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -60,21 +61,36 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#newRoutine" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#newRoutine" text="New">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#openRoutine" text="Open…" />
             <MenuItem mnemonicParsing="false" onAction="#closeRoutine" text="Close" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#saveRoutine" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#saveRoutine" text="Save">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#saveAsRoutine" text="Save As..." />
-                  <MenuItem mnemonicParsing="false" onAction="#editRoutineDetails" text="Routine Details" />
+                  <MenuItem mnemonicParsing="false" onAction="#editRoutineDetails" text="Routine Details">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#exit" text="Quit" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Tasks">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#newTask" text="New Task" />
-                  <MenuItem mnemonicParsing="false" text="Edit Selected Task" />
+                <MenuItem mnemonicParsing="false" onAction="#newTask" text="New Task">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Edit Selected Task">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#deleteTask" text="Delete Selected Task" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#moveTaskUp" text="Move Selected Task Up" />
@@ -83,8 +99,14 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Resources">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#newResource" text="New Resource" />
-                  <MenuItem mnemonicParsing="false" onAction="#editResource" text="Edit Selected Resource" />
+                <MenuItem mnemonicParsing="false" onAction="#newResource" text="New Resource">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#editResource" text="Edit Selected Resource">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#deleteResource" text="Delete Selected Resource" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#moveResourceUP" text="Move Selected Resource Up" />

@@ -112,7 +112,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         txtRoutineBudget.setText("" + this.routine.getRoutineBudget());
         txtRoutineNotes.setHtmlText(this.routine.getRoutineNotes());
         setDefaultTimeRadioButton(this.routine.getDefaultTimescale());
-        setStartFormat();
+        //setStartFormat();
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == btnConfirm){
             //should be finished at this point
@@ -250,7 +250,6 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     public void defineWorkHours(){
         routine.setWorkHours(new WorkHoursDialog(routine).getWorkHours());
-        System.out.println(routine.getWorkHours());
     }//end defineWorkScedule()
     
     

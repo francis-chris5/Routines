@@ -62,7 +62,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="68.0" prefWidth="77.0" spacing="5.0">
+                        <VBox disable="true" prefHeight="68.0" prefWidth="77.0" spacing="5.0" visible="false">
                            <children>
                               <RadioButton fx:id="rdbWeeks" mnemonicParsing="false" onAction="#schedulerChanged" text="Weeks" toggleGroup="$durationToggleGroup" />
                               <RadioButton fx:id="rdbMonths" mnemonicParsing="false" onAction="#schedulerChanged" text="Months" toggleGroup="$durationToggleGroup" />

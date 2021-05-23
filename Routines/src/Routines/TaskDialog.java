@@ -471,8 +471,6 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     public void adjustToWorkingTime(){
-        System.out.println(routine.getWorkHours().getWorkingHours());
-        System.out.println(task.getEndTime());
         if(routine.getDefaultTimescale() == TimeBasis.MINUTES || routine.getDefaultTimescale() == TimeBasis.HOURS){
             for(int h = task.getStartTime().getHour(); h%24 != task.getEndTime().getHour() ;h++){
                 if(!routine.getWorkHours().getWorkingHours().contains(LocalTime.of(h%24, 0, 0))){
@@ -481,7 +479,7 @@ public class TaskDialog extends Dialog implements Initializable {
             }
         }
         else{
-            for(DayOfWeek d = task.getStartTime().getDayOfWeek(); !d.equals(task.getEndTime().getDayOfWeek().plus(1)); d = d.plus(1)){
+            for(DayOfWeek d = task.getStartTime().getDayOfWeek(); !d.equals(task.getEndTime().getDayOfWeek()); d = d.plus(1)){
                 if(!routine.getWorkHours().getWorkingDays().contains(d)){
                     task.setEndTime(task.getEndTime().plusDays(1));
                 }

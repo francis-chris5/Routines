@@ -84,7 +84,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="84.0" prefWidth="95.0" spacing="3.0">
+                  <VBox disable="true" prefHeight="84.0" prefWidth="95.0" spacing="3.0" visible="false">
                      <children>
                         <RadioButton fx:id="rdbWeeks" mnemonicParsing="false" onAction="#setStartFormat" text="Weeks" toggleGroup="$timescaleToggleGroup">
                            <VBox.margin>

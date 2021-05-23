@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,8 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 
@@ -360,6 +365,7 @@ public class RoutineController implements Initializable{
         this.routine = new DetailsDialog(this.routine).editRoutine();
         this.routine.findRoutineEndTime();
         btnRoutineDetails.setText(this.routine.toString());
+        this.routine.setSaved(false);
         updateGraphicalAnalysis();
     }//end editRoutineDetails()
     
@@ -507,6 +513,14 @@ public class RoutineController implements Initializable{
         aboutDialog.setContentText(about);
         aboutDialog.showAndWait();
     }//end getAbout()
+    
+    
+    
+    
+    public void exit(){
+        closeRoutine();
+        Platform.exit();
+    }
     
     
     
