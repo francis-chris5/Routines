@@ -50,7 +50,8 @@ public class RoutineController implements Initializable{
     VBox chtResourceBurnUp;
     @FXML
     VBox chtCostPie;
-    
+    @FXML
+    VBox chtResourceUsageChart;
     
     
     
@@ -83,6 +84,8 @@ public class RoutineController implements Initializable{
         chtCostPie.getChildren().add(new CostPie(this.routine));
         chtGanttChart.getChildren().clear();
         chtGanttChart.getChildren().add(new GanttChart(this.routine));
+        chtResourceUsageChart.getChildren().clear();
+        chtResourceUsageChart.getChildren().add(new ResourceUsageChart(this.routine));
     }//end updateGraphicalAnalysis()
     
     
@@ -450,6 +453,7 @@ public class RoutineController implements Initializable{
             chtStaminaComplexityControl.getChildren().clear();
             chtCostPie.getChildren().clear();
             chtGanttChart.getChildren().clear();
+            chtResourceUsageChart.getChildren().clear();
         }
     }//end closeRoutine();
     

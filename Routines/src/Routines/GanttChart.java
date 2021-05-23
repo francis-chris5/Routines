@@ -37,7 +37,7 @@ public class GanttChart extends Pane{
         xAxis.setSide(Side.TOP);
         yAxis.setTickLabelsVisible(false);
         setData(routine);
-        chart.setPrefHeight(taskList.size()*22 + 250);
+        //chart.setPrefHeight(taskList.size()*22 + 250);
         for(int i = 0; i < taskList.size(); i++){
             chart.getData().add(taskList.get(i));
         }
@@ -60,7 +60,7 @@ public class GanttChart extends Pane{
             XYChart.Series data = new XYChart.Series();
             for(LocalDateTime j = routine.getRoutineTasks().get(i).getStartTime(); !j.equals(routine.getRoutineTasks().get(i).getEndTime()); j = j.plus(1, routine.getDefaultTimescale().getChronoUnits())) {
                 if(routine.getWorkHours().getWorkingHours().contains(LocalTime.of(j.getHour(), 0, 0)) && routine.getWorkHours().getWorkingDays().contains(j.getDayOfWeek())){
-                    data.getData().add(new XYChart.Data(j.toString(), -i));
+                    data.getData().add(new XYChart.Data(j.toString(), -i-1));
                     data.setName(routine.getRoutineTasks().get(i).getName());
                 }
             }
