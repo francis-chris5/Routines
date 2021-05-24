@@ -9,5 +9,5 @@ then
 fi
 
 
-
-java --module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml,javafx.web -jar Routines.jar
+current=$(pwd)
+java --module-path $current/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml,javafx.web -jar Routines.jar
