@@ -1,15 +1,5 @@
 
 
 
+/* I'll probably style this some...*/
 
-.chart-content{
-    -fx-padding: 0px;
-}
-.chart-series-line{
-    -fx-stroke-width: 22pt;
-}
-
-
-#offtime.chart-series-line{
-    -fx-stroke-fill:#555555;
-}
