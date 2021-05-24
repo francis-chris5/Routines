@@ -25,11 +25,13 @@ I've got the data organization, main GUI, and dialog boxes set up the way I want
 
 
 
-![pics_for_github_main](https://user-images.githubusercontent.com/50467171/119031840-86e0e880-b979-11eb-85ea-d2f8d9187a38.jpg)
-![pics_for_github_main_1](https://user-images.githubusercontent.com/50467171/119082237-a7399300-b9cb-11eb-9c2f-c9549d82195e.jpg)
-![pics_for_github_details](https://user-images.githubusercontent.com/50467171/119027892-d83aa900-b974-11eb-9570-6e98f172c916.jpg)
-![pics_for_github_task](https://user-images.githubusercontent.com/50467171/119027910-dd97f380-b974-11eb-9590-7894a0f11740.jpg)
-![pics_for_github_resource](https://user-images.githubusercontent.com/50467171/119027927-dffa4d80-b974-11eb-88d4-9a35cbf4a3dc.jpg)
+![pic_for_github_main_1](https://user-images.githubusercontent.com/50467171/119281559-27e2d400-bc04-11eb-86d2-b24d4798db4f.jpg)
+![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/119281557-274a3d80-bc04-11eb-875b-ea3e4c539bb2.jpg)
+![pic_for_github_main_3](https://user-images.githubusercontent.com/50467171/119281568-29140100-bc04-11eb-909d-1691f7523493.jpg)
+![pic_for_github_details](https://user-images.githubusercontent.com/50467171/119281563-287b6a80-bc04-11eb-9739-f92be5e206d6.jpg)
+![pic_for_github_workhours](https://user-images.githubusercontent.com/50467171/119281565-287b6a80-bc04-11eb-85d5-c9c593d6fbfb.jpg)
+![pic_for_github_resources](https://user-images.githubusercontent.com/50467171/119281561-287b6a80-bc04-11eb-92b0-9f784b1d5749.jpg)
+![pic_for_github_tasks](https://user-images.githubusercontent.com/50467171/119281562-287b6a80-bc04-11eb-88ad-b71b16246d8a.jpg)
 
 
 
