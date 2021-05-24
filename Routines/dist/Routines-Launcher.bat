@@ -2,9 +2,7 @@
 
 IF NOT EXIST javafx\ (
 
-	ECHO I have to download some dependencies here... Give me a minute, this is huge...
-
-	Powershell.exe Invoke-WebRequest -uri https://download2.gluonhq.com/openjfx/11.0.2/openjfx-11.0.2_windows-x64_bin-sdk.zip -outfile javafx.zip
+	curl https://download2.gluonhq.com/openjfx/11.0.2/openjfx-11.0.2_windows-x64_bin-sdk.zip --output javafx.zip
 
 
 	Powershell.exe Expand-Archive javafx.zip
