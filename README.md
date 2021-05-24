@@ -7,6 +7,8 @@ I just could not seem to find the project management software I really wanted, s
 <h2>Installation</h2>
 The project is made with JavaFX which means that to run it requires a Java Runtime Enviroment as well as the JavaFX-sdk. The launcher scripts take care of that (and soon there will be an installer point towards these scripts appropriately), until the installers are ready simply download the "dist" folder and run the appropriate launcher for your system (.bat for Windows and .sh for Linux --mac coming soon), assuming your machine already has java installed. If the javafx dependencies are not present it will download them -so it should only happen the first time the application is launched.
 
+The "dist" folder also contains the test run project used in the images shown below.
+
 
 
 <h2>PROJECT PROGRESS</h2>
