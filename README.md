@@ -4,7 +4,7 @@ An upcoming piece of software, not quite ready yet...
 ((after a recent backup recovery issue --become a fan of all data on cloud factory reset machines often as of late-- I remembered why I don't need the netbeans project on github, so it's just the design documents and src files now , put that in your IDE of choice --or say 'forget this lack of control' and just open the command prompt or bash terminal-- and rebuild the project as needed --ultimately that's what's needed anyway since the peope you want to deliver software to won't be running it from an IDE))
 
 
-((I also included a build in its current state with a batch file to launch on windows, however, this "dist" requires the JavaFX-SDK to be included in the folder these files are in, and that's too large to upload with this))
+((I also included a build in its current state with a batch file to launch on windows, along with one of the recent test runs))
 
 
 
