@@ -20,6 +20,7 @@ I've got the data organization, main GUI, and dialog boxes set up the way I want
 ![pic_for_github_main_1](https://user-images.githubusercontent.com/50467171/119281559-27e2d400-bc04-11eb-86d2-b24d4798db4f.jpg)
 ![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/119281557-274a3d80-bc04-11eb-875b-ea3e4c539bb2.jpg)
 ![pic_for_github_main_3](https://user-images.githubusercontent.com/50467171/119281568-29140100-bc04-11eb-909d-1691f7523493.jpg)
+![pic_for_github_main_4](https://user-images.githubusercontent.com/50467171/119579655-e16cb100-bd8c-11eb-86bb-6e7e789ff93e.jpg)
 ![pic_for_github_details](https://user-images.githubusercontent.com/50467171/119281563-287b6a80-bc04-11eb-9739-f92be5e206d6.jpg)
 ![pic_for_github_workhours](https://user-images.githubusercontent.com/50467171/119281565-287b6a80-bc04-11eb-85d5-c9c593d6fbfb.jpg)
 ![pic_for_github_resources](https://user-images.githubusercontent.com/50467171/119281561-287b6a80-bc04-11eb-92b0-9f784b1d5749.jpg)
