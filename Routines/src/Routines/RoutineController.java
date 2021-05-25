@@ -52,6 +52,8 @@ public class RoutineController implements Initializable{
     VBox chtCostPie;
     @FXML
     VBox chtResourceUsageChart;
+    @FXML
+    VBox chtPertChart;
     
     
     
@@ -86,6 +88,8 @@ public class RoutineController implements Initializable{
         chtGanttChart.getChildren().add(new GanttChart(this.routine));
         chtResourceUsageChart.getChildren().clear();
         chtResourceUsageChart.getChildren().add(new ResourceUsageChart(this.routine));
+        chtPertChart.getChildren().clear();
+        chtPertChart.getChildren().add(new PERTChart(this.routine));
     }//end updateGraphicalAnalysis()
     
     
@@ -415,6 +419,8 @@ public class RoutineController implements Initializable{
             wantSave.setTitle("Routines");
             wantSave.setHeaderText("Current routine has not been saved");
             wantSave.setContentText("Do you want to save the changes to this routine before closing?");
+            wantSave.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
+            wantSave.getDialogPane().getStyleClass().add("RoutineStyle");
             
             ButtonType save = new ButtonType("Save");
             ButtonType noSave = new ButtonType("Close Without Saving");
@@ -454,6 +460,7 @@ public class RoutineController implements Initializable{
             chtCostPie.getChildren().clear();
             chtGanttChart.getChildren().clear();
             chtResourceUsageChart.getChildren().clear();
+            chtPertChart.getChildren().clear();
         }
     }//end closeRoutine();
     
@@ -537,6 +544,7 @@ public class RoutineController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just need it here for interfacing requirements
+        
     }//end initialize()
     
 }//end Control

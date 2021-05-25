@@ -471,19 +471,24 @@ public class TaskDialog extends Dialog implements Initializable {
     
     
     public void adjustToWorkingTime(){
-        if(routine.getDefaultTimescale() == TimeBasis.MINUTES || routine.getDefaultTimescale() == TimeBasis.HOURS){
-            for(int h = task.getStartTime().getHour(); h%24 != task.getEndTime().getHour() ;h++){
-                if(!routine.getWorkHours().getWorkingHours().contains(LocalTime.of(h%24, 0, 0))){
-                    task.setEndTime(task.getEndTime().plusHours(1));
+        try{
+            if(routine.getDefaultTimescale() == TimeBasis.MINUTES || routine.getDefaultTimescale() == TimeBasis.HOURS){
+                for(int h = task.getStartTime().getHour(); h%24 != task.getEndTime().getHour() ;h++){
+                    if(!routine.getWorkHours().getWorkingHours().contains(LocalTime.of(h%24, 0, 0))){
+                        task.setEndTime(task.getEndTime().plusHours(1));
+                    }
+                }
+            }
+            else{
+                for(DayOfWeek d = task.getStartTime().getDayOfWeek(); !d.equals(task.getEndTime().getDayOfWeek()); d = d.plus(1)){
+                    if(!routine.getWorkHours().getWorkingDays().contains(d)){
+                        task.setEndTime(task.getEndTime().plusDays(1));
+                    }
                 }
             }
         }
-        else{
-            for(DayOfWeek d = task.getStartTime().getDayOfWeek(); !d.equals(task.getEndTime().getDayOfWeek()); d = d.plus(1)){
-                if(!routine.getWorkHours().getWorkingDays().contains(d)){
-                    task.setEndTime(task.getEndTime().plusDays(1));
-                }
-            }
+        catch(NullPointerException e){
+            //probably canceled out of dialog box
         }
     }//end adjustToWorkingTime()
     
