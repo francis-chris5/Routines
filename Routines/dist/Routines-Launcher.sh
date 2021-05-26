@@ -1,6 +1,6 @@
 #! /bin/bash
 
-
+echo
 if [ ! -d javafx-sdk-11.0.2 ] 
 then
 	echo Need to download some dependencies first...
@@ -9,6 +9,7 @@ then
 	unzip openjfx-11.0.2_linux-x64_bin-sdk.zip > temp.txt
 	rm openjfx-11.0.2_linux-x64_bin-sdk.zip > temp.txt
 	rm temp.txt
+	echo
 fi
 
 
