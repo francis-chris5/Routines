@@ -1,4 +1,4 @@
-# ![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png) Routines
+# Routines
 
 
 <h2>Intro</h2>
