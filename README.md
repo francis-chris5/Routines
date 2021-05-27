@@ -15,9 +15,11 @@ The "dist" folder also contains the test run project used in the images shown be
 
 I've got the data organization, main GUI, and dialog boxes set up the way I wanted them, still a few more charts and graphs and plots I'd like to include, but it's time to start planning the setup and lecture delivery for my summer course and enter the real test phase of this thing. I went with a summary list and dialog editing instead of a table for general overview, but the data is organized into proper Java objects that can easily be stuck right into beans or observable factories to switch that over to traditional tables instead (I may end up doing that eventually anyway). All the background data seems to be handled properly and a couple of the project analysis charts have started coming together nicely...
 
+It's at the point I've begun focusing on keyboard shortcuts and other alternative events so there's more than one way to do things, and got started with multiple themes (well... a dark theme... so there's two now).
 
 
-![pic_for_github_main_1](https://user-images.githubusercontent.com/50467171/119281559-27e2d400-bc04-11eb-86d2-b24d4798db4f.jpg)
+![pic_for_github_main_1_light](https://user-images.githubusercontent.com/50467171/119764139-e01bb100-be7e-11eb-8525-0ddba7505f1c.jpg)
+![pic_for_github_main_1_dark](https://user-images.githubusercontent.com/50467171/119764136-df831a80-be7e-11eb-80c9-f159df9cafc9.jpg)
 ![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/119281557-274a3d80-bc04-11eb-875b-ea3e4c539bb2.jpg)
 ![pic_for_github_main_3](https://user-images.githubusercontent.com/50467171/119281568-29140100-bc04-11eb-909d-1691f7523493.jpg)
 ![pic_for_github_main_4](https://user-images.githubusercontent.com/50467171/119579655-e16cb100-bd8c-11eb-86bb-6e7e789ff93e.jpg)
