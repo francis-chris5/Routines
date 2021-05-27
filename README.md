@@ -1,4 +1,4 @@
-# Routines
+# ![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png) Routines
 
 
 <h2>Intro</h2>
@@ -11,7 +11,6 @@ The project is made with JavaFX which means that to run it requires a Java Runti
 The "Routines" folder also contains the test run project (a .rtne file) used in the images shown below.
 
 
-![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png)
 
 
 
