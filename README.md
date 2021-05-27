@@ -21,15 +21,16 @@ I've got the data organization, main GUI, and dialog boxes set up the way I want
 It's at the point I've begun focusing on keyboard shortcuts and other alternative events so there's more than one way to do things, and got started with multiple themes (well... a dark theme... so there's two now). Changing the theme rewrites the primary css file so a restart of the application is required before the changes will take place.
 
 
-![pic_for_github_main_1_light](https://user-images.githubusercontent.com/50467171/119764139-e01bb100-be7e-11eb-8525-0ddba7505f1c.jpg)
-![pic_for_github_main_1_dark](https://user-images.githubusercontent.com/50467171/119764136-df831a80-be7e-11eb-80c9-f159df9cafc9.jpg)
-![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/119281557-274a3d80-bc04-11eb-875b-ea3e4c539bb2.jpg)
-![pic_for_github_main_3](https://user-images.githubusercontent.com/50467171/119281568-29140100-bc04-11eb-909d-1691f7523493.jpg)
-![pic_for_github_main_4](https://user-images.githubusercontent.com/50467171/119579655-e16cb100-bd8c-11eb-86bb-6e7e789ff93e.jpg)
-![pic_for_github_details](https://user-images.githubusercontent.com/50467171/119281563-287b6a80-bc04-11eb-9739-f92be5e206d6.jpg)
-![pic_for_github_workhours](https://user-images.githubusercontent.com/50467171/119281565-287b6a80-bc04-11eb-85d5-c9c593d6fbfb.jpg)
-![pic_for_github_resources](https://user-images.githubusercontent.com/50467171/119281561-287b6a80-bc04-11eb-92b0-9f784b1d5749.jpg)
-![pic_for_github_tasks](https://user-images.githubusercontent.com/50467171/119281562-287b6a80-bc04-11eb-88ad-b71b16246d8a.jpg)
+![pic_for_github_main_1_light](https://user-images.githubusercontent.com/50467171/119839789-6ca38f00-bed2-11eb-9800-6ba333e4930f.jpg)
+![pic_for_github_main_1_dark](https://user-images.githubusercontent.com/50467171/119839793-6d3c2580-bed2-11eb-949d-319b7ef37933.jpg)
+![pic_for_github_main_2_light](https://user-images.githubusercontent.com/50467171/119839799-6e6d5280-bed2-11eb-9e42-5a34f6eb3f4c.jpg)
+![pic_for_github_main_3_light](https://user-images.githubusercontent.com/50467171/119839797-6dd4bc00-bed2-11eb-979b-a0e774e24964.jpg)
+![pic_for_github_main_4_light](https://user-images.githubusercontent.com/50467171/119839796-6dd4bc00-bed2-11eb-89d2-4c1e114cb896.jpg)
+![pic_for_github_details_light](https://user-images.githubusercontent.com/50467171/119839788-6ca38f00-bed2-11eb-92fd-c864b6e72fce.jpg)
+![pic_for_github_resource_light](https://user-images.githubusercontent.com/50467171/119839782-6c0af880-bed2-11eb-9a3b-c0dd23bd666c.jpg)
+![pic_for_github_task_light](https://user-images.githubusercontent.com/50467171/119839785-6ca38f00-bed2-11eb-92b3-c1a387869ee1.jpg)
+![pic_for_github_workhours_light](https://user-images.githubusercontent.com/50467171/119839787-6ca38f00-bed2-11eb-9254-df0b45bc34aa.jpg)
+
 
 
 
