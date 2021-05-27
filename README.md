@@ -15,7 +15,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 
 I've got the data organization, main GUI, and dialog boxes set up the way I wanted them, still a few more charts and graphs and plots I'd like to include, but it's time to start planning the setup and lecture delivery for my summer course and enter the real test phase of this thing. I went with a summary list and dialog editing instead of a table for general overview, but the data is organized into proper Java objects that can easily be stuck right into beans or observable factories to switch that over to traditional tables instead (I may end up doing that eventually anyway). All the background data seems to be handled properly and a couple of the project analysis charts have started coming together nicely...
 
-It's at the point I've begun focusing on keyboard shortcuts and other alternative events so there's more than one way to do things, and got started with multiple themes (well... a dark theme... so there's two now).
+It's at the point I've begun focusing on keyboard shortcuts and other alternative events so there's more than one way to do things, and got started with multiple themes (well... a dark theme... so there's two now). Changing the theme rewrites the primary css file so a restart of the application is required before the changes will take place.
 
 
 ![pic_for_github_main_1_light](https://user-images.githubusercontent.com/50467171/119764139-e01bb100-be7e-11eb-8525-0ddba7505f1c.jpg)
