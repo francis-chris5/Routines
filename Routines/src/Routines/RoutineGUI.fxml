@@ -55,7 +55,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/RoutineStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Routines.RoutineController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/RoutineStyle.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Routines.RoutineController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -65,7 +65,10 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#openRoutine" text="Open…" />
+            <MenuItem mnemonicParsing="false" onAction="#openRoutine" text="Open…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#closeRoutine" text="Close" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#saveRoutine" text="Save">
@@ -87,7 +90,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Edit Selected Task">
+                  <MenuItem mnemonicParsing="false" onAction="#editTask" text="Edit Selected Task">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -113,6 +116,17 @@
                   <MenuItem mnemonicParsing="false" onAction="#moveResourceDown" text="Move Selected Resource Down" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="View">
+              <items>
+                  <Menu mnemonicParsing="false" text="Theme">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="(RESTART REQUIRED TO SEE CHANGES TO THEME)" />
+                      <MenuItem id="miLightTheme" mnemonicParsing="false" onAction="#changeTheme" text="Light" />
+                        <MenuItem id="miDarkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Dark" />
+                    </items>
+                  </Menu>
+              </items>
+            </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
                   <MenuItem mnemonicParsing="false" onAction="#getHelp" text="Help" />
@@ -125,7 +139,7 @@
       <items>
         <AnchorPane minWidth="-Infinity" prefHeight="212.0" prefWidth="240.0">
           <children>
-                  <HBox layoutX="80.0" layoutY="21.0" prefHeight="60.0" prefWidth="139.0" spacing="5.0">
+                  <HBox layoutX="84.0" layoutY="9.0" prefHeight="60.0" prefWidth="139.0" spacing="5.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#moveTaskUp">
                            <graphic>
@@ -159,7 +173,7 @@
                   <VBox layoutX="35.0" layoutY="68.0" prefHeight="485.0" prefWidth="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
                      <children>
                         <Label text="Tasks" />
-                        <ListView fx:id="lstTasks" prefHeight="474.0" prefWidth="219.0" />
+                        <ListView fx:id="lstTasks" onContextMenuRequested="#editTask" prefHeight="474.0" prefWidth="219.0" />
                      </children>
                   </VBox>
           </children>
@@ -193,7 +207,7 @@
                                              <children>
                                                 <SplitPane dividerPositions="0.5" layoutX="14.0" layoutY="95.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
-                                                      <VBox fx:id="chtTimePie" prefHeight="257.0" prefWidth="197.0" />
+                                                      <VBox fx:id="chtTimePie" prefHeight="257.0" prefWidth="197.0" stylesheets="@Stylesheets/PieChartStyle.css" />
                                                       <VBox fx:id="chtStaminaComplexityControl" prefHeight="200.0" prefWidth="100.0" stylesheets="@Stylesheets/ControlChartStyle.css" />
                                                   </items>
                                                 </SplitPane>
@@ -204,7 +218,7 @@
                                                 <SplitPane dividerPositions="0.5" layoutX="39.0" layoutY="136.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <items>
                                                       <VBox fx:id="chtResourceBurnUp" prefHeight="200.0" prefWidth="100.0" stylesheets="@Stylesheets/BurnUpChartStyle.css" />
-                                                      <VBox fx:id="chtCostPie" prefHeight="200.0" prefWidth="100.0" />
+                                                      <VBox fx:id="chtCostPie" prefHeight="200.0" prefWidth="100.0" stylesheets="@Stylesheets/PieChartStyle.css" />
                                                   </items>
                                                 </SplitPane>
                                              </children>
@@ -234,7 +248,7 @@
                                  <children>
                                     <ScrollPane prefHeight="524.0" prefWidth="406.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <VBox fx:id="chtPertChart" />
+                                          <VBox fx:id="chtPertChart" stylesheets="@Stylesheets/PertChartStyle.css" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -416,7 +430,7 @@
                   <VBox layoutX="14.0" layoutY="374.0" prefHeight="179.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="374.0">
                      <children>
                         <Label text="Resources" />
-                        <ListView fx:id="lstResources" prefHeight="221.0" prefWidth="230.0" />
+                        <ListView fx:id="lstResources" onContextMenuRequested="#editResource" prefHeight="221.0" prefWidth="230.0" />
                      </children>
                   </VBox>
           </children>

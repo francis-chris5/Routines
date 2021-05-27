@@ -1,5 +1,35 @@
 
 
 
-/* I'll probably style this some...*/
+.default-color0.chart-bar{
+    -fx-background-color: #e3241e;
+}
+
+.default-color1.chart-bar{
+    -fx-background-color: #ff9721;
+}
+
+.default-color2.chart-bar{
+    -fx-background-color: #f5e536;
+}
+
+.default-color3.chart-bar{
+    -fx-background-color: #209e30;
+}
+
+.default-color4.chart-bar{
+    -fx-background-color: #5743d9;
+}
+
+.default-color5.chart-bar{
+    -fx-background-color: #ac34b3;
+}
+
+.default-color6.chart-bar{
+    -fx-background-color: #ababab;
+}
+
+.default-color7.chart-bar{
+    -fx-background-color: #a38a39;
+}
 

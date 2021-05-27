@@ -3,12 +3,15 @@ package Routines;
 
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -171,6 +174,7 @@ public class RoutineController implements Initializable{
             //just move on
         }
         showTasks();
+        updateGraphicalAnalysis();
         currentTask -= 1;
         routine.setSaved(false);
     }//end moveTaskUp()
@@ -194,6 +198,7 @@ public class RoutineController implements Initializable{
             //just move on
         }
         showTasks();
+        updateGraphicalAnalysis();
         currentTask += 1; 
         routine.setSaved(false);
     }//end moveTaskDown()
@@ -298,6 +303,7 @@ public class RoutineController implements Initializable{
             //just move on
         }
         showResources();
+        updateGraphicalAnalysis();
         currentResource -= 1;
         routine.setSaved(false);
     }//end moveTaskUp()
@@ -321,6 +327,7 @@ public class RoutineController implements Initializable{
             //just move on
         }
         showResources();
+        updateGraphicalAnalysis();
         currentResource += 1; 
         routine.setSaved(false);
     }//end moveTaskDown()
@@ -471,6 +478,42 @@ public class RoutineController implements Initializable{
     
     
     
+        ////////////////////////////////////////////// APPEARANCE  ///////////
+    
+    public void changeTheme(ActionEvent event){
+        //this doesn't work in jar file though??? WORKS IN SOURCE CODE...
+        try{
+                //// USE THIS FOR JAR FILES --supposed to, not working
+            //File stylesheet = new File(Routine.class.getResource("src/Routines/Stylesheets/RoutineStyle.css").toExternalForm());
+                //// USE THIS FOR RUNING IN NETBEANS (DEBUGGING)
+            //File stylesheet = new File("src/Routines/Stylesheets/RoutineStyle.css");
+                //// USE THIS FOR LAUNCHING BUILD PACKAGE CLASSES FROM COMMAND PROMPT
+            File stylesheet = new File(Paths.get("").toAbsolutePath().toString() + "/bin/Routines/Stylesheets/RoutineStyle.css");
+            PrintWriter pw = new PrintWriter(stylesheet);
+            switch(((MenuItem)event.getSource()).getId()){
+                case "miLightTheme":
+                    pw.print(Themes.LIGHT.changeTheme());
+                    break;
+                case "miDarkTheme":
+                    pw.print(Themes.DARK.changeTheme());
+                    break;
+                default:
+                    pw.print(Themes.LIGHT.changeTheme());
+            }
+            
+            pw.close();
+        }
+        catch(Exception e){
+            //probably a file not found error
+            e.printStackTrace();
+        }
+    }//end changeTheme()
+    
+    
+    
+    
+    
+    
         //////////////////////////////////////////////  APPLICATION  /////////
     
     public void getHelp(){
@@ -491,6 +534,8 @@ public class RoutineController implements Initializable{
         Alert helpDialog = new Alert(AlertType.INFORMATION);
         helpDialog.setTitle("Routines");
         helpDialog.setHeaderText("User Manual");
+        helpDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
+        helpDialog.getDialogPane().getStyleClass().add("RoutineStyle");
         TextArea txtHelp = new TextArea();
         txtHelp.setText(help);
         txtHelp.setWrapText(true);
@@ -521,6 +566,8 @@ public class RoutineController implements Initializable{
         Alert aboutDialog = new Alert(AlertType.INFORMATION);
         aboutDialog.setTitle("Routines");
         aboutDialog.setHeaderText("About Routines");
+        aboutDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
+        aboutDialog.getDialogPane().getStyleClass().add("RoutineStyle");
         aboutDialog.setContentText(about);
         aboutDialog.showAndWait();
     }//end getAbout()

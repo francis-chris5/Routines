@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane stylesheets="@Stylesheets/RoutineStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane stylesheets="@Stylesheets/RoutineStyle.css"  xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="340.0" prefWidth="622.0">
          <children>

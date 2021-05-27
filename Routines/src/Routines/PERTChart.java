@@ -3,7 +3,6 @@ package Routines;
 
 import java.util.LinkedList;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -22,8 +21,6 @@ public class PERTChart extends Pane {
     private double width = 175;
     private double height = 100;
     private double spacing = 75;
-    private Color criticalColor = Color.GREEN;
-    private Color normalColor = Color.BLUE;
     
     
     
@@ -57,22 +54,19 @@ public class PERTChart extends Pane {
         for(int i = 0; i < routine.getRoutineTasks().size(); i++){
             boolean criticalPath =  criticals.contains(i) ? true : false;
             if(i > 0 && routine.getRoutineTasks().get(i).getStartTime().compareTo(routine.getRoutineTasks().get(i-1).getEndTime())<0){
-                //criticalPath =  criticals.contains(i);
                 startY += height + spacing;
                 startX -= (width + spacing);
                 previousX = startX - 35;
             }
             else{
-                //criticalPath  = criticals.contains(i);
                 startY = 15;
                 previousY = startY;
                 previousX = startX - 35;
             }
-            this.getChildren().add(new Summary(routine.getRoutineTasks().get(i), startX, startY, (criticalPath ? criticalColor : normalColor) ));
+            this.getChildren().add(new Summary(routine.getRoutineTasks().get(i), startX, startY, criticalPath));
             if(i != 0){
                 double[] coords = {previousX, previousY + height/2, startX + 35, startY + height/2}; //35 is padding in summary
-                Color color = criticalPath ? criticalColor : normalColor;
-                this.getChildren().add(new Connector(coords, color));
+                this.getChildren().add(new Connector(coords, criticalPath));
             }
         startX += width + spacing;
         }
@@ -89,12 +83,11 @@ public class PERTChart extends Pane {
         
             /////////////////////////////  DATAFIELDS  /////////
         private Task task;
-        private boolean criticalPath;
 
         
             /////////////////////////////  CONSTRUCTORS  ///////
         
-        public Summary(Task task, double x, double y, Color color){
+        public Summary(Task task, double x, double y, boolean criticalPath){
             Text words = new Text();
             words.setFont(new Font(12));
             this.task = task;
@@ -112,10 +105,8 @@ public class PERTChart extends Pane {
             }
             words.setText("Name: " + this.task.getName() + "\nDuration: " + this.task.getDuration() + " " + this.task.getUnits() + "\nProjected Cost: " + cost + "\n" );
             Rectangle container = new Rectangle(words.getX() - 15, words.getY() - 35, width, height);
-            container.setFill(null);
-            container.setStroke(color);
-            container.setStrokeWidth(3);
-            words.setFill(color);
+            container.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
+            words.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
             this.getChildren().addAll(container, words);
         }//end constructor
     }//end Summary
@@ -137,7 +128,7 @@ public class PERTChart extends Pane {
         
             /////////////////////////////////  CONSTRUCTORS  ////////
         
-        public Connector(double[] coords, Color color){
+        public Connector(double[] coords, boolean criticalPath){
             this.coords = coords;
             if(coords[1] != coords[3]){
                 bodyTail.setStartX(coords[0]);
@@ -152,9 +143,9 @@ public class PERTChart extends Pane {
                 bodyHead.setStartY(coords[3]);
                 bodyHead.setEndX(coords[2]);
                 bodyHead.setEndY(coords[3]);
-                body.setStroke(color);
-                bodyTail.setStroke(color);
-                bodyHead.setStroke(color);
+                body.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
+                bodyTail.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
+                bodyHead.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
                 this.getChildren().addAll(bodyTail, bodyHead, body);
             }
             else{
@@ -162,7 +153,7 @@ public class PERTChart extends Pane {
                 body.setStartY(coords[1]);
                 body.setEndX(coords[2]);
                 body.setEndY(coords[3]);
-                body.setStroke(color);
+                body.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
                 this.getChildren().add(body);
             }
             head1.setStartX(coords[2]-20);
@@ -173,8 +164,8 @@ public class PERTChart extends Pane {
             head2.setEndX(coords[2]);
             head1.setEndY(coords[3]);
             head2.setEndY(coords[3]);
-            head1.setStroke(color);
-            head2.setStroke(color);
+            head1.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
+            head2.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
             this.getChildren().addAll(head1, head2);
         }//end constructor
     }//end Connector

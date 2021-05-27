@@ -33,7 +33,7 @@ RESOURCES:
 
     A summary of the resource will appear in the Available Resources List on the main Graphical User Interface
         Select a resource from the Available Resources List and use the two arrows located just above the list, or select [Resources -> Move Resource Up/Down] from the main menu, to move the selected resource up or down the list
-        Select a resource from the Available Resources List and click the Edit Resource Button, or select [Resources -> Edit Resource] to open the Resource Dialog with the selected resource's details
+        Select a resource from the Available Resources List and click the Edit Resource Button, or right-click on the desired resource, or select [Resources -> Edit Resource] to open the Resource Dialog with the selected resource's details
         Select a resource from the Available Resources List and click the Delete Resource Button, or select [Resources -> Delete Resource] to delete the resource from the current routine
 
 
@@ -49,16 +49,34 @@ TASKS:
 
     A summary of the task will appear in the Task List on the main Graphical User Interface
         Select a task from the Task List and use the arrows located just above the list, or select [Tasks -> Move Resource Up/Down] from the main menu, to move the selected task up or down the list. NOTE: this will not change the task's assigned predecessor
-        Select a task from the Task List and click the Edit Task Button, or select [Tasks -> Edit Selected Task] from the main menu, to open the Task Dialog with the selected tasks details
+        Select a task from the Task List and click the Edit Task Button, or right-click on the desired task, or select [Tasks -> Edit Selected Task] from the main menu, to open the Task Dialog with the selected tasks details
         Select a task from the Task List and click the Delete Task Button, or select [Tasks -> Delete Selected Task] from the main menu, to remove the task from the current routine
 
 
 
 
+CHARTS & GRAPHS
+
+    The central region of the main screen displays an assortment of the standard charts and graphs used in Project Management. These graphical representations of the Routine's data all update automatically whenever a change is made to the Routine Details, Resource List, or Task List.
+        Gantt Chart
+            A bar chart to illustrate the schedule for the Routine and dependencies between tasks
+        PERT Chart
+            Displays the tasks involved in completing the Routine and highlights the critical path of tasks which actually define the timeline for the project (currently in green).
+        Resource Usage
+            A stacked bar chart providing a graphical representation of which tasks each Resource has been assigned to
+        Graphical Analysis
+            A pie chart showing the percentage of time each tasks takes out of the total time
+            A Burn-Up chart displaying the projected cost increase for Resources used on each subsequent task in comparison to a linear increase of the projected budget as the Routine progresses
+            A pie chart showing the percentage of the total cost that each task is projected to engulf
+            A control chart displaying the ratio of Resource Stamina to Task Complexity: Positive -lots of energy for easy task, Negative -low energy for hard task
+
+
+
 KEYBOARD SHORTCUTS
     FILE:
-        ctrl+s          ->   save
-        ctrl+shift+n    ->   new routine
+        ctrl+s          ->  save
+        ctrl+shift+n    ->  new routine
+        ctrl+0          ->  open routine
         ctrl+d          ->  edit routine details
     
     Tasks:
