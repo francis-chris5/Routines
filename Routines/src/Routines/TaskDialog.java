@@ -19,6 +19,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 
 public class TaskDialog extends Dialog implements Initializable {
@@ -85,6 +87,9 @@ public class TaskDialog extends Dialog implements Initializable {
             catch(Exception e){
                 //just move on then
             }
+            Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+            Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(icon);
             ButtonType btnConfirm = new ButtonType("Add Task", ButtonData.OK_DONE);
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
             setTimeBasisRadioButton(routine.getDefaultTimescale());
@@ -116,6 +121,9 @@ public class TaskDialog extends Dialog implements Initializable {
         catch(Exception e){
             //just move on then
         }
+        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+        Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
         ButtonType btnConfirm = new ButtonType("Update Task", ButtonData.OK_DONE);
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
         txtName.setText(this.task.getName());

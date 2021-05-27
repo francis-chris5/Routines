@@ -22,6 +22,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -423,6 +424,9 @@ public class RoutineController implements Initializable{
         boolean close = true;
         if(!routine.isSaved()){
             Alert wantSave = new Alert(AlertType.CONFIRMATION);
+            Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+            Stage stage = (Stage)wantSave.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(icon);
             wantSave.setTitle("Routines");
             wantSave.setHeaderText("Current routine has not been saved");
             wantSave.setContentText("Do you want to save the changes to this routine before closing?");
@@ -519,7 +523,10 @@ public class RoutineController implements Initializable{
     public void getHelp(){
         String help = new String();
         try{
-            File file = new File("src/Routines/References/UserManual.txt");
+                ////use this in netbeans
+            //File file = new File("src/Routines/References/UserManual.txt");
+                ////use this in build
+            File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/Routines/References/UserManual.txt");
             Scanner readFile = new Scanner(file);
             while(readFile.hasNextLine()){
                 help += readFile.nextLine();
@@ -532,6 +539,9 @@ public class RoutineController implements Initializable{
             help = "error reading help file";
         }
         Alert helpDialog = new Alert(AlertType.INFORMATION);
+        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+        Stage stage = (Stage)helpDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
         helpDialog.setTitle("Routines");
         helpDialog.setHeaderText("User Manual");
         helpDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
@@ -551,7 +561,10 @@ public class RoutineController implements Initializable{
     public void getAbout(){
         String about = new String();
         try{
-            File file = new File("src/Routines/References/about.txt");
+                ////use this in netbeans
+            //File file = new File("src/Routines/References/about.txt");
+                ////use this for build
+            File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/Routines/References/about.txt");
             Scanner readFile = new Scanner(file);
             while(readFile.hasNextLine()){
                 about += readFile.nextLine();
@@ -564,6 +577,9 @@ public class RoutineController implements Initializable{
             about = "error reading about file";
         }
         Alert aboutDialog = new Alert(AlertType.INFORMATION);
+        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+        Stage stage = (Stage)aboutDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
         aboutDialog.setTitle("Routines");
         aboutDialog.setHeaderText("About Routines");
         aboutDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());

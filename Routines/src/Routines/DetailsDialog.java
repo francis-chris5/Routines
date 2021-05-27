@@ -16,7 +16,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
 
 public class DetailsDialog extends Dialog implements Initializable {
 
@@ -80,6 +82,9 @@ public class DetailsDialog extends Dialog implements Initializable {
             }
             ButtonType btnConfirm = new ButtonType("Create Routine", ButtonData.OTHER);
             this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
+            Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+            Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(icon);
             Optional<ButtonType> clicked = this.showAndWait();
             if(clicked.get() == btnConfirm){
                 //should be finished at this point
@@ -104,6 +109,9 @@ public class DetailsDialog extends Dialog implements Initializable {
         catch(Exception e){
             //just move on then
         }
+        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+        Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
         ButtonType btnConfirm = new ButtonType("Update Routine", ButtonData.OTHER);
         this.getDialogPane().getButtonTypes().addAll(btnConfirm, ButtonType.CANCEL);
         txtRoutineName.setText(this.routine.getRoutineName());

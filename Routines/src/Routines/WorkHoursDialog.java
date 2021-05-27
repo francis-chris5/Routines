@@ -17,6 +17,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 
 public class WorkHoursDialog extends Dialog implements Initializable{
@@ -61,6 +63,9 @@ public class WorkHoursDialog extends Dialog implements Initializable{
         catch(Exception e){
             //just move on then
         }
+        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
+        Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
         setUpOptions();
         cmbWeekStart.setValue(routine.getWorkHours().getWeekStart());
         cmbWeekEnd.setValue(routine.getWorkHours().getWeekEnd());
