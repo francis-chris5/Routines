@@ -1,7 +1,5 @@
 # Routines
 
-![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png)
-
 
 <h2>Intro</h2>
 
@@ -11,6 +9,9 @@ I just could not seem to find the project management software I really wanted, s
 The project is made with JavaFX which means that to run it requires a Java Runtime Enviroment as well as the JavaFX-sdk. The launcher scripts take care of that (and soon there will be an installer point towards these scripts appropriately), until the installers are ready simply click github's green "Code" button and download the zip file, after unzipping it navigate into the top-level "Routines" folder and run the appropriate launcher for your system (.bat for Windows and .sh for Linux, .zsh for Mac) .exe, .deb, and .dmg installers to point at these launchers will be coming soon, and obviously this is assuming your machine already has java installed. If the javafx dependencies are not present it will download them -so it should only happen the first time the application is launched.
 
 The "Routines" folder also contains the test run project (a .rtne file) used in the images shown below.
+
+
+![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png)
 
 
 
