@@ -1,5 +1,8 @@
 # Routines
 
+![RoutinesIcon](https://user-images.githubusercontent.com/50467171/119836946-26e5c700-bed0-11eb-8f5f-391f04dc22a2.png)
+
+
 <h2>Intro</h2>
 
 I just could not seem to find the project management software I really wanted, so I finally got around to just making it myself. The problem is project management software is set up for massive undertakings and tasks can rarely be scheduled for less than a day, and those that do have minutes and hours seem to glitch out at such short time scales. What I'm looking for is something that will allow me to use gantt charts and \<difficulty\> or \<complexity\> level resources when planning out my lectures for the classroom or other presentations. While I'm at it I might as well go ahead and make it usable for regular project management work as well.
