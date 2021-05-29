@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,12 +18,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -43,9 +40,12 @@ public class RoutineController implements Initializable{
     ListView lstResources;
     
     @FXML
+    Label lblLeftStatus;
+    @FXML
+    Label lblRightStatus;
+    
+    @FXML
     VBox chtGanttChart;
-    
-    
     @FXML
     VBox chtTimePie;
     @FXML
@@ -120,6 +120,7 @@ public class RoutineController implements Initializable{
     
     
     public void newTask(){
+        setLeftStatus("Status: creating new task...");
         Task dt = new TaskDialog("add", this.routine).addTask();
         if(dt != null){
             currentTask = routine.getRoutineTasks().size();
@@ -129,12 +130,14 @@ public class RoutineController implements Initializable{
             updateGraphicalAnalysis();
             routine.setSaved(false);
         }
+        setLeftStatus("Status:...");
     }//end newTask()
     
     
     
     
     public void editTask(){
+        setLeftStatus("Status: editing task details...");
         try{
             String selection = lstTasks.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.getRoutineTasks().size(); i++){
@@ -153,6 +156,7 @@ public class RoutineController implements Initializable{
         catch(Exception e){
             //just move on then
         }
+        setLeftStatus("Status:...");
     }//end editTask()
     
     
@@ -251,6 +255,7 @@ public class RoutineController implements Initializable{
     
     
     public void newResource(){
+        setLeftStatus("Status: creating new resource...");
         Resource nr = new ResourceDialog("add").addResource();
         if(nr != null){
             routine.getAvailableResources().add(nr);
@@ -259,12 +264,14 @@ public class RoutineController implements Initializable{
             updateGraphicalAnalysis();
             routine.setSaved(false);
         }
+        setLeftStatus("Status:...");
     }//end addResource()
      
      
      
     
     public void editResource(){
+        setLeftStatus("Status: editing resource details...");
         try{
             String selection = lstResources.getSelectionModel().getSelectedItem().toString();
             for(int i=0; i < routine.getAvailableResources().size(); i++){
@@ -283,6 +290,7 @@ public class RoutineController implements Initializable{
         catch(Exception e){
             //just move on then
         }
+        setLeftStatus("Status:...");
     }//end editResource()
     
     
@@ -371,17 +379,21 @@ public class RoutineController implements Initializable{
         closeRoutine();
         routine = new Routine();
         editRoutineDetails();
-    }//end newRoutine()
+        }//end newRoutine()
     
     
     
     
     public void editRoutineDetails(){
+        setLeftStatus("Status: Editing routine details...");
         this.routine = new DetailsDialog(this.routine).editRoutine();
         this.routine.findRoutineEndTime();
         btnRoutineDetails.setText(this.routine.toString());
         this.routine.setSaved(false);
         updateGraphicalAnalysis();
+        setLeftStatus("Status:...");
+        Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
+        stgMain.setTitle(routine.getFilepath() != null? "Routines:\t\t" + routine.getFilepath(): "Routines: \t\tunsaved routine");
     }//end editRoutineDetails()
     
     
@@ -394,6 +406,8 @@ public class RoutineController implements Initializable{
         else{
             routine.saveRoutine();
         }
+        Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
+        stgMain.setTitle(routine.getFilepath() != null? "Routines:\t\t" + routine.getFilepath(): "Routines: \t\tunsaved routine");
     }//end saveRoutine()
     
     
@@ -401,7 +415,9 @@ public class RoutineController implements Initializable{
     
     public void saveAsRoutine(){
         routine.saveAsRoutine();
-    }
+        Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
+        stgMain.setTitle(routine.getFilepath() != null? "Routines:\t\t" + routine.getFilepath(): "Routines: \t\tunsaved routine");
+    }//end saveAsRoutine()
     
     
     
@@ -415,6 +431,8 @@ public class RoutineController implements Initializable{
         updateGraphicalAnalysis();
         btnRoutineDetails.setText(this.routine.toString());
         routine.setSaved(true);
+        Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
+        stgMain.setTitle(routine.getFilepath() != null? "Routines:\t\t" + routine.getFilepath(): "Routines: \t\tunsaved routine");
     }//end openRoutine()
     
     
@@ -472,6 +490,8 @@ public class RoutineController implements Initializable{
             chtGanttChart.getChildren().clear();
             chtResourceUsageChart.getChildren().clear();
             chtPertChart.getChildren().clear();
+            Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
+            stgMain.setTitle("Routines");
         }
     }//end closeRoutine();
     
@@ -485,10 +505,7 @@ public class RoutineController implements Initializable{
         ////////////////////////////////////////////// APPEARANCE  ///////////
     
     public void changeTheme(ActionEvent event){
-        //this doesn't work in jar file though??? WORKS IN SOURCE CODE...
         try{
-                //// USE THIS FOR JAR FILES --supposed to, not working
-            //File stylesheet = new File(Routine.class.getResource("src/Routines/Stylesheets/RoutineStyle.css").toExternalForm());
                 //// USE THIS FOR RUNING IN NETBEANS (DEBUGGING)
             //File stylesheet = new File("src/Routines/Stylesheets/RoutineStyle.css");
                 //// USE THIS FOR LAUNCHING BUILD PACKAGE CLASSES FROM COMMAND PROMPT
@@ -509,8 +526,9 @@ public class RoutineController implements Initializable{
         }
         catch(Exception e){
             //probably a file not found error
-            e.printStackTrace();
+            //don't worry about it then
         }
+        setRightStatus("Pertinent: *Restart Required to Apply Theme Changes*");
     }//end changeTheme()
     
     
@@ -521,71 +539,14 @@ public class RoutineController implements Initializable{
         //////////////////////////////////////////////  APPLICATION  /////////
     
     public void getHelp(){
-        String help = new String();
-        try{
-                ////use this in netbeans
-            //File file = new File("src/Routines/References/UserManual.txt");
-                ////use this in build
-            File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/Routines/References/UserManual.txt");
-            Scanner readFile = new Scanner(file);
-            while(readFile.hasNextLine()){
-                help += readFile.nextLine();
-                help += "\n";
-            }
-            readFile.close();
-        }
-        catch(Exception e){
-            //whoops, no help file
-            help = "error reading help file";
-        }
-        Alert helpDialog = new Alert(AlertType.INFORMATION);
-        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
-        Stage stage = (Stage)helpDialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(icon);
-        helpDialog.setTitle("Routines");
-        helpDialog.setHeaderText("User Manual");
-        helpDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
-        helpDialog.getDialogPane().getStyleClass().add("RoutineStyle");
-        TextArea txtHelp = new TextArea();
-        txtHelp.setText(help);
-        txtHelp.setWrapText(true);
-        txtHelp.setEditable(false);
-        VBox vbxHelp = new VBox(txtHelp);
-        helpDialog.getDialogPane().setContent(vbxHelp);
-        helpDialog.showAndWait();
+        new HelpDialog("Routines/References/UserManual.txt");
     }//end getHelp()
     
     
     
     
     public void getAbout(){
-        String about = new String();
-        try{
-                ////use this in netbeans
-            //File file = new File("src/Routines/References/about.txt");
-                ////use this for build
-            File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/Routines/References/about.txt");
-            Scanner readFile = new Scanner(file);
-            while(readFile.hasNextLine()){
-                about += readFile.nextLine();
-                about += "\n";
-            }
-            readFile.close();
-        }
-        catch(Exception e){
-            //whoops, no about file
-            about = "error reading about file";
-        }
-        Alert aboutDialog = new Alert(AlertType.INFORMATION);
-        Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
-        Stage stage = (Stage)aboutDialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(icon);
-        aboutDialog.setTitle("Routines");
-        aboutDialog.setHeaderText("About Routines");
-        aboutDialog.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/RoutineStyle.css").toExternalForm());
-        aboutDialog.getDialogPane().getStyleClass().add("RoutineStyle");
-        aboutDialog.setContentText(about);
-        aboutDialog.showAndWait();
+        new HelpDialog("Routines/References/about.txt");
     }//end getAbout()
     
     
@@ -594,7 +555,21 @@ public class RoutineController implements Initializable{
     public void exit(){
         closeRoutine();
         Platform.exit();
-    }
+    }//end exit()
+    
+    
+    
+    
+    public void setLeftStatus(String currentStatus){
+        lblLeftStatus.setText(currentStatus);
+    }//end setLeftStatus()
+    
+    
+    
+    
+    public void setRightStatus(String currentStatus){
+        lblRightStatus.setText(currentStatus);
+    }//end setRightStatus();
     
     
     

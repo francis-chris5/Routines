@@ -46,7 +46,7 @@
             <VBox layoutX="23.0" layoutY="160.0" prefHeight="281.0" prefWidth="625.0">
                <children>
                   <Label text="Notes" />
-                  <HTMLEditor fx:id="txtRoutineNotes" prefHeight="271.0" prefWidth="347.0">
+                  <HTMLEditor fx:id="txtRoutineNotes" prefHeight="271.0" prefWidth="347.0" stylesheets="@Stylesheets/RoutineStyle.css">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>

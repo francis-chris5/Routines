@@ -6,18 +6,18 @@ ROUTINE:
 
     The Routines Application will open to an empty routine
 
-    Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Dialog: 
+    Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Details Dialog: 
         Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
         Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
         Enter the projected/anticipated/allocated budget for the project
         Use the date selector to choose the desired/anticipated/projected Start Date for the routine
+        Click the "Define Work Schedule" button to configure which days and times will be included or ignored when calculating start and end times for tasks
         The "Notes" text area is for general note keeping on a routine-wide basis
-            Overriding the default usage of the Enter key to confirm the Dialog entry seemed a slippery slope so use Shift+Enter for line feeds in the notes
-            This is an HTML editor, not text editor, so it is better to type the words and then format them
 
     A summary of the routine details will appear as the label for the Routine Details Button
     
     To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
+
 
 
 
@@ -27,7 +27,7 @@ RESOURCES:
     Click the Add Resource Button, or select [Resources -> Add Resource] from the main menu to open the Resource Dialog:
         Enter the name, default role, and primary contact information for the resource
         Provide the cost for the resource and select one of the radio buttons to determine the Cost Basis of how the cost will be applied to the routine
-        Move the slider to an appropriate Stamina value for the current resource: the resource stamina will be compared to task complexity as a ratio (and its inverse) to use in the Routine Analysis Procedures --for example a warning message if back to back high complexity tasks are assigned to a resource known to "tire easily"
+        Move the slider to an appropriate Stamina value for the current resource: the resource stamina will be compared to task complexity as a ratio in a control chart in the Routine Visual Analysis Tab to make sure resources are not over-or-under-whelmed on the project
         Use the Date Picker to add requested days off for the current resource, right click a date on the list to remove it
         All details for a resource are optional fields
 
@@ -45,7 +45,7 @@ TASKS:
         Enter the name, duration, override time scale if necessary
         Select an option for how the task will be scheduled choose a predecessor task OR select start date/time OR select end date/time, if the Timescale is set to minutes or hours enter the start or end time as HH:MM:SS in 24 hour format, otherwise select the desired date from the calendar choices
         assign resources to the task, and select a complexity level for the current task
-        All details for a resource are optional fields
+        All details for a task are optional fields
 
     A summary of the task will appear in the Task List on the main Graphical User Interface
         Select a task from the Task List and use the arrows located just above the list, or select [Tasks -> Move Resource Up/Down] from the main menu, to move the selected task up or down the list. NOTE: this will not change the task's assigned predecessor
@@ -74,18 +74,24 @@ CHARTS & GRAPHS
 
 KEYBOARD SHORTCUTS
     FILE:
-        ctrl+s          ->  save
-        ctrl+shift+n    ->  new routine
-        ctrl+0          ->  open routine
-        ctrl+d          ->  edit routine details
+        ctrl+s              :       save
+        ctrl+shift+n    :       new routine
+        ctrl+0              :       open routine
+        ctrl+d              :       edit routine details
     
+    
+    HELP:
+        F1                  :       open user manual
+
+
     Tasks:
-        ctrl+t          ->  new task
-        ctrl+shift+t    ->  edit task
+        ctrl+t              :       new task
+        ctrl+shift+t    :       edit task
+
 
     Resources
-        ctrl+r          ->  new resource
-        ctrl+shift+r    ->  edit resource
+        ctrl+r              :       new resource
+        ctrl+shift+r    :       edit resource
 
 
 

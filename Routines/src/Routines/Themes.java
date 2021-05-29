@@ -19,6 +19,10 @@ public enum Themes {
                         "    -fx-text-fill: #e2e2e2;\n" +
                         "}\n" +
                         "\n" +
+                        ".from-file{\n" +
+                        "   -fx-fill: #e2e2e2;\n" + 
+                        "}\n" +
+                        "\n" + 
                         ".tab{\n" +
                         "    -fx-opacity: 0.50;\n" +
                         "}\n" +

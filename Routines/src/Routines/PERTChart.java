@@ -106,7 +106,7 @@ public class PERTChart extends Pane {
             words.setText("Name: " + this.task.getName() + "\nDuration: " + this.task.getDuration() + " " + this.task.getUnits() + "\nProjected Cost: " + cost + "\n" );
             Rectangle container = new Rectangle(words.getX() - 15, words.getY() - 35, width, height);
             container.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
-            words.getStyleClass().add(criticalPath ? "pert-critical": "pert-normal");
+            words.getStyleClass().add(criticalPath ? "pert-critical-words": "pert-normal-words");
             this.getChildren().addAll(container, words);
         }//end constructor
     }//end Summary
