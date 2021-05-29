@@ -214,10 +214,7 @@ public class Routine implements Serializable{
             return newRoutine;
         }
         catch(Exception e){
-            LinkedList<Task> fail = new LinkedList<Task>();
-            fail.add(new Task("saved tasks failed to load"));
-            e.printStackTrace();
-            return new Routine();
+            return null;
         }
     }//end openRoutine()
     

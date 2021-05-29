@@ -424,13 +424,17 @@ public class RoutineController implements Initializable{
     
     public void openRoutine(){
         closeRoutine();
-        Routine another = new Routine();
-        routine = another.openRoutine();
-        showTasks();
-        showResources();
-        updateGraphicalAnalysis();
-        btnRoutineDetails.setText(this.routine.toString());
-        routine.setSaved(true);
+        //Routine another = new Routine();
+        //routine = another.openRoutine();
+        Routine another = new Routine().openRoutine();
+        if(another != null){
+            routine = another;
+            showTasks();
+            showResources();
+            updateGraphicalAnalysis();
+            btnRoutineDetails.setText(this.routine.toString());
+            routine.setSaved(true);
+        }
         Stage stgMain = (Stage)btnRoutineDetails.getScene().getWindow();
         stgMain.setTitle(routine.getFilepath() != null? "Routines:\t\t" + routine.getFilepath(): "Routines: \t\tunsaved routine");
     }//end openRoutine()

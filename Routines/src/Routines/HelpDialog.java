@@ -71,11 +71,8 @@ public class HelpDialog extends Dialog implements Initializable{
         output.setWrappingWidth(vbxContent.getPrefWidth());
         output.setFont(new Font(14));
         vbxContent.getChildren().add(output);
-        this.getDialogPane().getButtonTypes().add(ButtonType.FINISH);
-        Optional<ButtonType> clicked = this.showAndWait();
-        if(clicked.get() == ButtonType.FINISH){
-            //should be done now
-        }
+        this.getDialogPane().getButtonTypes().addAll(ButtonType.FINISH);
+        this.showAndWait();
     }//end constructor
     
     
