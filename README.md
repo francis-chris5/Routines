@@ -31,7 +31,8 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
         <li>Click the "Define Work Schedule" button to configure which days and times will be included or ignored when calculating start and end times for tasks</li>
         <li>The "Notes" text area is for general note keeping on a routine-wide basis</li>
 
-        </ul>
+</ul>
+
  <p>A summary of the routine details will appear as the label for the Routine Details Button</p>
     
  <p>To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button</p>
