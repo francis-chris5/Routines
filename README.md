@@ -96,23 +96,34 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 
 <blockquote>
   <b>FILE:</b>
+    
         ctrl+s              :       save
+    
         ctrl+shift+n    :       new routine
+    
         ctrl+0              :       open routine
+    
         ctrl+d              :       edit routine details
     
     
+    
+    
   <b>HELP:</b>
+    
         F1                  :       open user manual
 
 
   <b>Tasks:</b>
-        ctrl+t              :       new task
+    
+        ctrl+t              :       new 
+    
         ctrl+shift+t    :       edit task
 
 
   <b>Resources</b>
+    
         ctrl+r              :       new resource
+    
         ctrl+shift+r    :       edit resource
 
 </blockqoute>
