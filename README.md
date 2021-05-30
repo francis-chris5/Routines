@@ -22,6 +22,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 The Routines Application will open to an empty routine
 
 Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Details Dialog: 
+
         Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
         Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
         Enter the projected/anticipated/allocated budget for the project
