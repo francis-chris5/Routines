@@ -17,7 +17,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 <h2>User Manual</h2>
 
 <h4>ROUTINE:</h4>
-<blockquote>
+
 
     The Routines Application will open to an empty routine
 
@@ -33,7 +33,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
     
     To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
 
-</blockquote>
+
 
 
 
