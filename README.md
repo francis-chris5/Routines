@@ -19,9 +19,9 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 <h4>ROUTINE:</h4>
 
 
-    The Routines Application will open to an empty routine
+The Routines Application will open to an empty routine
 
-    Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Details Dialog: 
+Clicking the Routine Details Button will bring up the Routine Details Dialog, selecting [File -> New] from the main menu in order to create a new routine will open directly to the Routine Details Dialog, or selecting [File -> Routine Details] from the main menu will open the Routine Details Dialog: 
         Enter a name for the routine --NOTE: the name of the routine is different than the filename where it will be saved to allow versioning of a routine--
         Choose one of the Timescale Radio Buttons to set the default Timescale task durations will be measured in --NOTE: this can easily be overridden per-task--
         Enter the projected/anticipated/allocated budget for the project
@@ -29,9 +29,9 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
         Click the "Define Work Schedule" button to configure which days and times will be included or ignored when calculating start and end times for tasks
         The "Notes" text area is for general note keeping on a routine-wide basis
 
-    A summary of the routine details will appear as the label for the Routine Details Button
+ A summary of the routine details will appear as the label for the Routine Details Button
     
-    To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
+  To edit any of the Routine Details simply relaunch the Routine Details Dialog by clicking the Routine Details Button
 
 
 
@@ -99,7 +99,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
     
         ctrl+s              :       save
     
-        ctrl+shift+n    :       new routine
+        ctrl+shift+n        :       new routine
     
         ctrl+0              :       open routine
     
@@ -117,14 +117,14 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
     
         ctrl+t              :       new 
     
-        ctrl+shift+t    :       edit task
+        ctrl+shift+t        :       edit task
 
 
   <b>Resources</b>
     
         ctrl+r              :       new resource
     
-        ctrl+shift+r    :       edit resource
+        ctrl+shift+r        :       edit resource
 
 </blockqoute>
 
