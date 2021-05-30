@@ -41,7 +41,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 
 
 
-<h4>RESOURCES:</h4>
+<h4>RESOURCE:</h4>
 
 
    <p>Click the Add Resource Button, or select [Resources -> Add Resource] from the main menu to open the Resource Dialog:</p>
@@ -64,7 +64,7 @@ The "Routines" folder also contains the test run project (a .rtne file) used in 
 
 
 
-<h4>TASKS:</h4>
+<h4>TASK:</h4>
 
 
    <p>Click the Add Task Button, or select [Tasks -> Add Task] from the main menu to open the Task Dialog:</p>
