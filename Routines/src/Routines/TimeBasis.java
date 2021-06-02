@@ -3,8 +3,10 @@ package Routines;
 
 import java.time.temporal.ChronoUnit;
 
+
 /**
- * @description <p>The software PLAN will be using Unix-Epoch time instead of calendar dates, so the GUI units need converted to a millisecond basis for internal calculations.</p>
+ * List of manners in which time to carry out a Task can be measured. The plan is for this to also return a matrix to right multiply on a matrix of tasks vectored by temporal units into costs (still working on that though)
+ * @author Chris Francis
  */
 public enum TimeBasis{
     
@@ -12,6 +14,10 @@ public enum TimeBasis{
 
     
     
+    /**
+     * Converts this TimeBasis to regular java.time.temporal.ChronoUnit for working with LocalDateTime objects
+     * @return <b>ChronoUnit</b> which is one of the time measurement tools built into the Java programming language
+     */
     public ChronoUnit getChronoUnits(){
         switch(this){
             case MINUTES:
@@ -31,6 +37,12 @@ public enum TimeBasis{
         }
     }//end getChronoUnits()
 
+    
+    
+    /**
+     * overrides default method
+     * @return <b>String</b> of the enumerated value in lowercase letters
+     */
     @Override
     public String toString() {
         switch(this){

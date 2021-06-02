@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 
+/**
+ * <h2>Summary</h2>
+ * <p>A task is an activity that needs to be carried out in the Routine</p>
+ * <p>Each task is given a name, start and end times, an optional predecessor task for scheduling purposes, a complexity level to avoid resources becoming over or under whelmed, and a list of resources assigned to carry out the task.</p>
+ * @author Chris Francis
+ */
 public class Task implements Serializable{
 	
         /////////////////////////////////////////////  DATAFIELDS  //////////
@@ -23,12 +29,19 @@ public class Task implements Serializable{
 	
         ///////////////////////////////////////////  CONSTRUCTORS  ////////////
     
+    /**
+     * the default constructor to be used in conjunction with getters and setters
+     */
     public Task(){
     }//end default constructor()
     
     
     
     
+    /**
+     * The one-arg constructor is to make sure that every task is given a name with which to identify it by, this is the primary constructor used for tasks in the code
+     * @param name The name by which to identify this tasks on the various lists it shows up on
+     */
     public Task(String name){
         this.name = (name.length() == 0)? "untitled task": name;
     }//end one-arg constructor()
@@ -143,7 +156,11 @@ public class Task implements Serializable{
     
     
 	///////////////////////////////////////////  JAVA OBJECT  /////////////
-	
+    
+    /**
+     * override of default method
+     * @return <b>String</b> offering a summary of some key points about this Task in phrase form (needs rest of sentence concatenated on for grammatically correct output).
+     */
     @Override
     public String toString(){
         return this.getName() + " comes after " + (this.getPredecessor() == null?"nothing":this.predecessor.getName()) + " and should take " + this.getDuration() + " " + this.getUnits().toString() + " to be completed by " + (this.assignedResources.isEmpty()?"nobody???":this.getResourceNames());

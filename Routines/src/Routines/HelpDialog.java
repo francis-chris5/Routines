@@ -4,7 +4,6 @@ package Routines;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
@@ -19,6 +18,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
+/**
+ * The Java class to accompany a GUI constructed in FXML. Basically this reads from a text file (about.txt and UserManual.txt) and sets it up to be displayed nicely on the screen for a user.
+ * @author Chris Francis
+ */
 public class HelpDialog extends Dialog implements Initializable{
 
         /////////////////////////////////////////////  DATAFIELDS  //////////
@@ -35,6 +38,10 @@ public class HelpDialog extends Dialog implements Initializable{
     
         /////////////////////////////////////////  CONSTRUCTORS  ///////////
     
+    /**
+     * The constructor does all the work here as it's just an information dialog.
+     * @param filepath The location of the file holding the information requested by the user
+     */
     public HelpDialog(String filepath){
         this.setTitle("Routines:");
         Image icon = new Image(getClass().getResourceAsStream("Images/RoutinesIcon.png"));
@@ -84,6 +91,11 @@ public class HelpDialog extends Dialog implements Initializable{
     
         /////////////////////////////////////////  JAVA OBJECT  ////////////
     
+    /**
+     * I rarely use this but the interfacing requirements for FXML require it
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just in the interfacing requirements

@@ -2,10 +2,18 @@
 package Routines;
 
 
+/**
+ * Trying something new with this project, available themes enumerated with a method to return a long string to write to the main CSS file, instead of the more complicated writing methods to switch out which stylesheet(s) objects reference
+ * @author Chris Francis
+ */
 public enum Themes {
     
     LIGHT, DARK;
     
+    /**
+     * call this method when changing the preset styling of the software
+     * @return <b>String</b> of CSS code including line-feeds and white-space to write directly to a file
+     */
     public String changeTheme(){
         switch(this){
             case LIGHT:

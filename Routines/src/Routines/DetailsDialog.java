@@ -20,6 +20,11 @@ import javafx.scene.image.Image;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
+
+/**
+ * The Java class to accompany a GUI constructed in FXML. Basically this take the general Routine data (name, descriptione, etc.) from a Routine object and sets it up to be displayed nicely on the screen for a user.
+ * @author Chris Francis
+ */
 public class DetailsDialog extends Dialog implements Initializable {
 
     
@@ -62,12 +67,19 @@ public class DetailsDialog extends Dialog implements Initializable {
     
         //////////////////////////////////////////////  CONSTRUCTORS  /////////
     
+    /**
+     * the default constructor (I don't think I used this anywhere)
+     */
     public DetailsDialog(){
     }//end default constructor
     
     
     
     
+    /**
+     * The one-string constructor is called from the new routine button in the file menu, originally the plan was to pass in the reason for opening it, but edit functionality was moved to the other one-arg constructor so only new files call this one (it assumes the dialog inputs are all empty)
+     * @param purpose The reason for opening the dialog, the only valid entry at this point is "new"
+     */
     public DetailsDialog(String purpose){
         routine = new Routine();
         this.setTitle("Routines: Routine Details");
@@ -98,6 +110,10 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * The one-routine constructor is the go to for most of the code. It loads in the fxml file and sets the inputs on the GUI to whatever is stored in the Routine object
+     * @param routine The currently open Routine this dialog will be used for editing the data of
+     */
     public DetailsDialog(Routine routine){
         this.setTitle("Routines: Routine Details");
         this.routine = routine;
@@ -152,6 +168,11 @@ public class DetailsDialog extends Dialog implements Initializable {
     
         //////////////////////////////////////////////  ROUTINE METHODS  /////
     
+    
+    /**
+     * selects a default time measurement scale for Tasks in this Routine
+     * @return <b>TimeBasis</b> based off the chosen radio button
+     */
     public TimeBasis getDefaultTimeBasis(){
         if(rdbMinutes.isSelected()){
             return TimeBasis.MINUTES;
@@ -179,6 +200,10 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * Uses the default timescale for the Routine to set the appropriate radio button when opening this dialog
+     * @param tb The default timescale for this Routine
+     */
     public void setDefaultTimeRadioButton(TimeBasis tb){
         if(tb != null){
             switch(tb){
@@ -212,6 +237,9 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * switches input methods between start date or start time inputs based on default timescale
+     */
     public void setStartFormat(){
         if(rdbMinutes.isSelected() || rdbHours.isSelected()){
             txtRoutineStartTime.setDisable(false);
@@ -224,6 +252,10 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * updates the routine data to match what the user entered in the dialog GUI
+     * @return -should probably update this to a void because the routine being edited is passed by reference-
+     */
     public Routine editRoutine(){
         this.routine.setRoutineName(txtRoutineName.getText());
              try{
@@ -256,6 +288,9 @@ public class DetailsDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * launches the WorkHoursDialog and resets the Routine's working hours to the results from that dialog
+     */
     public void defineWorkHours(){
         routine.setWorkHours(new WorkHoursDialog(routine).getWorkHours());
     }//end defineWorkScedule()
@@ -268,6 +303,11 @@ public class DetailsDialog extends Dialog implements Initializable {
     
         ///////////////////////////////////////////////  JAVA OBJECTS  ////////
     
+    /**
+     * I rarely use this but the interfacing requirements for FXML require it
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this but the interface requires it

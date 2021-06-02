@@ -6,6 +6,12 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 
+/**
+ * <h2>Summary</h2>
+ * <p>A resource is a person or tool needed to carry out the Tasks in this Routine.</p>
+ * <p>Each resource is given a name by which to identify it and a default role in the Routine, contact info seems a standard to include here, lists for days requested off and Tasks this Resource has been assigned to, and finally a numerical representation of stamina -how quickly this resource becomes exhausted- in order to try and prevent Resources becoming over or under whelmed while working through the Routine.</p>
+ * @author Chris Francis
+ */
 public class Resource implements Serializable{
     
     
@@ -21,14 +27,33 @@ public class Resource implements Serializable{
     
     
     
+    
+    
+    
+    
+    
         /////////////////////////////////////////  CONSTRUCTORS  //////////////
     
+    /**
+     * the default constructor to be used in conjunction with getters and setters
+     */
     public Resource(){
     }//end default constructor()
     
+    
+    
+    
+    /**
+     * The one-arg constructor is used most often in the code and requires a value be passed in to identify this resource in the various lists, legends, and summaries it will show up on
+     * @param name The identifier for this resource
+     */
     public Resource(String name){
         this.name = (name.length() == 0)? "untitled resource": name;
     }//end one-arg constructor()
+    
+    
+    
+    
     
     
     
@@ -122,6 +147,10 @@ public class Resource implements Serializable{
     
         ///////////////////////////////////////// JAVA OBJECT  ///////////////
     
+    /**
+     * override of default method
+     * @return <b>String</b> offering a summary of some key points about this Resource in phrase form (needs rest of sentence concatenated on for grammatically correct output).
+     */
     @Override
     public String toString(){
         return this.getName() + " reached at " + this.getPrimaryContactInfo() + " is assigned to " + (this.getAssignedTo().isEmpty()?"none":this.getTaskNames()) + " and gets paid " + this.getCost() + " " + (this.getUnits()!=null?this.getUnits().toString():CostBasis.FLAT_FEE) + ", and needs off on " + (this.daysOff.isEmpty()?"none":this.daysOff.toString());

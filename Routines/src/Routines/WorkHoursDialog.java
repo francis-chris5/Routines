@@ -5,7 +5,6 @@ import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,6 +20,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
+/**
+ * The Java class to accompany a GUI constructed in FXML. Basically this take the data from a WorkHours object and sets it up to be displayed nicely on the screen for a user.
+ * @author Chris Francis
+ */
 public class WorkHoursDialog extends Dialog implements Initializable{
 
         /////////////////////////////////////////////  DATAFIELDS  /////////
@@ -53,6 +56,10 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
         ///////////////////////////////////////////  CONSTRUCTORS  ///////////
     
+    /**
+     * The nature of this kind of requires a Routine that it goes with so no default constructor
+     * @param routine The Routine these work hours will be scheduled for
+     */
     public WorkHoursDialog(Routine routine){
         this.setTitle("Routines: Define Work Schedule");
         try{
@@ -92,6 +99,9 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
         ////////////////////////////////////////////  DIALOG METHODS  ////////
     
+    /**
+     * fills in the day and time options for combo boxes on the dialog GUI
+     */
     public void setUpOptions(){
         cmbWeekStart.getItems().addAll(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
         cmbWeekEnd.getItems().addAll(DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
@@ -108,6 +118,9 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
     
     
+    /**
+     * adds user selected holidays to be excluded from the work schedule to a list
+     */
     public void addHoliday(){
         lstHolidays.getItems().add(dtHolidays.getValue());
         dtHolidays.getEditor().clear();
@@ -115,7 +128,9 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
     
     
-    
+    /**
+     * removes a previously excluded holiday from the exclusion list
+     */
     public void removeHoliday(){
         int day = lstHolidays.getSelectionModel().getSelectedIndex();
         if(day >= 0){
@@ -125,6 +140,10 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
     
     
+    /**
+     * assigns the values set up by the user in the dialog as data points in a WorkHours object
+     * @return <b>WorkHours</b> for the Routine to schedule tasks around (such as no work done on weekends or holidays)
+     */
     public WorkHours getWorkHours(){
         WorkHours schedule = new WorkHours();
         schedule.setWeekStart((DayOfWeek)cmbWeekStart.getValue());
@@ -148,6 +167,11 @@ public class WorkHoursDialog extends Dialog implements Initializable{
     
         //////////////////////////////////////////////  JAVA OBJECTS  ///////
     
+    /**
+     * I rarely use this but the interfacing requirements for FXML require it
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this but need it for the interface

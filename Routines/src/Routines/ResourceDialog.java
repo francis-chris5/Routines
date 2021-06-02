@@ -20,6 +20,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
+/**
+ * The Java class to accompany a GUI constructed in FXML. Basically this take the data from a Resource object and sets it up to be displayed nicely on the screen for a user.
+ * @author Chris Francis
+ */
 public class ResourceDialog extends Dialog implements Initializable {
 
     
@@ -269,6 +273,11 @@ public class ResourceDialog extends Dialog implements Initializable {
     
         ///////////////////////////////////////////  JAVA OBJECTS  ///////////
     
+    /**
+     * I rarely use this but the interfacing requirements for FXML require it
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this but the interface requires it
