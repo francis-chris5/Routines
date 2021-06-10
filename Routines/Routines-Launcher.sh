@@ -16,5 +16,5 @@ fi
 echo Opening Routines Application...
 echo
 current=$(pwd)
-java -cp $current/bin --module-path $current/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml,javafx.web Routines.RoutineMain
+java -cp "$current/bin" --module-path "$current/javafx-sdk-11.0.2/lib" --add-modules javafx.controls,javafx.fxml,javafx.web Routines.RoutineMain
 
