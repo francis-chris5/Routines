@@ -1,0 +1,42 @@
+
+
+    /* Resource Usage */   
+    
+.default-color0.chart-legend-item-symbol{
+    -fx-background-color: #d43a28;
+}
+
+.default-color0.chart-series-area-symbol{
+    -fx-background-color: #d43a28;
+}
+
+.default-color0.chart-series-area-fill{
+    -fx-fill: #d43a2875;
+}
+
+.default-color0.chart-series-area-line{
+    -fx-stroke: #d43a28;
+}
+
+
+
+
+    /* Cash projection */   
+    
+.default-color1.chart-legend-item-symbol{
+    -fx-background-color: #25961b;
+}
+
+.default-color1.chart-series-area-symbol{
+    -fx-background-color: #25961b;
+}
+
+.default-color1.chart-series-area-fill{
+    -fx-fill: #25961b22;
+}
+
+.default-color1.chart-series-area-line{
+    -fx-stroke: #25961b;
+}
+
+

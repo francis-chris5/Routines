@@ -1,0 +1,25 @@
+
+
+*{
+    -fx-background-color: transparent;
+}
+
+.pert-critical{
+    -fx-fill: transparent;
+    -fx-stroke-width: 1px;
+    -fx-stroke: #209e30;
+}
+
+.pert-normal{
+    -fx-fill: transparent;
+    -fx-stroke-width: 1px;
+    -fx-stroke: #5743d9;
+}
+
+.pert-critical-words{
+    -fx-fill: #209e30;
+}
+
+.pert-normal-words{
+    -fx-fill: #5743d9;
+}

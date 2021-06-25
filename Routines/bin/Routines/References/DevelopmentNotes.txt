@@ -1,0 +1,18 @@
+
+
+when building switch location of how to get files to read
+    Routine Controller
+        -location of stylesheet in changeTheme()
+    HelpDialog
+        -in the constructor, 
+
+
+remove version number from fxml (I'm using 11 not 16) to stop that warning
+    opening tag of top level element
+
+
+
+after building in netbeans move 
+    (NetbeansProjects -> Routines -> Build -> Classes -> routines )
+    folder of class files and all other resources to a folder named 
+    bin at same level as launcher file (put on github like this)
